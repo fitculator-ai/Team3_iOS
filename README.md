@@ -1,10 +1,10 @@
-# Team4_iOS
+# Team3_iOS
 ## Tuist 프로젝트 설정 방법
 
 ### 1️⃣ 프로젝트 클론
 ```
-git clone https://github.com/fitculator-ai/Team4_iOS.git
-cd Team4_iOS
+git clone https://github.com/fitculator-ai/Team3_iOS.git
+cd Team3_iOS
 ```
 ### 2️⃣ Tuist 설치 (최초 1회만 실행)<br/>
 둘 중 하나만 선택 brew를 사용한다면 아래 실행
@@ -20,4 +20,4 @@ tuist install
 ```
 tuist generate
 ```
-정상적으로 완료됐다면 생성된 fitculator.xcworkspace 실행 후 개발
+정상적으로 완료됐다면 생성된 Fitculator.xcworkspace 실행 후 개발
