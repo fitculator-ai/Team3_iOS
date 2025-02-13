@@ -620,8 +620,8 @@
 			buildPhases = (
 				FF6690CD37946AD39560E448 /* Sources */,
 				B1E61863D0819DFDEE80E9D5 /* Resources */,
-				931757DD9080E2EF738405C6 /* Frameworks */,
 				7F837C5EA2574CA2C1A30BDC /* Embed Frameworks */,
+				931757DD9080E2EF738405C6 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -630,8 +630,6 @@
 				F29A5FD5D124A99B9DA7BB5D /* PBXTargetDependency */,
 			);
 			name = Features;
-			packageProductDependencies = (
-			);
 			productName = Features;
 			productReference = BDA14826C4C0A13CAF29FE80 /* Features.framework */;
 			productType = "com.apple.product-type.framework";
@@ -642,8 +640,8 @@
 			buildPhases = (
 				3084DE101B2CAE53807881D5 /* Sources */,
 				0159156D473A761BDF327C67 /* Resources */,
-				83046CA933A0BC86870922FD /* Frameworks */,
 				AFD29C199817902D5AF57FA1 /* Embed Frameworks */,
+				83046CA933A0BC86870922FD /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -651,8 +649,6 @@
 				B23E400FFF87CDF28A42F1E3 /* PBXTargetDependency */,
 			);
 			name = Core;
-			packageProductDependencies = (
-			);
 			productName = Core;
 			productReference = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */;
 			productType = "com.apple.product-type.framework";
@@ -663,8 +659,8 @@
 			buildPhases = (
 				706FA06AE4C3407D1846103D /* Sources */,
 				3D956AFB2FFB810ADC423031 /* Resources */,
-				8F31B8EB2064FAFB4FBC8DEB /* Frameworks */,
 				C5FF8FCC9A9249636E2830DC /* Embed Frameworks */,
+				8F31B8EB2064FAFB4FBC8DEB /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -674,8 +670,6 @@
 				39A8756C52D3AB97E879A76F /* PBXTargetDependency */,
 			);
 			name = Fitculator;
-			packageProductDependencies = (
-			);
 			productName = Fitculator;
 			productReference = FEF3CC56035865C02D41340F /* Fitculator.app */;
 			productType = "com.apple.product-type.application";
@@ -686,8 +680,8 @@
 			buildPhases = (
 				D320E86267FBD764D002C851 /* Sources */,
 				C8441497895F413ECBC886E4 /* Resources */,
-				9072843C9B11E4E2D49C4263 /* Frameworks */,
 				975D413B0C3261F189C504DE /* Embed Frameworks */,
+				9072843C9B11E4E2D49C4263 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -695,8 +689,6 @@
 				658F38B7D2DF7EA73FE19F25 /* PBXTargetDependency */,
 			);
 			name = FitculatorTests;
-			packageProductDependencies = (
-			);
 			productName = FitculatorTests;
 			productReference = 7F215F7BB2BC22395F9F0064 /* FitculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -707,16 +699,14 @@
 			buildPhases = (
 				1F0BA16CBB09000009E4768B /* Sources */,
 				44B6A94E0881ED03CB66ED13 /* Resources */,
-				1AD31DD5902EF5F1F5B52E30 /* Frameworks */,
 				8EA1984CAD0123CC03C647FC /* Embed Frameworks */,
+				1AD31DD5902EF5F1F5B52E30 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Shared;
-			packageProductDependencies = (
-			);
 			productName = Shared;
 			productReference = C598175FD8176FC31EEBAE00 /* Shared.framework */;
 			productType = "com.apple.product-type.framework";
