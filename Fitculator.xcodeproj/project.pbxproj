@@ -8,46 +8,46 @@
 
 /* Begin PBXBuildFile section */
 		082C74F34E48283E0C54591D /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08F51234463081CF86BE8F63 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353C836A97D4662A90ACD4B /* PlaceHolder.swift */; };
-		0ABEA49E3BDE7428EFC3591E /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88811EA904B48AAC6C9F6935 /* PlaceHolder.swift */; };
+		0D6E356165DDBD71675B36A1 /* PlaceHolder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */; };
 		0F0CBA5C53095A611A13478A /* TuistAssets+Fitculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B4BDD3D8AF09B554B0199 /* TuistAssets+Fitculator.swift */; };
-		11101F9E0AE8E6340C5FDB43 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC6F6245F8570FE8F9F802B /* PlaceHolder.swift */; };
 		119EE8D7468CC8E3845CE358 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
-		13B56A84595974807DAD6F71 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7FA2D39466C3F85C8A7AF /* PlaceHolder.swift */; };
-		30894A14D0D4ADA52491D8E3 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A13877EEE689F9F7A9A8BD6 /* PlaceHolder.swift */; };
-		377184F2CF4D209465D7E8F3 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6A07F440954AF317F2A22 /* PlaceHolder.swift */; };
-		3B3B0F6D06BA5BCA52E6745F /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDEBE5CA9D032B3D5CCFFBD /* PlaceHolder.swift */; };
-		44D25B2C721BADBC7DC5AF31 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB530B45860B172196D9164E /* PlaceHolder.swift */; };
+		258679D0F67E883C77F1DE8D /* PlaceHolder1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */; };
+		3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */; };
+		40C199B4FD1260F6332F12F0 /* PlaceHolder2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022693F41000C8D51E5E8A5B /* PlaceHolder2.swift */; };
 		466F08534215DCE8442FBD24 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; };
-		49853D386BA2E63E268CD2A8 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54120FDA493AA0263F022DF2 /* PlaceHolder.swift */; };
 		4E8CFDBDE82B4B7AD4232712 /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BDA14826C4C0A13CAF29FE80 /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F9DAB0F58B783B496DE44F9 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
 		53494343A90D740D59781D57 /* FitculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD94024AD2F61D403E2678B /* FitculatorTests.swift */; };
-		5F77B892DFF6AF958AA716A7 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5664E245CC0A258703785C62 /* PlaceHolder.swift */; };
-		60EDD69643241A63D298417B /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319D5193DAEFEA21F5D0EC82 /* PlaceHolder.swift */; };
-		78B349FA75ABE832CFD1FFCC /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0C9E09A9E66F9E41E20EC6 /* PlaceHolder.swift */; };
-		81EF28A92C83299A2B25E303 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D166931A06571F6443E938C /* PlaceHolder.swift */; };
+		5751A78CB91E6F9B2DB588A5 /* PlaceHolder9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */; };
+		64AD25F29106D9CEFA51B7E5 /* PlaceHolder3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C50367FE431BCA92F2683B /* PlaceHolder3.swift */; };
+		9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AC3F6D546B24A0D55F2F60 /* PlaceHolder14.swift */; };
 		919B706519A36F97D084B822 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 740851605AFA51EF8764D194 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D0FCBBF092E9B632C66DFD7 /* PlaceHolder21.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1BF04FB1A65FE8765B4D92 /* PlaceHolder21.swift */; };
+		9FABD95B89D26D9A14460D4E /* PlaceHolder20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E31ED9239B391204A7EFA /* PlaceHolder20.swift */; };
+		A0B4A3D57C3946AAE25153E0 /* PlaceHolder15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59170F5F18E759A6E4FF79 /* PlaceHolder15.swift */; };
 		A4AEE7826083957801F48735 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 382EBF5BA0DF8712B91079A1 /* Assets.xcassets */; };
+		A7939FCE9D79E0C6832831F1 /* PlaceHolder11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BC486DDEB75B215BDF793E /* PlaceHolder11.swift */; };
 		A865E4D4F9C693B61AAD1A38 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740851605AFA51EF8764D194 /* Kingfisher.framework */; };
 		AF2B715CF238B69E7E4BB3F5 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; };
 		B4F9EF1915E66AF8AE7859F8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE155CEEF7F5897A826509C /* Alamofire.framework */; };
 		B6EDDFDC98CFD5D2D54C4116 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71C382DBBE44C3535248B5 /* ContentView.swift */; };
+		B904200FC9D5FEAD0625C55A /* PlaceHolder19.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09357C91C59896603663E4A /* PlaceHolder19.swift */; };
+		BD0DF5C95C32C440EB2B7B98 /* PlaceHolder10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4BF2CD4B2DC7C15523D733 /* PlaceHolder10.swift */; };
+		BF7F1D8478DFFCB7F1F13821 /* PlaceHolder13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A7DC8A4BE1BD00B39E5C7 /* PlaceHolder13.swift */; };
 		BFFCC02765A803BB4588BBD8 /* FitculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74523276C202800AC5899E15 /* FitculatorApp.swift */; };
-		C5AFF486E7669DF71C0F4B55 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0FD38E884982E63D13F868 /* PlaceHolder.swift */; };
-		C70970D2ADD6571EC6A0882A /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBB9665BA7DC8906D443D6C /* PlaceHolder.swift */; };
+		C10666CEC833C89AF7ADB02A /* PlaceHolder8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8ABAE8F4A1650FBA2CABC /* PlaceHolder8.swift */; };
+		C14212FF76C1C437B9B5920B /* PlaceHolder6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD1B281EC7C33795487A52C /* PlaceHolder6.swift */; };
+		CBD3D09A57FADEFCDC2C66B9 /* PlaceHolder4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1450FAB189DF5C924407A745 /* PlaceHolder4.swift */; };
 		CE4CAACE8CE6BC154DD64ABE /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA14826C4C0A13CAF29FE80 /* Features.framework */; };
 		CEA80309689EA51340F44FC2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F516C3E6797CDFE1DE536A23 /* Preview Assets.xcassets */; };
-		D2C21EA1BFF9685D2A4A6512 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9A390EA4B07FF2DAA79567 /* PlaceHolder.swift */; };
-		D6C371937A71B546FDA60303 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CA9F6D24036EAE6848FA85 /* PlaceHolder.swift */; };
+		D209B593FC0676C9F21C4198 /* PlaceHolder17.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA44071F4B25B00754C110CE /* PlaceHolder17.swift */; };
 		D93E8C64DB207CDC0A7DD590 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE155CEEF7F5897A826509C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF0B9AB0EB8794B748AE1285 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
-		E448DC43CCC248E23DA52599 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA397DEF054ABD930932DF15 /* PlaceHolder.swift */; };
+		E07FBFB80FAF005DD4CC8BF6 /* PlaceHolder18.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D2AA5B61425F20CEFE244D /* PlaceHolder18.swift */; };
 		E77EA43881FF0F4CF36E140B /* TuistBundle+Fitculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD994C6A91E8870CE8A17 /* TuistBundle+Fitculator.swift */; };
-		E945F9B82EE2DDD24316C033 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CBBD6FBCC621616F59D65 /* PlaceHolder.swift */; };
-		F8A11A50A2F686A50A7D19E8 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216FEA7F283EB53D81E70F1 /* PlaceHolder.swift */; };
 		F8FE9FF6BA17A864E2C0FF0A /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FAEB4701B835934FC6953C08 /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05942368B84B583B29BFF89B /* PlaceHolder.swift */; };
+		FE3B2C70D8E4080F86C139C8 /* PlaceHolder7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D2C8FBEDAFBD1D94AB1AB3 /* PlaceHolder7.swift */; };
+		FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D73F3764EA91F04800B82D5 /* PlaceHolder16.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,45 +161,45 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01A7FA2D39466C3F85C8A7AF /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		022693F41000C8D51E5E8A5B /* PlaceHolder2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder2.swift; sourceTree = "<group>"; };
 		03FAB010C6A96D03CCDB4DFF /* Features-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Features-Info.plist"; sourceTree = "<group>"; };
-		05942368B84B583B29BFF89B /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		0B4BF2CD4B2DC7C15523D733 /* PlaceHolder10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder10.swift; sourceTree = "<group>"; };
 		0B7B4BDD3D8AF09B554B0199 /* TuistAssets+Fitculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Fitculator.swift"; sourceTree = "<group>"; };
-		11CA9F6D24036EAE6848FA85 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder9.swift; sourceTree = "<group>"; };
+		1450FAB189DF5C924407A745 /* PlaceHolder4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder4.swift; sourceTree = "<group>"; };
 		18A440168BB14D1002CBE56A /* FitculatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FitculatorTests-Info.plist"; sourceTree = "<group>"; };
 		22BD8E6840A94BFF4028C18C /* Fitculator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Fitculator-Info.plist"; sourceTree = "<group>"; };
-		319D5193DAEFEA21F5D0EC82 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		3216FEA7F283EB53D81E70F1 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder1.swift; sourceTree = "<group>"; };
 		382EBF5BA0DF8712B91079A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3F9A390EA4B07FF2DAA79567 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		3D73F3764EA91F04800B82D5 /* PlaceHolder16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder16.swift; sourceTree = "<group>"; };
+		3E59170F5F18E759A6E4FF79 /* PlaceHolder15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder15.swift; sourceTree = "<group>"; };
+		45BC486DDEB75B215BDF793E /* PlaceHolder11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder11.swift; sourceTree = "<group>"; };
 		4C51E2BB9887E1626E489367 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
-		54120FDA493AA0263F022DF2 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		4DE8ABAE8F4A1650FBA2CABC /* PlaceHolder8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder8.swift; sourceTree = "<group>"; };
 		54FF6E3909773921ECA58109 /* Shared-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Shared-Info.plist"; sourceTree = "<group>"; };
-		5664E245CC0A258703785C62 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		5E0FD38E884982E63D13F868 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		5D7A7DC8A4BE1BD00B39E5C7 /* PlaceHolder13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder13.swift; sourceTree = "<group>"; };
+		64C50367FE431BCA92F2683B /* PlaceHolder3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder3.swift; sourceTree = "<group>"; };
 		6C6DD994C6A91E8870CE8A17 /* TuistBundle+Fitculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Fitculator.swift"; sourceTree = "<group>"; };
 		740851605AFA51EF8764D194 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74523276C202800AC5899E15 /* FitculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitculatorApp.swift; sourceTree = "<group>"; };
-		7A13877EEE689F9F7A9A8BD6 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		7D166931A06571F6443E938C /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 		7F215F7BB2BC22395F9F0064 /* FitculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		88811EA904B48AAC6C9F6935 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		89C6A07F440954AF317F2A22 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		87D2C8FBEDAFBD1D94AB1AB3 /* PlaceHolder7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder7.swift; sourceTree = "<group>"; };
+		88AC3F6D546B24A0D55F2F60 /* PlaceHolder14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder14.swift; sourceTree = "<group>"; };
+		8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder5.swift; sourceTree = "<group>"; };
 		8EE155CEEF7F5897A826509C /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		952CBBD6FBCC621616F59D65 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		8F9E31ED9239B391204A7EFA /* PlaceHolder20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder20.swift; sourceTree = "<group>"; };
+		9CD1B281EC7C33795487A52C /* PlaceHolder6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder6.swift; sourceTree = "<group>"; };
 		9E71C382DBBE44C3535248B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AA397DEF054ABD930932DF15 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		AC0C9E09A9E66F9E41E20EC6 /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		A4D2AA5B61425F20CEFE244D /* PlaceHolder18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder18.swift; sourceTree = "<group>"; };
 		ACD94024AD2F61D403E2678B /* FitculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitculatorTests.swift; sourceTree = "<group>"; };
-		B353C836A97D4662A90ACD4B /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 		BDA14826C4C0A13CAF29FE80 /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDBB9665BA7DC8906D443D6C /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 		C598175FD8176FC31EEBAE00 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDDEBE5CA9D032B3D5CCFFBD /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
-		CFC6F6245F8570FE8F9F802B /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder12.swift; sourceTree = "<group>"; };
+		EA44071F4B25B00754C110CE /* PlaceHolder17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder17.swift; sourceTree = "<group>"; };
+		EF1BF04FB1A65FE8765B4D92 /* PlaceHolder21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder21.swift; sourceTree = "<group>"; };
+		F09357C91C59896603663E4A /* PlaceHolder19.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder19.swift; sourceTree = "<group>"; };
 		F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F516C3E6797CDFE1DE536A23 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FB530B45860B172196D9164E /* PlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 		FEF3CC56035865C02D41340F /* Fitculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -253,7 +253,7 @@
 		0B73D37FE557F60794FD6BE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				05942368B84B583B29BFF89B /* PlaceHolder.swift */,
+				45BC486DDEB75B215BDF793E /* PlaceHolder11.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -270,7 +270,7 @@
 		131CDCB8213F07BAFDBD9FDA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				11CA9F6D24036EAE6848FA85 /* PlaceHolder.swift */,
+				1450FAB189DF5C924407A745 /* PlaceHolder4.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -281,7 +281,10 @@
 				B8B8D53C7F6C2178D25AF782 /* Project */,
 				7AF73C049A14DDC33DF795B7 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		17B82D205AC9FAEF78AAB275 /* Shared */ = {
 			isa = PBXGroup;
@@ -295,7 +298,7 @@
 		1E3B8099BEE17D9390A27EC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CFC6F6245F8570FE8F9F802B /* PlaceHolder.swift */,
+				88AC3F6D546B24A0D55F2F60 /* PlaceHolder14.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -303,7 +306,7 @@
 		2AA2271760EC4165B966CE79 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				952CBBD6FBCC621616F59D65 /* PlaceHolder.swift */,
+				3D73F3764EA91F04800B82D5 /* PlaceHolder16.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -311,7 +314,7 @@
 		34814AC4544D5D41C9D0CD94 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				AC0C9E09A9E66F9E41E20EC6 /* PlaceHolder.swift */,
+				0B4BF2CD4B2DC7C15523D733 /* PlaceHolder10.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -319,7 +322,7 @@
 		3DE9BA08861F18B8DC125B2F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				89C6A07F440954AF317F2A22 /* PlaceHolder.swift */,
+				8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -327,7 +330,7 @@
 		3E495C661B9551EF6CF1FE81 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				FB530B45860B172196D9164E /* PlaceHolder.swift */,
+				87D2C8FBEDAFBD1D94AB1AB3 /* PlaceHolder7.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -335,7 +338,7 @@
 		45EF778BBF3E4FD63290F545 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5E0FD38E884982E63D13F868 /* PlaceHolder.swift */,
+				EA44071F4B25B00754C110CE /* PlaceHolder17.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -343,7 +346,7 @@
 		4B586016FD6A150B1AFB1525 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				319D5193DAEFEA21F5D0EC82 /* PlaceHolder.swift */,
+				5D7A7DC8A4BE1BD00B39E5C7 /* PlaceHolder13.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -351,7 +354,7 @@
 		641E66765AA48B8C5C270875 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7A13877EEE689F9F7A9A8BD6 /* PlaceHolder.swift */,
+				F09357C91C59896603663E4A /* PlaceHolder19.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -359,7 +362,7 @@
 		75C7A9034F1E9DA17E4F3723 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				88811EA904B48AAC6C9F6935 /* PlaceHolder.swift */,
+				EF1BF04FB1A65FE8765B4D92 /* PlaceHolder21.swift */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -367,7 +370,7 @@
 		77DB921DD38DF14C1F533838 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				5664E245CC0A258703785C62 /* PlaceHolder.swift */,
+				8F9E31ED9239B391204A7EFA /* PlaceHolder20.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -375,7 +378,7 @@
 		79B81C0F2E42A9DFBE06A1BE /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				3216FEA7F283EB53D81E70F1 /* PlaceHolder.swift */,
+				022693F41000C8D51E5E8A5B /* PlaceHolder2.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -428,7 +431,7 @@
 		83EE66AC2B1A33157118186C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B353C836A97D4662A90ACD4B /* PlaceHolder.swift */,
+				3E59170F5F18E759A6E4FF79 /* PlaceHolder15.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -453,7 +456,7 @@
 		A36F07B329D572F1E3BD646C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				01A7FA2D39466C3F85C8A7AF /* PlaceHolder.swift */,
+				0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -461,7 +464,7 @@
 		A76F7BCD6321740A52BC4251 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BDBB9665BA7DC8906D443D6C /* PlaceHolder.swift */,
+				9CD1B281EC7C33795487A52C /* PlaceHolder6.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -512,7 +515,7 @@
 		BCA30440285EF04E21764400 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				54120FDA493AA0263F022DF2 /* PlaceHolder.swift */,
+				A4D2AA5B61425F20CEFE244D /* PlaceHolder18.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -529,7 +532,7 @@
 		C747B540D92B129975F3DAE9 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				AA397DEF054ABD930932DF15 /* PlaceHolder.swift */,
+				64C50367FE431BCA92F2683B /* PlaceHolder3.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -537,7 +540,7 @@
 		CE41F2D009A88C91F67DDA7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3F9A390EA4B07FF2DAA79567 /* PlaceHolder.swift */,
+				2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -573,7 +576,7 @@
 		ED765B0F9D64FE19523BFA42 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7D166931A06571F6443E938C /* PlaceHolder.swift */,
+				4DE8ABAE8F4A1650FBA2CABC /* PlaceHolder8.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -593,7 +596,7 @@
 		FE3EDCCB824EB137D953C83B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CDDEBE5CA9D032B3D5CCFFBD /* PlaceHolder.swift */,
+				C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -617,8 +620,8 @@
 			buildPhases = (
 				FF6690CD37946AD39560E448 /* Sources */,
 				B1E61863D0819DFDEE80E9D5 /* Resources */,
-				7F837C5EA2574CA2C1A30BDC /* Embed Frameworks */,
 				931757DD9080E2EF738405C6 /* Frameworks */,
+				7F837C5EA2574CA2C1A30BDC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -627,6 +630,8 @@
 				F29A5FD5D124A99B9DA7BB5D /* PBXTargetDependency */,
 			);
 			name = Features;
+			packageProductDependencies = (
+			);
 			productName = Features;
 			productReference = BDA14826C4C0A13CAF29FE80 /* Features.framework */;
 			productType = "com.apple.product-type.framework";
@@ -637,8 +642,8 @@
 			buildPhases = (
 				3084DE101B2CAE53807881D5 /* Sources */,
 				0159156D473A761BDF327C67 /* Resources */,
-				AFD29C199817902D5AF57FA1 /* Embed Frameworks */,
 				83046CA933A0BC86870922FD /* Frameworks */,
+				AFD29C199817902D5AF57FA1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -646,6 +651,8 @@
 				B23E400FFF87CDF28A42F1E3 /* PBXTargetDependency */,
 			);
 			name = Core;
+			packageProductDependencies = (
+			);
 			productName = Core;
 			productReference = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */;
 			productType = "com.apple.product-type.framework";
@@ -656,8 +663,8 @@
 			buildPhases = (
 				706FA06AE4C3407D1846103D /* Sources */,
 				3D956AFB2FFB810ADC423031 /* Resources */,
-				C5FF8FCC9A9249636E2830DC /* Embed Frameworks */,
 				8F31B8EB2064FAFB4FBC8DEB /* Frameworks */,
+				C5FF8FCC9A9249636E2830DC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -667,6 +674,8 @@
 				39A8756C52D3AB97E879A76F /* PBXTargetDependency */,
 			);
 			name = Fitculator;
+			packageProductDependencies = (
+			);
 			productName = Fitculator;
 			productReference = FEF3CC56035865C02D41340F /* Fitculator.app */;
 			productType = "com.apple.product-type.application";
@@ -677,8 +686,8 @@
 			buildPhases = (
 				D320E86267FBD764D002C851 /* Sources */,
 				C8441497895F413ECBC886E4 /* Resources */,
-				975D413B0C3261F189C504DE /* Embed Frameworks */,
 				9072843C9B11E4E2D49C4263 /* Frameworks */,
+				975D413B0C3261F189C504DE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -686,6 +695,8 @@
 				658F38B7D2DF7EA73FE19F25 /* PBXTargetDependency */,
 			);
 			name = FitculatorTests;
+			packageProductDependencies = (
+			);
 			productName = FitculatorTests;
 			productReference = 7F215F7BB2BC22395F9F0064 /* FitculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -696,14 +707,16 @@
 			buildPhases = (
 				1F0BA16CBB09000009E4768B /* Sources */,
 				44B6A94E0881ED03CB66ED13 /* Resources */,
-				8EA1984CAD0123CC03C647FC /* Embed Frameworks */,
 				1AD31DD5902EF5F1F5B52E30 /* Frameworks */,
+				8EA1984CAD0123CC03C647FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Shared;
+			packageProductDependencies = (
+			);
 			productName = Shared;
 			productReference = C598175FD8176FC31EEBAE00 /* Shared.framework */;
 			productType = "com.apple.product-type.framework";
@@ -723,11 +736,11 @@
 			};
 			buildConfigurationList = 161B999A06FF1FECA41CE4EE /* Build configuration list for PBXProject "Fitculator" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				ko,
 			);
 			mainGroup = 1702B6E34BE46E00FB28FCE1;
 			productRefGroup = 7AF73C049A14DDC33DF795B7 /* Products */;
@@ -788,8 +801,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F77B892DFF6AF958AA716A7 /* PlaceHolder.swift in Sources */,
-				0ABEA49E3BDE7428EFC3591E /* PlaceHolder.swift in Sources */,
+				9FABD95B89D26D9A14460D4E /* PlaceHolder20.swift in Sources */,
+				9D0FCBBF092E9B632C66DFD7 /* PlaceHolder21.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,10 +810,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C21EA1BFF9685D2A4A6512 /* PlaceHolder.swift in Sources */,
-				F8A11A50A2F686A50A7D19E8 /* PlaceHolder.swift in Sources */,
-				E448DC43CCC248E23DA52599 /* PlaceHolder.swift in Sources */,
-				D6C371937A71B546FDA60303 /* PlaceHolder.swift in Sources */,
+				258679D0F67E883C77F1DE8D /* PlaceHolder1.swift in Sources */,
+				40C199B4FD1260F6332F12F0 /* PlaceHolder2.swift in Sources */,
+				64AD25F29106D9CEFA51B7E5 /* PlaceHolder3.swift in Sources */,
+				CBD3D09A57FADEFCDC2C66B9 /* PlaceHolder4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,21 +840,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377184F2CF4D209465D7E8F3 /* PlaceHolder.swift in Sources */,
-				C70970D2ADD6571EC6A0882A /* PlaceHolder.swift in Sources */,
-				44D25B2C721BADBC7DC5AF31 /* PlaceHolder.swift in Sources */,
-				81EF28A92C83299A2B25E303 /* PlaceHolder.swift in Sources */,
-				13B56A84595974807DAD6F71 /* PlaceHolder.swift in Sources */,
-				78B349FA75ABE832CFD1FFCC /* PlaceHolder.swift in Sources */,
-				FAEB4701B835934FC6953C08 /* PlaceHolder.swift in Sources */,
-				3B3B0F6D06BA5BCA52E6745F /* PlaceHolder.swift in Sources */,
-				60EDD69643241A63D298417B /* PlaceHolder.swift in Sources */,
-				11101F9E0AE8E6340C5FDB43 /* PlaceHolder.swift in Sources */,
-				08F51234463081CF86BE8F63 /* PlaceHolder.swift in Sources */,
-				E945F9B82EE2DDD24316C033 /* PlaceHolder.swift in Sources */,
-				C5AFF486E7669DF71C0F4B55 /* PlaceHolder.swift in Sources */,
-				49853D386BA2E63E268CD2A8 /* PlaceHolder.swift in Sources */,
-				30894A14D0D4ADA52491D8E3 /* PlaceHolder.swift in Sources */,
+				0D6E356165DDBD71675B36A1 /* PlaceHolder5.swift in Sources */,
+				C14212FF76C1C437B9B5920B /* PlaceHolder6.swift in Sources */,
+				FE3B2C70D8E4080F86C139C8 /* PlaceHolder7.swift in Sources */,
+				C10666CEC833C89AF7ADB02A /* PlaceHolder8.swift in Sources */,
+				5751A78CB91E6F9B2DB588A5 /* PlaceHolder9.swift in Sources */,
+				BD0DF5C95C32C440EB2B7B98 /* PlaceHolder10.swift in Sources */,
+				A7939FCE9D79E0C6832831F1 /* PlaceHolder11.swift in Sources */,
+				3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */,
+				BF7F1D8478DFFCB7F1F13821 /* PlaceHolder13.swift in Sources */,
+				9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */,
+				A0B4A3D57C3946AAE25153E0 /* PlaceHolder15.swift in Sources */,
+				FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */,
+				D209B593FC0676C9F21C4198 /* PlaceHolder17.swift in Sources */,
+				E07FBFB80FAF005DD4CC8BF6 /* PlaceHolder18.swift in Sources */,
+				B904200FC9D5FEAD0625C55A /* PlaceHolder19.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,12 @@ import ProjectDescription
 
 let project = Project(
     name: "Fitculator",
+    options: .options(
+        automaticSchemesOptions: .disabled,
+        defaultKnownRegions: ["en", "ko"],
+        developmentRegion: "ko",
+        textSettings: .textSettings(usesTabs: false, indentWidth: 4, tabWidth: 4)
+    ),
     targets: [
         .target(
             name: "Fitculator",
@@ -15,6 +21,7 @@ let project = Project(
                         "UIColorName": "",
                         "UIImageName": "",
                     ],
+                    "UIUserInterfaceStyle": "Dark"
                 ]
             ),
             sources: ["Fitculator/Sources/**"],
@@ -37,44 +44,44 @@ let project = Project(
             dependencies: [.target(name: "Fitculator")]
         ),
         
-        .target(
-            name: "Features",
-            destinations: [.iPhone, .iPad],
-            product: .framework,
-            bundleId: "io.fitculator.Fitculator.features",
-            deploymentTargets: .iOS("16.6"),
-            infoPlist: .default,
-            sources: ["Features/**"],
-            dependencies: [
-                .target(name: "Core"),
-                .target(name: "Shared"),
-                .external(name: "Kingfisher")
-            ]
-        ),
+            .target(
+                name: "Features",
+                destinations: [.iPhone, .iPad],
+                product: .framework,
+                bundleId: "io.fitculator.Fitculator.features",
+                deploymentTargets: .iOS("16.6"),
+                infoPlist: .default,
+                sources: ["Features/**"],
+                dependencies: [
+                    .target(name: "Core"),
+                    .target(name: "Shared"),
+                    .external(name: "Kingfisher")
+                ]
+            ),
         
-        .target(
-            name: "Core",
-            destinations: [.iPhone, .iPad],
-            product: .framework,
-            bundleId: "io.fitculator.Fitculator.core",
-            deploymentTargets: .iOS("16.6"),
-            infoPlist: .default,
-            sources: ["Core/**"],
-            dependencies: [
-                .target(name: "Shared"),
-                .external(name: "Alamofire")
-            ]
-        ),
+            .target(
+                name: "Core",
+                destinations: [.iPhone, .iPad],
+                product: .framework,
+                bundleId: "io.fitculator.Fitculator.core",
+                deploymentTargets: .iOS("16.6"),
+                infoPlist: .default,
+                sources: ["Core/**"],
+                dependencies: [
+                    .target(name: "Shared"),
+                    .external(name: "Alamofire")
+                ]
+            ),
         
-        .target(
-            name: "Shared",
-            destinations: [.iPhone, .iPad],
-            product: .framework,
-            bundleId: "io.fitculator.Fitculator.shared",
-            deploymentTargets: .iOS("16.6"),
-            infoPlist: .default,
-            sources: ["Shared/**"],
-            dependencies: []
-        ),
+            .target(
+                name: "Shared",
+                destinations: [.iPhone, .iPad],
+                product: .framework,
+                bundleId: "io.fitculator.Fitculator.shared",
+                deploymentTargets: .iOS("16.6"),
+                infoPlist: .default,
+                sources: ["Shared/**"],
+                dependencies: []
+            ),
     ]
 )
