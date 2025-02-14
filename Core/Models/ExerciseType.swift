@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Exercise: Identifiable {  // <- public 추가
+public struct ExerciseType: Identifiable {  // <- public 추가
     public let id = UUID()
     public var exerciseName: String
     public var exerciseType: String

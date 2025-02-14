@@ -11,7 +11,7 @@
 		0D6E356165DDBD71675B36A1 /* PlaceHolder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */; };
 		0F0CBA5C53095A611A13478A /* TuistAssets+Fitculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B4BDD3D8AF09B554B0199 /* TuistAssets+Fitculator.swift */; };
 		119EE8D7468CC8E3845CE358 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
-		258679D0F67E883C77F1DE8D /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB56C0618FFBC803293FFA /* Exercise.swift */; };
+		258679D0F67E883C77F1DE8D /* ExerciseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB56C0618FFBC803293FFA /* ExerciseType.swift */; };
 		2C8231607FCFF7982BC18B21 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854CB9EED4D256116E76030C /* Colors.swift */; };
 		3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */; };
 		40C199B4FD1260F6332F12F0 /* PlaceHolder2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022693F41000C8D51E5E8A5B /* PlaceHolder2.swift */; };
@@ -174,7 +174,7 @@
 		0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder9.swift; sourceTree = "<group>"; };
 		18A440168BB14D1002CBE56A /* FitculatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FitculatorTests-Info.plist"; sourceTree = "<group>"; };
 		22BD8E6840A94BFF4028C18C /* Fitculator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Fitculator-Info.plist"; sourceTree = "<group>"; };
-		2AAB56C0618FFBC803293FFA /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		2AAB56C0618FFBC803293FFA /* ExerciseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseType.swift; sourceTree = "<group>"; };
 		382EBF5BA0DF8712B91079A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D73F3764EA91F04800B82D5 /* PlaceHolder16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder16.swift; sourceTree = "<group>"; };
 		3E59170F5F18E759A6E4FF79 /* PlaceHolder15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder15.swift; sourceTree = "<group>"; };
@@ -590,7 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				57DC2C582D5EE01E00DAE832 /* PlaceHolder1.swift */,
-				2AAB56C0618FFBC803293FFA /* Exercise.swift */,
+				2AAB56C0618FFBC803293FFA /* ExerciseType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -870,7 +870,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57DC2C592D5EE01E00DAE832 /* PlaceHolder1.swift in Sources */,
-				258679D0F67E883C77F1DE8D /* Exercise.swift in Sources */,
+				258679D0F67E883C77F1DE8D /* ExerciseType.swift in Sources */,
 				40C199B4FD1260F6332F12F0 /* PlaceHolder2.swift in Sources */,
 				64AD25F29106D9CEFA51B7E5 /* PlaceHolder3.swift in Sources */,
 				68F59615BB757E4023BE8A8C /* Color+Extension.swift in Sources */,
