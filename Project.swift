@@ -68,7 +68,6 @@ let project = Project(
                 infoPlist: .default,
                 sources: ["Core/**"],
                 dependencies: [
-                    .target(name: "Shared"),
                     .external(name: "Alamofire")
                 ]
             ),
@@ -81,7 +80,9 @@ let project = Project(
                 deploymentTargets: .iOS("16.6"),
                 infoPlist: .default,
                 sources: ["Shared/**"],
-                dependencies: []
+                dependencies: [
+                    .target(name: "Core")
+                ]
             ),
     ]
 )

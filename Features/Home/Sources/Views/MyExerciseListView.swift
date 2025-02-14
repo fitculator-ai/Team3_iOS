@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import Shared
 
 struct MyExerciseListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("나의 운동 기록")
-                .font(.title2)
-                .fontWeight(.black)
+                .font(AppFont.mainTitle)
             
             ScrollView {
                 LazyVStack {
@@ -34,10 +34,11 @@ struct MyExerciseListView: View {
                                     }
                                     VStack(alignment: .leading) {
                                         Text("달리기")
-                                            .font(.title3)
-                                            .fontWeight(.bold)
+                                            .font(AppFont.subTitle)
                                         Text("02.11 오후 6:50")
                                             .font(.system(size: 13))
+                                            .foregroundStyle(Color.white)
+                                            .opacity(0.8)
                                     }
                                     Spacer()
                                     Text("111.1pt")
