@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		0D6E356165DDBD71675B36A1 /* PlaceHolder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */; };
 		0F0CBA5C53095A611A13478A /* TuistAssets+Fitculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B4BDD3D8AF09B554B0199 /* TuistAssets+Fitculator.swift */; };
 		119EE8D7468CC8E3845CE358 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
+		1538A0E72D5EC60300C03E4C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1538A0E62D5EC60300C03E4C /* HomeView.swift */; };
 		258679D0F67E883C77F1DE8D /* PlaceHolder1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */; };
 		3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */; };
 		40C199B4FD1260F6332F12F0 /* PlaceHolder2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022693F41000C8D51E5E8A5B /* PlaceHolder2.swift */; };
@@ -167,6 +168,7 @@
 		0B7B4BDD3D8AF09B554B0199 /* TuistAssets+Fitculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Fitculator.swift"; sourceTree = "<group>"; };
 		0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder9.swift; sourceTree = "<group>"; };
 		1450FAB189DF5C924407A745 /* PlaceHolder4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder4.swift; sourceTree = "<group>"; };
+		1538A0E62D5EC60300C03E4C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		18A440168BB14D1002CBE56A /* FitculatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FitculatorTests-Info.plist"; sourceTree = "<group>"; };
 		22BD8E6840A94BFF4028C18C /* Fitculator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Fitculator-Info.plist"; sourceTree = "<group>"; };
 		2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder1.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				3E59170F5F18E759A6E4FF79 /* PlaceHolder15.swift */,
+				1538A0E62D5EC60300C03E4C /* HomeView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				A0B4A3D57C3946AAE25153E0 /* PlaceHolder15.swift in Sources */,
 				FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */,
 				D209B593FC0676C9F21C4198 /* PlaceHolder17.swift in Sources */,
+				1538A0E72D5EC60300C03E4C /* HomeView.swift in Sources */,
 				E07FBFB80FAF005DD4CC8BF6 /* PlaceHolder18.swift in Sources */,
 				B904200FC9D5FEAD0625C55A /* PlaceHolder19.swift in Sources */,
 			);
@@ -920,10 +924,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -951,10 +952,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -988,10 +986,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1025,10 +1020,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1319,10 +1311,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
