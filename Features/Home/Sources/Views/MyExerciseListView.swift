@@ -22,8 +22,7 @@ struct MyExerciseListView: View {
                             
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.gray)
-                                    .opacity(0.25)
+                                    .fill(Color.background)
                                     .frame(width: UIScreen.main.bounds.width * 0.88, height: 160)
                                     .onTapGesture {
                                         isActive = true
