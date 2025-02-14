@@ -8,8 +8,8 @@
 import SwiftUI
 
 // MARK: hex color 값 사용
-// 사용예시 - Color("#FFFFFF")
-extension Color {
+// 사용예시 - Color("hex: #FFFFFF")
+public extension Color {  // <- public 추가
     init(hex: String) {
         let scanner = Scanner(string: hex)
         _ = scanner.scanString("#")
