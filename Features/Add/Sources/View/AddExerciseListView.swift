@@ -17,23 +17,26 @@ public struct AddExerciseListView: View {
     @State private var selectedPicker: tapInfo = .aerobic
     
     public init() {}
-    
+
     public var body: some View {
-        ScrollView {
-            Picker("운동 종류", selection: $selectedPicker) {
-                ForEach(tapInfo.allCases, id: \.self) { option in
-                    Text(option.rawValue)
+        NavigationStack {
+            ScrollView {
+                Picker("운동 종류", selection: $selectedPicker) {
+                    ForEach(tapInfo.allCases, id: \.self) { option in
+                        Text(option.rawValue)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding()
+                
+                if selectedPicker == .aerobic {
+                    AddExerciseAerobicListView()
+                } else {
+                    AddExerciseAnaerobicListView()
                 }
             }
-            .pickerStyle(.segmented)
-            .padding()
-            
-            if selectedPicker == .aerobic {
-                AddExerciseAerobicListView()
-            } else {
-                AddExerciseAnaerobicListView()
-            }
         }
+        .buttonStyle(.plain)
     }
 }
 
@@ -41,17 +44,22 @@ struct AddExerciseAerobicListView: View {
     var body: some View {
         ForEach(dummyExerciseTypeList) { item in
             HStack {
-                Image(systemName: item.exerciseImage)
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .padding(8)
-                    .background(Color(hex: item.exerciseColor))
-                    .clipShape(Circle())
-                    .padding(.leading, 20)
-                
-                Text(item.exerciseName)
-                    .bold()
-                    .padding(.leading, 10)
+                NavigationLink {
+                    EmptyView()
+                } label: {
+                    Image(systemName: item.exerciseImage)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .padding(8)
+                        .background(Color(hex: item.exerciseColor))
+                        .clipShape(Circle())
+                        .padding(.leading, 20)
+                    
+                    
+                    Text(item.exerciseName)
+                        .bold()
+                        .padding(.leading, 10)
+                }
                 
                 Spacer()
             }
@@ -66,17 +74,22 @@ struct AddExerciseAnaerobicListView: View {
     var body: some View {
         ForEach(dummyExerciseTypeList.reversed()) { item in
             HStack {
-                Image(systemName: item.exerciseImage)
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .padding(8)
-                    .background(Color(hex: item.exerciseColor))
-                    .clipShape(Circle())
-                    .padding(.leading, 20)
-                
-                Text(item.exerciseName)
-                    .bold()
-                    .padding(.leading, 10)
+                NavigationLink {
+                    EmptyView()
+                } label: {
+                    Image(systemName: item.exerciseImage)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .padding(8)
+                        .background(Color(hex: item.exerciseColor))
+                        .clipShape(Circle())
+                        .padding(.leading, 20)
+                    
+                    
+                    Text(item.exerciseName)
+                        .bold()
+                        .padding(.leading, 10)
+                }
                 
                 Spacer()
             }
