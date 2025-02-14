@@ -8,7 +8,7 @@
 import SwiftUI
 import Core
 
-var aerobicList: [ExerciseType] = [
+var dummyExerciseTypeList: [ExerciseType] = [
     ExerciseType(exerciseName: "Running", exerciseType: "Cardio", exerciseColor: "#FF0000", exerciseImage: "figure.run"),
     ExerciseType(exerciseName: "Cycling", exerciseType: "Cardio", exerciseColor: "#3498DB", exerciseImage: "bicycle"),
     ExerciseType(exerciseName: "Swimming", exerciseType: "Cardio", exerciseColor: "#1ABC9C", exerciseImage: "figure.pool.swim"),
