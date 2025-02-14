@@ -43,8 +43,8 @@
 		D209B593FC0676C9F21C4198 /* PlaceHolder17.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA44071F4B25B00754C110CE /* PlaceHolder17.swift */; };
 		D93E8C64DB207CDC0A7DD590 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE155CEEF7F5897A826509C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF0B9AB0EB8794B748AE1285 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
-		E07FBFB80FAF005DD4CC8BF6 /* PlaceHolder18.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D2AA5B61425F20CEFE244D /* PlaceHolder18.swift */; };
 		E77EA43881FF0F4CF36E140B /* TuistBundle+Fitculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD994C6A91E8870CE8A17 /* TuistBundle+Fitculator.swift */; };
+		EA0B3DBB2D5ECF6A008560A5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0B3DBA2D5ECF6A008560A5 /* ProfileView.swift */; };
 		F8FE9FF6BA17A864E2C0FF0A /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE3B2C70D8E4080F86C139C8 /* PlaceHolder7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D2C8FBEDAFBD1D94AB1AB3 /* PlaceHolder7.swift */; };
 		FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D73F3764EA91F04800B82D5 /* PlaceHolder16.swift */; };
@@ -190,11 +190,11 @@
 		8F9E31ED9239B391204A7EFA /* PlaceHolder20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder20.swift; sourceTree = "<group>"; };
 		9CD1B281EC7C33795487A52C /* PlaceHolder6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder6.swift; sourceTree = "<group>"; };
 		9E71C382DBBE44C3535248B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A4D2AA5B61425F20CEFE244D /* PlaceHolder18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder18.swift; sourceTree = "<group>"; };
 		ACD94024AD2F61D403E2678B /* FitculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitculatorTests.swift; sourceTree = "<group>"; };
 		BDA14826C4C0A13CAF29FE80 /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C598175FD8176FC31EEBAE00 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder12.swift; sourceTree = "<group>"; };
+		EA0B3DBA2D5ECF6A008560A5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		EA44071F4B25B00754C110CE /* PlaceHolder17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder17.swift; sourceTree = "<group>"; };
 		EF1BF04FB1A65FE8765B4D92 /* PlaceHolder21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder21.swift; sourceTree = "<group>"; };
 		F09357C91C59896603663E4A /* PlaceHolder19.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder19.swift; sourceTree = "<group>"; };
@@ -515,7 +515,7 @@
 		BCA30440285EF04E21764400 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A4D2AA5B61425F20CEFE244D /* PlaceHolder18.swift */,
+				EA0B3DBA2D5ECF6A008560A5 /* ProfileView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -620,8 +620,8 @@
 			buildPhases = (
 				FF6690CD37946AD39560E448 /* Sources */,
 				B1E61863D0819DFDEE80E9D5 /* Resources */,
-				7F837C5EA2574CA2C1A30BDC /* Embed Frameworks */,
 				931757DD9080E2EF738405C6 /* Frameworks */,
+				7F837C5EA2574CA2C1A30BDC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -630,6 +630,8 @@
 				F29A5FD5D124A99B9DA7BB5D /* PBXTargetDependency */,
 			);
 			name = Features;
+			packageProductDependencies = (
+			);
 			productName = Features;
 			productReference = BDA14826C4C0A13CAF29FE80 /* Features.framework */;
 			productType = "com.apple.product-type.framework";
@@ -640,8 +642,8 @@
 			buildPhases = (
 				3084DE101B2CAE53807881D5 /* Sources */,
 				0159156D473A761BDF327C67 /* Resources */,
-				AFD29C199817902D5AF57FA1 /* Embed Frameworks */,
 				83046CA933A0BC86870922FD /* Frameworks */,
+				AFD29C199817902D5AF57FA1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -649,6 +651,8 @@
 				B23E400FFF87CDF28A42F1E3 /* PBXTargetDependency */,
 			);
 			name = Core;
+			packageProductDependencies = (
+			);
 			productName = Core;
 			productReference = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */;
 			productType = "com.apple.product-type.framework";
@@ -659,8 +663,8 @@
 			buildPhases = (
 				706FA06AE4C3407D1846103D /* Sources */,
 				3D956AFB2FFB810ADC423031 /* Resources */,
-				C5FF8FCC9A9249636E2830DC /* Embed Frameworks */,
 				8F31B8EB2064FAFB4FBC8DEB /* Frameworks */,
+				C5FF8FCC9A9249636E2830DC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -670,6 +674,8 @@
 				39A8756C52D3AB97E879A76F /* PBXTargetDependency */,
 			);
 			name = Fitculator;
+			packageProductDependencies = (
+			);
 			productName = Fitculator;
 			productReference = FEF3CC56035865C02D41340F /* Fitculator.app */;
 			productType = "com.apple.product-type.application";
@@ -680,8 +686,8 @@
 			buildPhases = (
 				D320E86267FBD764D002C851 /* Sources */,
 				C8441497895F413ECBC886E4 /* Resources */,
-				975D413B0C3261F189C504DE /* Embed Frameworks */,
 				9072843C9B11E4E2D49C4263 /* Frameworks */,
+				975D413B0C3261F189C504DE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -689,6 +695,8 @@
 				658F38B7D2DF7EA73FE19F25 /* PBXTargetDependency */,
 			);
 			name = FitculatorTests;
+			packageProductDependencies = (
+			);
 			productName = FitculatorTests;
 			productReference = 7F215F7BB2BC22395F9F0064 /* FitculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -699,14 +707,16 @@
 			buildPhases = (
 				1F0BA16CBB09000009E4768B /* Sources */,
 				44B6A94E0881ED03CB66ED13 /* Resources */,
-				8EA1984CAD0123CC03C647FC /* Embed Frameworks */,
 				1AD31DD5902EF5F1F5B52E30 /* Frameworks */,
+				8EA1984CAD0123CC03C647FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Shared;
+			packageProductDependencies = (
+			);
 			productName = Shared;
 			productReference = C598175FD8176FC31EEBAE00 /* Shared.framework */;
 			productType = "com.apple.product-type.framework";
@@ -838,12 +848,12 @@
 				BD0DF5C95C32C440EB2B7B98 /* PlaceHolder10.swift in Sources */,
 				A7939FCE9D79E0C6832831F1 /* PlaceHolder11.swift in Sources */,
 				3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */,
+				EA0B3DBB2D5ECF6A008560A5 /* ProfileView.swift in Sources */,
 				BF7F1D8478DFFCB7F1F13821 /* PlaceHolder13.swift in Sources */,
 				9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */,
 				A0B4A3D57C3946AAE25153E0 /* PlaceHolder15.swift in Sources */,
 				FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */,
 				D209B593FC0676C9F21C4198 /* PlaceHolder17.swift in Sources */,
-				E07FBFB80FAF005DD4CC8BF6 /* PlaceHolder18.swift in Sources */,
 				B904200FC9D5FEAD0625C55A /* PlaceHolder19.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,10 +930,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -951,10 +958,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -988,10 +992,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1025,10 +1026,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1319,10 +1317,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
