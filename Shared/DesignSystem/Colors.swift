@@ -9,5 +9,6 @@ import Core
 import SwiftUI
 
 public extension Color {
-    static let background = Color("#191C30")
+    static let background = Color(hex: "#191C30")
+    static let cellColor = Color(hex: "#3b3f51", opacity: 0.6)
 }

@@ -11,6 +11,7 @@
 		0D6E356165DDBD71675B36A1 /* PlaceHolder5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */; };
 		0F0CBA5C53095A611A13478A /* TuistAssets+Fitculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B4BDD3D8AF09B554B0199 /* TuistAssets+Fitculator.swift */; };
 		119EE8D7468CC8E3845CE358 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C598175FD8176FC31EEBAE00 /* Shared.framework */; };
+		258679D0F67E883C77F1DE8D /* ExerciseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB56C0618FFBC803293FFA /* ExerciseType.swift */; };
 		258679D0F67E883C77F1DE8D /* PlaceHolder1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */; };
 		2C8231607FCFF7982BC18B21 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854CB9EED4D256116E76030C /* Colors.swift */; };
 		3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */; };
@@ -20,6 +21,10 @@
 		53494343A90D740D59781D57 /* FitculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD94024AD2F61D403E2678B /* FitculatorTests.swift */; };
 		55D95D589788D3A99D85F021 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AC4A08FD90DBE400208BC /* AppFont.swift */; };
 		5751A78CB91E6F9B2DB588A5 /* PlaceHolder9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */; };
+		57DC2C552D5EDB2D00DAE832 /* AddExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC2C522D5EDB2D00DAE832 /* AddExerciseListView.swift */; };
+		57DC2C572D5EDFBB00DAE832 /* DummyExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC2C562D5EDFAE00DAE832 /* DummyExerciseList.swift */; };
+		57DC2C592D5EE01E00DAE832 /* PlaceHolder1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC2C582D5EE01E00DAE832 /* PlaceHolder1.swift */; };
+		57DC2C5C2D5EE05500DAE832 /* AddExerciseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC2C5B2D5EE04300DAE832 /* AddExerciseListViewModel.swift */; };
 		64AD25F29106D9CEFA51B7E5 /* PlaceHolder3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C50367FE431BCA92F2683B /* PlaceHolder3.swift */; };
 		68F59615BB757E4023BE8A8C /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C625D40250AAA8B85D003C5 /* Color+Extension.swift */; };
 		9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AC3F6D546B24A0D55F2F60 /* PlaceHolder14.swift */; };
@@ -170,7 +175,7 @@
 		0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder9.swift; sourceTree = "<group>"; };
 		18A440168BB14D1002CBE56A /* FitculatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FitculatorTests-Info.plist"; sourceTree = "<group>"; };
 		22BD8E6840A94BFF4028C18C /* Fitculator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Fitculator-Info.plist"; sourceTree = "<group>"; };
-		2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder1.swift; sourceTree = "<group>"; };
+		2AAB56C0618FFBC803293FFA /* ExerciseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseType.swift; sourceTree = "<group>"; };
 		382EBF5BA0DF8712B91079A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D73F3764EA91F04800B82D5 /* PlaceHolder16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder16.swift; sourceTree = "<group>"; };
 		4183A9A6A9D7A480938993B2 /* MyExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyExerciseListView.swift; sourceTree = "<group>"; };
@@ -179,6 +184,10 @@
 		4C625D40250AAA8B85D003C5 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		4DE8ABAE8F4A1650FBA2CABC /* PlaceHolder8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder8.swift; sourceTree = "<group>"; };
 		54FF6E3909773921ECA58109 /* Shared-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Shared-Info.plist"; sourceTree = "<group>"; };
+		57DC2C522D5EDB2D00DAE832 /* AddExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseListView.swift; sourceTree = "<group>"; };
+		57DC2C562D5EDFAE00DAE832 /* DummyExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyExerciseList.swift; sourceTree = "<group>"; };
+		57DC2C582D5EE01E00DAE832 /* PlaceHolder1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder1.swift; sourceTree = "<group>"; };
+		57DC2C5B2D5EE04300DAE832 /* AddExerciseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseListViewModel.swift; sourceTree = "<group>"; };
 		5D7A7DC8A4BE1BD00B39E5C7 /* PlaceHolder13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder13.swift; sourceTree = "<group>"; };
 		64C50367FE431BCA92F2683B /* PlaceHolder3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder3.swift; sourceTree = "<group>"; };
 		6C6DD994C6A91E8870CE8A17 /* TuistBundle+Fitculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Fitculator.swift"; sourceTree = "<group>"; };
@@ -334,6 +343,7 @@
 		3E495C661B9551EF6CF1FE81 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				57DC2C562D5EDFAE00DAE832 /* DummyExerciseList.swift */,
 				87D2C8FBEDAFBD1D94AB1AB3 /* PlaceHolder7.swift */,
 			);
 			path = Tests;
@@ -353,6 +363,29 @@
 				5D7A7DC8A4BE1BD00B39E5C7 /* PlaceHolder13.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		57DC2C512D5EDB2D00DAE832 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		57DC2C532D5EDB2D00DAE832 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57DC2C522D5EDB2D00DAE832 /* AddExerciseListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		57DC2C542D5EDB2D00DAE832 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57DC2C5B2D5EE04300DAE832 /* AddExerciseListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		641E66765AA48B8C5C270875 /* Tests */ = {
@@ -470,6 +503,9 @@
 			isa = PBXGroup;
 			children = (
 				9CD1B281EC7C33795487A52C /* PlaceHolder6.swift */,
+				57DC2C512D5EDB2D00DAE832 /* Model */,
+				57DC2C532D5EDB2D00DAE832 /* View */,
+				57DC2C542D5EDB2D00DAE832 /* ViewModel */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -554,7 +590,8 @@
 		CE41F2D009A88C91F67DDA7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2AAB56C0618FFBC803293FFA /* PlaceHolder1.swift */,
+				57DC2C582D5EE01E00DAE832 /* PlaceHolder1.swift */,
+				2AAB56C0618FFBC803293FFA /* ExerciseType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -833,7 +870,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				258679D0F67E883C77F1DE8D /* PlaceHolder1.swift in Sources */,
+				57DC2C592D5EE01E00DAE832 /* PlaceHolder1.swift in Sources */,
+				258679D0F67E883C77F1DE8D /* ExerciseType.swift in Sources */,
 				40C199B4FD1260F6332F12F0 /* PlaceHolder2.swift in Sources */,
 				64AD25F29106D9CEFA51B7E5 /* PlaceHolder3.swift in Sources */,
 				68F59615BB757E4023BE8A8C /* Color+Extension.swift in Sources */,
@@ -865,7 +903,8 @@
 			files = (
 				0D6E356165DDBD71675B36A1 /* PlaceHolder5.swift in Sources */,
 				C14212FF76C1C437B9B5920B /* PlaceHolder6.swift in Sources */,
-				AFD3EED92D5EDA1600CAEF20 /* MyExerciseDetailView.swift in Sources */,
+				57DC2C5C2D5EE05500DAE832 /* AddExerciseListViewModel.swift in Sources */,
+				57DC2C572D5EDFBB00DAE832 /* DummyExerciseList.swift in Sources */,
 				FE3B2C70D8E4080F86C139C8 /* PlaceHolder7.swift in Sources */,
 				C10666CEC833C89AF7ADB02A /* PlaceHolder8.swift in Sources */,
 				5751A78CB91E6F9B2DB588A5 /* PlaceHolder9.swift in Sources */,
@@ -873,6 +912,7 @@
 				A7939FCE9D79E0C6832831F1 /* PlaceHolder11.swift in Sources */,
 				3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */,
 				BF7F1D8478DFFCB7F1F13821 /* PlaceHolder13.swift in Sources */,
+				57DC2C552D5EDB2D00DAE832 /* AddExerciseListView.swift in Sources */,
 				9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */,
 				F589C01B3AE0C93902B93683 /* MyExerciseListView.swift in Sources */,
 				FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */,
