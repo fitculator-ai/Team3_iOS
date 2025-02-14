@@ -1,4 +1,5 @@
 import SwiftUI
+import Features
 
 struct ContentView: View {
     @State private var isModalPresented = false
@@ -28,12 +29,15 @@ struct ContentView: View {
                         Image(systemName: "person.2")
                         Text("커뮤니티")
                     }
-                
-                Text("마이")
-                    .tabItem {
-                        Image(systemName: "person.crop.circle")
-                        Text("마이")
+                NavigationStack {
+                    NavigationLink(destination: ProfileView()) {
                     }
+                    .navigationTitle("마이")
+                }
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("마이")
+                }
             }
             
             VStack {
