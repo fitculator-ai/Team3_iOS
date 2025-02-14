@@ -30,9 +30,9 @@ struct ContentView: View {
                         Text("커뮤니티")
                     }
                 NavigationStack {
-                    NavigationLink(destination: ProfileView()) {
-                    }
-                    .navigationTitle("마이")
+                    //NavigationLink(destination: ProfileView()) {
+                        ProfileView()
+                   // }
                 }
                 .tabItem {
                     Image(systemName: "person.crop.circle")

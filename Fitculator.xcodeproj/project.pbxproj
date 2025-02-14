@@ -18,8 +18,10 @@
 		466F08534215DCE8442FBD24 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; };
 		4E8CFDBDE82B4B7AD4232712 /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BDA14826C4C0A13CAF29FE80 /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53494343A90D740D59781D57 /* FitculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD94024AD2F61D403E2678B /* FitculatorTests.swift */; };
+		55D95D589788D3A99D85F021 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AC4A08FD90DBE400208BC /* AppFont.swift */; };
 		5751A78CB91E6F9B2DB588A5 /* PlaceHolder9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE29A63A32F6582D58A4770 /* PlaceHolder9.swift */; };
 		64AD25F29106D9CEFA51B7E5 /* PlaceHolder3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C50367FE431BCA92F2683B /* PlaceHolder3.swift */; };
+		68F59615BB757E4023BE8A8C /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C625D40250AAA8B85D003C5 /* Color+Extension.swift */; };
 		9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AC3F6D546B24A0D55F2F60 /* PlaceHolder14.swift */; };
 		919B706519A36F97D084B822 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 740851605AFA51EF8764D194 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D0FCBBF092E9B632C66DFD7 /* PlaceHolder21.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1BF04FB1A65FE8765B4D92 /* PlaceHolder21.swift */; };
@@ -28,6 +30,7 @@
 		A7939FCE9D79E0C6832831F1 /* PlaceHolder11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BC486DDEB75B215BDF793E /* PlaceHolder11.swift */; };
 		A865E4D4F9C693B61AAD1A38 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740851605AFA51EF8764D194 /* Kingfisher.framework */; };
 		AF2B715CF238B69E7E4BB3F5 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; };
+		B21D1B7AE503017B2B13A56A /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AA4B9AE9AE9FFD43A08E95 /* Core.framework */; };
 		B4F9EF1915E66AF8AE7859F8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE155CEEF7F5897A826509C /* Alamofire.framework */; };
 		B6EDDFDC98CFD5D2D54C4116 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71C382DBBE44C3535248B5 /* ContentView.swift */; };
 		B904200FC9D5FEAD0625C55A /* PlaceHolder19.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09357C91C59896603663E4A /* PlaceHolder19.swift */; };
@@ -183,6 +186,7 @@
 		740851605AFA51EF8764D194 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74523276C202800AC5899E15 /* FitculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitculatorApp.swift; sourceTree = "<group>"; };
 		7F215F7BB2BC22395F9F0064 /* FitculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		854CB9EED4D256116E76030C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		87D2C8FBEDAFBD1D94AB1AB3 /* PlaceHolder7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder7.swift; sourceTree = "<group>"; };
 		88AC3F6D546B24A0D55F2F60 /* PlaceHolder14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder14.swift; sourceTree = "<group>"; };
 		8B091ABEDC87EB5B7BE0D441 /* PlaceHolder5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder5.swift; sourceTree = "<group>"; };
@@ -194,7 +198,6 @@
 		BDA14826C4C0A13CAF29FE80 /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C598175FD8176FC31EEBAE00 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72D7189546EBCBC884DEE1A /* PlaceHolder12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder12.swift; sourceTree = "<group>"; };
-		EA0B3DBA2D5ECF6A008560A5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		EA0B3DBE2D5EDE80008560A5 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		EA44071F4B25B00754C110CE /* PlaceHolder17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder17.swift; sourceTree = "<group>"; };
 		EF1BF04FB1A65FE8765B4D92 /* PlaceHolder21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolder21.swift; sourceTree = "<group>"; };
@@ -869,13 +872,13 @@
 				BD0DF5C95C32C440EB2B7B98 /* PlaceHolder10.swift in Sources */,
 				A7939FCE9D79E0C6832831F1 /* PlaceHolder11.swift in Sources */,
 				3293AFB81CB2812F12390D16 /* PlaceHolder12.swift in Sources */,
-				EA0B3DBB2D5ECF6A008560A5 /* ProfileView.swift in Sources */,
 				BF7F1D8478DFFCB7F1F13821 /* PlaceHolder13.swift in Sources */,
 				9100A56677A2F0586431F83E /* PlaceHolder14.swift in Sources */,
 				A0B4A3D57C3946AAE25153E0 /* PlaceHolder15.swift in Sources */,
 				F589C01B3AE0C93902B93683 /* MyExerciseListView.swift in Sources */,
 				FFE15E2DFB748820B253FD79 /* PlaceHolder16.swift in Sources */,
 				D209B593FC0676C9F21C4198 /* PlaceHolder17.swift in Sources */,
+				E806275AC06E345A84244FFE /* ProfileView.swift in Sources */,
 				B904200FC9D5FEAD0625C55A /* PlaceHolder19.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
