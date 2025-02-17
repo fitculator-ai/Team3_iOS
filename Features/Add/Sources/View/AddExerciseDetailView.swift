@@ -74,9 +74,9 @@ struct AddExerciseDetailView: View {
                 }
                 .padding()
             }
-            .onChange(of: $viewModel.selectedDate) {
-                print(DateFormatterUtil.dateFormatDate.string(from:viewModel.selectedDate))
-            }
+//            .onChange(of: viewModel.selectedDate) {
+//                print("\(DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate))")
+//            }
             .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
             .padding(.top, 10)
             
