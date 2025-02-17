@@ -6,28 +6,11 @@
 //
 
 import SwiftUI
-
-let dateformatDate: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter
-}()
-
-let dateformatTime: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm:ss"
-    return formatter
-}()
+import Core
 
 struct AddExerciseDetailView: View {
     let exerciseName: String
-    
-    @State var averageHeartRate: String = ""
-    @State var maxHeartRate: String = ""
-    @State var workoutDuration: String = ""
-    @State var workoutMemo: String = ""
-    
-    @State private var selectedDate = Date()
+    @ObservedObject var viewModel = AddExerciseDetailViewModel()
     
     var body: some View {
         VStack {
@@ -41,7 +24,7 @@ struct AddExerciseDetailView: View {
                     HStack {
                         Text("평균 심박수")
                             .opacity(0.7)
-                        TextField("", text: $averageHeartRate)
+                        TextField("", text: $viewModel.averageHeartRate)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.trailing)
                     }
@@ -52,7 +35,7 @@ struct AddExerciseDetailView: View {
                     HStack {
                         Text("최대 심박수")
                             .opacity(0.7)
-                        TextField("", text: $maxHeartRate)
+                        TextField("", text: $viewModel.maxHeartRate)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.trailing)
                     }
@@ -69,13 +52,13 @@ struct AddExerciseDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 
                 VStack(alignment: .leading) {
-                    DatePicker("시작 날짜", selection: $selectedDate, in: ...Date(), displayedComponents: .date)
+                    DatePicker("시작 날짜", selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
                         .opacity(0.7)
                         .padding(.top, -8)
                     
                     Divider()
                     
-                    DatePicker("시작 시간", selection: $selectedDate, displayedComponents: .hourAndMinute)
+                    DatePicker("시작 시간", selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
                         .opacity(0.7)
                     
                     Divider()
@@ -84,12 +67,15 @@ struct AddExerciseDetailView: View {
                     HStack {
                         Text("운동 시간(분)")
                             .opacity(0.7)
-                        TextField("", text: $workoutDuration)
+                        TextField("", text: $viewModel.workoutDuration)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.trailing)
                     }
                 }
                 .padding()
+            }
+            .onChange(of: $viewModel.selectedDate) {
+                print(DateFormatterUtil.dateFormatDate.string(from:viewModel.selectedDate))
             }
             .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
             .padding(.top, 10)
@@ -105,7 +91,7 @@ struct AddExerciseDetailView: View {
                     
                     Divider()
                     
-                    TextEditor(text: $workoutMemo)
+                    TextEditor(text: $viewModel.workoutMemo)
                         .scrollContentBackground(.hidden)
                 }
                 .padding()
@@ -119,7 +105,6 @@ struct AddExerciseDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-
 
 #Preview {
     AddExerciseDetailView(exerciseName: "런닝")
