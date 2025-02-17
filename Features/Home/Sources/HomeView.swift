@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import Shared
+import Charts
 
 // UINavigationController의 실제 높이를 가져오는 UIViewControllerRepresentable
 struct NavigationBarHeightReader: UIViewControllerRepresentable {
@@ -156,12 +157,8 @@ public struct HomeView: View {
                         }
                         ZStack(alignment: .top) {
                             VStack {
-                                ForEach(0...20, id: \.self) {_ in
-                                    Image(systemName: "globe")
-                                        .imageScale(.large)
-                                        .foregroundStyle(.tint)
-                                    Text("Hello, world!")
-                                }
+                                ExercisePieChartView(data: ExercisePoint.dummyData())
+                                    .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.7)
                             }
                             if showDatePicker {
                                 DatePicker("", selection: $selectedDate, displayedComponents: .date)
@@ -182,7 +179,7 @@ public struct HomeView: View {
             .onAppear {
                 updateStartAndEndOfWeek()
             }
-            .onChange(of: selectedDate) { _ in
+            .onChange(of: selectedDate) {
                 updateStartAndEndOfWeek()
                 showDatePicker = false
             }
@@ -195,6 +192,81 @@ struct ScrollClipModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .clipShape(Rectangle())
+    }
+}
+
+struct ExercisePoint {
+    //TODO: enum 변경
+    let exerciseType: String
+    let point: Int
+    
+    static func dummyData() -> [ExercisePoint] {
+        return [
+            ExercisePoint(exerciseType: "달리기", point: 81),
+            ExercisePoint(exerciseType: "HIIT", point: 81),
+//            ExercisePoint(exerciseType: "수영", point: 22)
+        ]
+    }
+}
+
+//TODO: 차트 색상 변경, info 버튼, 아이콘 추가
+struct ExercisePieChartView: View {
+    let exerciseIcons: [String: String] = [
+        "달리기": "figure.run",
+        "HIIT": "bolt.fill",
+        "수영": "figure.open.water.swim"
+    ]
+    var data: [ExercisePoint]
+    
+    var body: some View {
+        Chart(data, id: \.exerciseType) { element in
+            SectorMark(angle: .value("Usage", element.point), innerRadius: .ratio(0.5))
+                .foregroundStyle(by: .value("Version", element.exerciseType))
+                .annotation(position: .overlay) {
+                    if let exerciseIcon = exerciseIcons[element.exerciseType] {
+                        GeometryReader { geometry in
+                            let frame = geometry.frame(in: .local)
+                            // 여기 수정해야 해당 영역의 각도
+                            let centerAngle = .pi * (Double(element.point) / Double(data.reduce(0) { $0 + $1.point }))
+                            let radius: CGFloat = min(frame.width, frame.height) / 2
+                            let ratio = 0.1
+                            
+                            let offsetX = radius * cos(centerAngle - .pi / 2) * ratio
+                            let offsetY = radius * sin(centerAngle - .pi / 2) * ratio
+                            
+                            Image(systemName: exerciseIcon)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                                .position(x: frame.midX - offsetX, y: frame.midY + offsetY)
+                        }
+                    }
+                }
+        }
+        .chartLegend(.hidden)
+        .chartBackground { chartProxy in
+            GeometryReader { geometry in
+                let frame = geometry[chartProxy.plotFrame!]
+                VStack() {
+                    Text("유산소")
+                        .font(.subheadline)
+                    Text("80").font(.largeTitle) + Text(" %").font(.subheadline)
+                    Spacer().frame(height: 4)
+                    Button(action: {
+                        print("info")
+                    }) {
+                        Image(systemName: "info.circle")
+                            .foregroundStyle(.white)
+                            .font(.caption)
+                    }
+                }
+                .position(x: frame.midX, y: frame.midY)
+                .offset(x: 0, y: frame.height * 0.03)
+            }
+        }
+        .padding()
+        .scaledToFit()
     }
 }
 
