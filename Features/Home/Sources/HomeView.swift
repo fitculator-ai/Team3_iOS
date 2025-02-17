@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Shared
 
 // UINavigationController의 실제 높이를 가져오는 UIViewControllerRepresentable
 struct NavigationBarHeightReader: UIViewControllerRepresentable {
@@ -39,9 +40,9 @@ struct HomeNavigationBar: View {
             HStack(alignment: .center) {
                 HStack {
                     Image(systemName: leftIcon)
-                        .font(.system(size: 20, weight: .bold))
+                        .font(AppFont.subTitle)
                     Text(title)
-                        .font(.system(size: 24, weight: .bold))
+                        .font(AppFont.mainTitle)
                         .italic()
                         .foregroundStyle(.white)
                 }
@@ -49,7 +50,7 @@ struct HomeNavigationBar: View {
                 Spacer()
 
                 Image(systemName: rightIcon)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(AppFont.subTitle)
                     .foregroundStyle(.white)
             }
             .frame(height: navBarHeight) // 동적으로 가져온 높이 적용
@@ -105,8 +106,7 @@ public struct HomeView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                // TODO: 배경색 변경
-                Color.blue
+                Color.background
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -129,12 +129,12 @@ public struct HomeView: View {
                                     .foregroundStyle(.white)
                             }
                             
-                            // TODO: 배경색 변경, 너비 고정
+                            // TODO: 너비 고정
                             Text("\(getStringFromDate(from: startOfWeek)) ~ \(getStringFromDate(from: endOfWeek))")
                                 .font(.subheadline)
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
-                                .background(Color.black)
+                                .background(Color.cellColor)
                                 .clipShape(RoundedRectangle(cornerRadius: 36))
                                 .onTapGesture {
                                     showDatePicker.toggle()
