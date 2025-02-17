@@ -45,7 +45,7 @@ struct AddExerciseAerobicListView: View {
         ForEach(dummyExerciseTypeList) { item in
             HStack {
                 NavigationLink {
-                    EmptyView()
+                    AddExerciseDetailView(exerciseName: item.exerciseName)
                 } label: {
                     Image(systemName: item.exerciseImage)
                         .resizable()
@@ -75,7 +75,7 @@ struct AddExerciseAnaerobicListView: View {
         ForEach(dummyExerciseTypeList.reversed()) { item in
             HStack {
                 NavigationLink {
-                    EmptyView()
+                    AddExerciseDetailView(exerciseName: item.exerciseName)
                 } label: {
                     Image(systemName: item.exerciseImage)
                         .resizable()
