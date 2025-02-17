@@ -8,10 +8,12 @@
 import SwiftUI
 import Shared
 
-struct MyExerciseListView: View {
+public struct MyExerciseListView: View {
     @State private var isActive: Bool = false
     
-    var body: some View {
+    public init() {}
+    
+    public var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
                 Text("나의 운동 기록")
