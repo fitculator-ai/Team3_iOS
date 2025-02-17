@@ -67,8 +67,39 @@ public struct HomeView: View {
         self.showDatePicker = showDatePicker
     }
     
+    // 주의 첫날과 마지막날 날짜 구하기
+    private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
+        let calendar = Calendar.current
+        guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: date) else {
+            return nil
+        }
+        
+        if let endOfWeek = calendar.date(byAdding: .day, value: 6, to: weekInterval.start) {
+            return (weekInterval.start, endOfWeek)
+        } else {
+            return nil
+        }
+    }
+    
+    // 주의 첫날과 마지막날 날짜 업데이트
+    private func updateStartAndEndOfWeek() {
+        if let (startOfWeek, endOfWeek) = self.getStartAndEndOfWeek(from: selectedDate) {
+            self.startOfWeek = startOfWeek
+            self.endOfWeek = endOfWeek
+        }
+    }
+    
+    // Date yyyy-MM-dd 형식으로 바꾸기
+    private func getStringFromDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: date)
+    }
+    
     private let sidePadding = UIScreen.main.bounds.width * (1 - 0.88) / 2
     @State private var selectedDate = Date()
+    @State private var startOfWeek = Date()
+    @State private var endOfWeek = Date()
     @State private var showDatePicker = false
     
     public var body: some View {
@@ -86,8 +117,11 @@ public struct HomeView: View {
                         HStack(spacing: 20) {
                             Spacer()
                             
+                            // TODO: 조건에 따라 버튼 disabled 처리
                             Button(action: {
-                                print("previous week")
+                                if let previousWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: selectedDate) {
+                                    selectedDate = previousWeekDate
+                                }
                             }) {
                                 Image(systemName: "chevron.left")
                                     .resizable()
@@ -95,8 +129,8 @@ public struct HomeView: View {
                                     .foregroundStyle(.white)
                             }
                             
-                            // TODO: DatePicker 연결, 배경색 변경
-                            Text("2025.02.02 ~ 2025.02.08")
+                            // TODO: 배경색 변경, 너비 고정
+                            Text("\(getStringFromDate(from: startOfWeek)) ~ \(getStringFromDate(from: endOfWeek))")
                                 .font(.subheadline)
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
@@ -106,8 +140,11 @@ public struct HomeView: View {
                                     showDatePicker.toggle()
                                 }
                             
+                            // TODO: 조건에 따라 버튼 disabled 처리
                             Button(action: {
-                                print("next week")
+                                if let nextWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: +1, to: selectedDate) {
+                                    selectedDate = nextWeekDate
+                                }
                             }) {
                                 Image(systemName: "chevron.right")
                                     .resizable()
@@ -141,6 +178,13 @@ public struct HomeView: View {
                 .padding([.leading, .trailing, .bottom], sidePadding)
                 .modifier(ScrollClipModifier())
                 .scrollIndicators(.never)
+            }
+            .onAppear {
+                updateStartAndEndOfWeek()
+            }
+            .onChange(of: selectedDate) { _ in
+                updateStartAndEndOfWeek()
+                showDatePicker = false
             }
         }
     }
