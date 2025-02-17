@@ -10,6 +10,7 @@ import Shared
 
 struct MyExerciseListView: View {
     @State private var isActive: Bool = false
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -21,9 +22,9 @@ struct MyExerciseListView: View {
                         ForEach(1...10, id: \.self) { _ in
                             
                             ZStack {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.background)
-                                    .frame(width: UIScreen.main.bounds.width * 0.88, height: 160)
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.cellColor)
+                                    .frame(height: 160)
                                     .onTapGesture {
                                         isActive = true
                                     }
@@ -42,7 +43,6 @@ struct MyExerciseListView: View {
                                                 .font(AppFont.subTitle)
                                             Text("02.11 오후 6:50")
                                                 .font(.system(size: 13))
-                                                .foregroundStyle(Color.white)
                                                 .opacity(0.8)
                                         }
                                         Spacer()
@@ -50,14 +50,13 @@ struct MyExerciseListView: View {
                                             .font(.system(size: 26))
                                             .fontWeight(.bold)
                                     }
-                                    .padding(.horizontal, 30)
+                                    .padding(.horizontal, 25)
                                     .padding(.bottom, 20)
                                     
                                     HStack {
                                         VStack(alignment: .leading) {
                                             Text("시간")
                                                 .font(.system(size: 13))
-                                                .foregroundStyle(Color.white)
                                                 .opacity(0.8)
                                             Text("100min")
                                                 .fontWeight(.semibold)
@@ -66,7 +65,6 @@ struct MyExerciseListView: View {
                                         VStack(alignment: .leading) {
                                             Text("평균 심박수")
                                                 .font(.system(size: 13))
-                                                .foregroundStyle(Color.white)
                                                 .opacity(0.8)
                                             Text("150bpm")
                                                 .fontWeight(.semibold)
@@ -75,7 +73,6 @@ struct MyExerciseListView: View {
                                         VStack(alignment: .leading) {
                                             Text("운동 강도")
                                                 .font(.system(size: 13))
-                                                .foregroundStyle(Color.white)
                                                 .opacity(0.8)
                                             Text("매우 높음")
                                                 .fontWeight(.semibold)
@@ -92,6 +89,7 @@ struct MyExerciseListView: View {
                     }
                 }
             }
+            .frame(width: UIScreen.main.bounds.width * 0.88)
         }
         .padding()
     }
