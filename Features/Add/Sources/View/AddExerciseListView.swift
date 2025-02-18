@@ -21,7 +21,7 @@ public struct AddExerciseListView: View {
         appearance.selectedSegmentTintColor = UIColor(Color.cellColor)
         appearance.backgroundColor = UIColor(Color.black)
     }
-
+    
     public var body: some View {
         NavigationStack {
             ScrollView {
@@ -48,10 +48,10 @@ public struct AddExerciseListView: View {
 struct AddExerciseAerobicListView: View {
     var body: some View {
         ForEach(dummyExerciseTypeList) { item in
-            HStack {
-                NavigationLink {
-                    AddExerciseDetailView(exerciseName: item.exerciseName)
-                } label: {
+            NavigationLink {
+                AddExerciseDetailView(exerciseName: item.exerciseName)
+            } label: {
+                HStack {
                     Image(systemName: item.exerciseImage)
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -64,13 +64,14 @@ struct AddExerciseAerobicListView: View {
                     Text(item.exerciseName)
                         .bold()
                         .padding(.leading, 10)
+                    
+                    Spacer()
                 }
                 
-                Spacer()
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
+                .background(Color.cellColor)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
-            .background(Color.cellColor)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
         }
     }
 }
@@ -78,10 +79,10 @@ struct AddExerciseAerobicListView: View {
 struct AddExerciseAnaerobicListView: View {
     var body: some View {
         ForEach(dummyExerciseTypeList.reversed()) { item in
-            HStack {
-                NavigationLink {
-                    AddExerciseDetailView(exerciseName: item.exerciseName)
-                } label: {
+            NavigationLink {
+                AddExerciseDetailView(exerciseName: item.exerciseName)
+            } label: {
+                HStack {
                     Image(systemName: item.exerciseImage)
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -94,13 +95,12 @@ struct AddExerciseAnaerobicListView: View {
                     Text(item.exerciseName)
                         .bold()
                         .padding(.leading, 10)
+                    Spacer()
                 }
-                
-                Spacer()
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
+                .background(Color.cellColor)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
-            .background(Color.cellColor)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
         }
     }
 }
