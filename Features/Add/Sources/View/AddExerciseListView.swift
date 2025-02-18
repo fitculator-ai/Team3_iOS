@@ -16,7 +16,11 @@ enum tapInfo : String, CaseIterable {
 public struct AddExerciseListView: View {
     @State private var selectedPicker: tapInfo = .aerobic
     
-    public init() {}
+    public init() {
+        let appearance = UISegmentedControl.appearance()
+        appearance.selectedSegmentTintColor = UIColor(Color.cellColor)
+        appearance.backgroundColor = UIColor(Color.black)
+    }
 
     public var body: some View {
         NavigationStack {
@@ -27,7 +31,8 @@ public struct AddExerciseListView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .padding()
+                .frame(width: UIScreen.main.bounds.width * 0.88)
+                .padding(.vertical, 5)
                 
                 if selectedPicker == .aerobic {
                     AddExerciseAerobicListView()
