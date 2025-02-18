@@ -277,7 +277,7 @@ struct ScrollClipModifier: ViewModifier {
 struct ExercisePoint {
     //TODO: enum 변경
     let exerciseType: String
-    let point: Int
+    let point: Double
     
     static func dummyData() -> [ExercisePoint] {
         return [
@@ -295,18 +295,25 @@ struct ExercisePieChartView: View {
         "달리기": "figure.run",
         "HIIT": "bolt.fill",
         "수영": "figure.open.water.swim",
-        "테니스": "figure.tennis"
+        "테니스": "figure.tennis",
     ]
     var data: [ExercisePoint]
-
     var total: Double {
-        Double(data.reduce(0) { $0 + $1.point })
+        data.reduce(0) { $0 + $1.point }
+    }
+    var adjustedData: [ExercisePoint] {
+        //TODO: maximum point 변경
+        if total < 250 {
+            let remaining = 250 - total
+            return data + [ExercisePoint(exerciseType: "empty", point: remaining)]
+        }
+        return data
     }
 
     var cumulativeSums: [Double] {
         var sums: [Double] = []
         var sum: Double = 0
-        for point in data {
+        for point in adjustedData {
             sum += Double(point.point)
             sums.append(sum)
         }
@@ -314,13 +321,15 @@ struct ExercisePieChartView: View {
     }
 
     var body: some View {
-        Chart(Array(zip(data, cumulativeSums)), id: \.0.exerciseType) { element, cumulativeSum in
+        Chart(Array(zip(adjustedData, cumulativeSums)), id: \.0.exerciseType) { element, cumulativeSum in
             let elementPoint = Double(element.point)
+            //TODO: maximum point 변경
+            let adjustedTotal = max(total, 250)
             let centerAngle =
                 // 현재 조각의 끝 지점
-                .pi * 2 * (cumulativeSum / total)
+                .pi * 2 * (cumulativeSum / adjustedTotal)
                 // 조각 중심으로 보정
-                - (.pi * elementPoint / total)
+                - (.pi * elementPoint / adjustedTotal)
                 // 시작점을 12시 방향으로 조정 (기본값 3시)
                 - .pi / 2
 
