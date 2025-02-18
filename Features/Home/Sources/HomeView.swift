@@ -202,9 +202,10 @@ struct ExercisePoint {
     
     static func dummyData() -> [ExercisePoint] {
         return [
-            ExercisePoint(exerciseType: "달리기", point: 81),
-            ExercisePoint(exerciseType: "HIIT", point: 81),
-//            ExercisePoint(exerciseType: "수영", point: 22)
+            ExercisePoint(exerciseType: "달리기", point: 50),
+            ExercisePoint(exerciseType: "HIIT", point: 50),
+            ExercisePoint(exerciseType: "수영", point: 50),
+            ExercisePoint(exerciseType: "테니스", point: 50),
         ]
     }
 }
@@ -214,32 +215,55 @@ struct ExercisePieChartView: View {
     let exerciseIcons: [String: String] = [
         "달리기": "figure.run",
         "HIIT": "bolt.fill",
-        "수영": "figure.open.water.swim"
+        "수영": "figure.open.water.swim",
+        "테니스": "figure.tennis"
     ]
     var data: [ExercisePoint]
-    
+
+    var total: Double {
+        Double(data.reduce(0) { $0 + $1.point })
+    }
+
+    var cumulativeSums: [Double] {
+        var sums: [Double] = []
+        var sum: Double = 0
+        for point in data {
+            sum += Double(point.point)
+            sums.append(sum)
+        }
+        return sums
+    }
+
     var body: some View {
-        Chart(data, id: \.exerciseType) { element in
-            SectorMark(angle: .value("Usage", element.point), innerRadius: .ratio(0.5))
+        Chart(Array(zip(data, cumulativeSums)), id: \.0.exerciseType) { element, cumulativeSum in
+            let elementPoint = Double(element.point)
+            let centerAngle =
+                // 현재 조각의 끝 지점
+                .pi * 2 * (cumulativeSum / total)
+                // 조각 중심으로 보정
+                - (.pi * elementPoint / total)
+                // 시작점을 12시 방향으로 조정 (기본값 3시)
+                - .pi / 2
+
+            SectorMark(angle: .value("Usage", elementPoint), innerRadius: .ratio(0.5))
                 .foregroundStyle(by: .value("Version", element.exerciseType))
                 .annotation(position: .overlay) {
                     if let exerciseIcon = exerciseIcons[element.exerciseType] {
                         GeometryReader { geometry in
+                            // 아이콘 원 안쪽으로 이동
                             let frame = geometry.frame(in: .local)
-                            // 여기 수정해야 해당 영역의 각도
-                            let centerAngle = .pi * (Double(element.point) / Double(data.reduce(0) { $0 + $1.point }))
                             let radius: CGFloat = min(frame.width, frame.height) / 2
-                            let ratio = 0.1
-                            
-                            let offsetX = radius * cos(centerAngle - .pi / 2) * ratio
-                            let offsetY = radius * sin(centerAngle - .pi / 2) * ratio
-                            
+                            let ratio: CGFloat = 0.1
+
+                            let offsetX = radius * cos(centerAngle) * ratio
+                            let offsetY = radius * sin(centerAngle) * ratio
+
                             Image(systemName: exerciseIcon)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
-                                .position(x: frame.midX - offsetX, y: frame.midY + offsetY)
+                                .position(x: frame.midX - offsetX, y: frame.midY - offsetY)
                         }
                     }
                 }
@@ -248,7 +272,7 @@ struct ExercisePieChartView: View {
         .chartBackground { chartProxy in
             GeometryReader { geometry in
                 let frame = geometry[chartProxy.plotFrame!]
-                VStack() {
+                VStack {
                     Text("유산소")
                         .font(.subheadline)
                     Text("80").font(.largeTitle) + Text(" %").font(.subheadline)
@@ -269,6 +293,7 @@ struct ExercisePieChartView: View {
         .scaledToFit()
     }
 }
+
 
 #Preview {
     HomeView()
