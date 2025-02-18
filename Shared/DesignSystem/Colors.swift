@@ -11,4 +11,7 @@ import SwiftUI
 public extension Color {
     static let background = Color(hex: "#191C30")
     static let cellColor = Color(hex: "#3b3f51", opacity: 0.6)
+    
+    static let subscriptionTagColor = Color(hex: "#26CBFE")
+    static let editButtonColor = Color(hex: "D9D9D9", opacity: 0.2)
 }

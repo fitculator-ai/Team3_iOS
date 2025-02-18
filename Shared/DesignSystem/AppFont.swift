@@ -13,5 +13,5 @@ public struct AppFont {
     
     //Profile
     public static let profileItemFont = Font.title2.weight(.bold)
-    public static let profileContentTextFont = Font.body.weight(.regular)
+    public static let profileContentTextFont = Font.subheadline.weight(.regular)
 }
