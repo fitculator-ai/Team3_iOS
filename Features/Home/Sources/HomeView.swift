@@ -289,13 +289,20 @@ struct ExercisePoint {
     }
 }
 
-//TODO: 차트 색상 변경, info 버튼
+//TODO: 운동 종류 추가, 색상 변경, info 버튼
 struct ExercisePieChartView: View {
     let exerciseIcons: [String: String] = [
         "달리기": "figure.run",
         "HIIT": "bolt.fill",
         "수영": "figure.open.water.swim",
         "테니스": "figure.tennis",
+    ]
+    let exerciseColors: [String: Color] = [
+        "달리기": .red,
+        "HIIT": .blue,
+        "수영": .green,
+        "테니스": .orange,
+        "empty": Color.cellColor
     ]
     var data: [ExercisePoint]
     var total: Double {
@@ -333,8 +340,8 @@ struct ExercisePieChartView: View {
                 // 시작점을 12시 방향으로 조정 (기본값 3시)
                 - .pi / 2
 
-            SectorMark(angle: .value("Usage", elementPoint), innerRadius: .ratio(0.5))
-                .foregroundStyle(by: .value("Version", element.exerciseType))
+            SectorMark(angle: .value("Point", elementPoint), innerRadius: .ratio(0.5))
+                .foregroundStyle(exerciseColors[element.exerciseType] ?? Color.cellColor)
                 .annotation(position: .overlay) {
                     if let exerciseIcon = exerciseIcons[element.exerciseType] {
                         GeometryReader { geometry in
