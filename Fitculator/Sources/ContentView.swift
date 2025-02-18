@@ -2,7 +2,7 @@ import SwiftUI
 import Features
 
 struct ContentView: View {
-    @State private var isModalPresented = false
+    @StateObject private var addModalManager = AddModalManager()
     
     var body: some View {
         ZStack {
@@ -39,7 +39,7 @@ struct ContentView: View {
             }
             
             Button(action: {
-                isModalPresented.toggle()
+                addModalManager.isModalPresented.toggle()
             }) {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
@@ -48,13 +48,15 @@ struct ContentView: View {
                     .clipShape(Circle())
                     .shadow(radius: 4)
             }
-            .sheet(isPresented: $isModalPresented) {
+            .sheet(isPresented: $addModalManager.isModalPresented) {
                 AddExerciseListView()
+                    .environmentObject(addModalManager)
             }
             .offset(x: 0, y: (UIScreen.main.bounds.height/2)-74)
         }
     }
 }
+
 
 #Preview {
     ContentView()

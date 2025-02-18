@@ -10,11 +10,12 @@ import Core
 
 struct AddExerciseDetailView: View {
     let exerciseName: String
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var modalManager: AddModalManager
     @ObservedObject var viewModel = AddExerciseDetailViewModel()
     
     var body: some View {
         VStack {
-            // ✅ 심박수 입력 섹션
             ZStack {
                 Rectangle()
                     .fill(Color.cellColor)
@@ -45,7 +46,6 @@ struct AddExerciseDetailView: View {
             .frame(width: UIScreen.main.bounds.width * 0.88, height: 95)
             .padding(.top, 10)
             
-            // ✅ 날짜 & 시간 선택 섹션
             ZStack {
                 Rectangle()
                     .fill(Color.cellColor)
@@ -74,13 +74,10 @@ struct AddExerciseDetailView: View {
                 }
                 .padding()
             }
-//            .onChange(of: viewModel.selectedDate) {
-//                print("\(DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate))")
-//            }
+            // DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate))")
             .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
             .padding(.top, 10)
             
-            // ✅ 메모 섹션
             ZStack {
                 Color.cellColor
                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -103,6 +100,23 @@ struct AddExerciseDetailView: View {
         }
         .navigationTitle(exerciseName)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    modalManager.isModalPresented = false
+                }) {
+                    Text("저장")
+                }
+            }
+        }
     }
 }
 
