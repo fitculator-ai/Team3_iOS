@@ -1,5 +1,5 @@
 //
-//  MyExerciseDetailView.swift
+//  MyWorkoutDetailView.swift
 //  Features
 //
 //  Created by JIHYE SEOK on 2/14/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Shared
 
-struct MyExerciseDetailView: View {
+struct MyWorkoutDetailView: View {
     @State private var showDialog: Bool = false
     @State private var isEditing: Bool = false
     @State private var textEditor: String = ""
@@ -148,9 +148,8 @@ struct MyExerciseDetailView: View {
                 }
             }
         }
-        .confirmationDialog("MyExerciseEdit", isPresented: $showDialog) {
+        .confirmationDialog("MyWorkoutEdit", isPresented: $showDialog) {
             Button("수정") {
-//                originalText = textEditor
                 isEditing = true
                 isFocused = true
             }
@@ -164,6 +163,6 @@ struct MyExerciseDetailView: View {
 
 #Preview {
     NavigationStack {
-        MyExerciseDetailView()
+        MyWorkoutDetailView()
     }
 }

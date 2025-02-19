@@ -1,5 +1,5 @@
 //
-//  MyExerciseListView.swift
+//  MyWorkoutListView.swift
 //  Features
 //
 //  Created by JIHYE SEOK on 2/14/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Shared
 
-public struct MyExerciseListView: View {
+public struct MyWorkoutListView: View {
     @State private var isActive: Bool = false
     
     public init() {}
@@ -86,7 +86,7 @@ public struct MyExerciseListView: View {
                             }
                         }
                         .navigationDestination(isPresented: $isActive) {
-                            MyExerciseDetailView()
+                            MyWorkoutDetailView()
                         }
                     }
                 }
@@ -98,5 +98,5 @@ public struct MyExerciseListView: View {
 }
 
 #Preview {
-    MyExerciseListView()
+    MyWorkoutListView()
 }
