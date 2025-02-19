@@ -23,7 +23,6 @@ struct ContentView: View {
                     .tabItem {
                         Text("")
                     }
-                    .allowsHitTesting(true)
                 
                 Text("커뮤니티")
                     .tabItem {
@@ -50,6 +49,7 @@ struct ContentView: View {
                     .background(Color.white.opacity(0.8))
                     .clipShape(Circle())
                     .shadow(radius: 4)
+                    .padding(30)
             }
             .sheet(isPresented: $addModalManager.isModalPresented) {
                 AddExerciseListView()
