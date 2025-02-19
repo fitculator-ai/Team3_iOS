@@ -11,4 +11,5 @@ import SwiftUI
 public extension Color {
     static let background = Color(hex: "#191C30")
     static let cellColor = Color(hex: "#3b3f51", opacity: 0.6)
+    static let fitculatorLogo = Color(hex: "#5bbff5")
 }
