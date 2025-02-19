@@ -20,6 +20,8 @@ public class HomeViewModel: ObservableObject {
         ExercisePoint(exerciseType: "수영", point: 50),
         ExercisePoint(exerciseType: "테니스", point: 50),
     ]
+    private var strengthPoint: Int = 3
+    private var workoutLoad: Double = 0.5
     
     // 주의 첫날과 마지막날 날짜 구하기
     private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
@@ -47,5 +49,13 @@ public class HomeViewModel: ObservableObject {
         let formatter = DateFormatterUtil.dateFormatDate
         let selectedWeekString = "\(formatter.string(from: startOfWeek)) ~ \(formatter.string(from: endOfWeek))"
         return selectedWeekString
+    }
+    
+    func getStrenthPoint() -> String {
+        return "\(strengthPoint)"
+    }
+    
+    func getWorkoutLoad() -> Double {
+        return workoutLoad
     }
 }

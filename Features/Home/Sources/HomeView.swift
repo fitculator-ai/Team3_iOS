@@ -106,7 +106,7 @@ public struct HomeView: View {
                                         
                                         HStack {
                                             Spacer()
-                                            Text("2").font(AppFont.subTitle) + Text("/2").font(.subheadline)
+                                            Text(viewModel.getStrenthPoint()).font(AppFont.subTitle) + Text("/2").font(.subheadline)
                                         }
                                     }
                                     .padding(12)
@@ -125,7 +125,7 @@ public struct HomeView: View {
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
-                                        ProgressView(value: 0.5)
+                                        ProgressView(value: viewModel.getWorkoutLoad())
                                             .progressViewStyle(.linear)
                                             .scaleEffect(y: 2.5)
                                             .frame(height: 20)
