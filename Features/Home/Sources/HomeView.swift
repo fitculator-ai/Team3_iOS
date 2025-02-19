@@ -177,14 +177,6 @@ public struct HomeView: View {
     }
 }
 
-// SafeArea 밖으로 스크롤 뷰가 뻗는 것 방지
-struct ScrollClipModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .clipShape(Rectangle())
-    }
-}
-
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView()
+//}

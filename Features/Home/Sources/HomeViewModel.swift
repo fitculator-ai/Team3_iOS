@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 public class HomeViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
@@ -42,16 +43,8 @@ public class HomeViewModel: ObservableObject {
         }
     }
     
-    // Date yyyy-MM-dd 형식으로 바꾸기
-    private func getStringFromDate(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
-        return formatter.string(from: date)
-    }
-    
     func getSelectedWeekString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
+        let formatter = DateFormatterUtil.dateFormatDate
         let selectedWeekString = "\(formatter.string(from: startOfWeek)) ~ \(formatter.string(from: endOfWeek))"
         return selectedWeekString
     }
