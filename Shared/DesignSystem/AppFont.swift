@@ -10,4 +10,8 @@ import SwiftUI
 public struct AppFont {
     public static let mainTitle = Font.title2.weight(.black)
     public static let subTitle = Font.title3.weight(.bold)
+    //Profile
+    public static let profileItemFont = Font.title2.weight(.bold)
+    public static let profileContentTextFont = Font.subheadline.weight(.regular)
+    public static let cellTitle = Font.system(size: 16).weight(.semibold)
 }
