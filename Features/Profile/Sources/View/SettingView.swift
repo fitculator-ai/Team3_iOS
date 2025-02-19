@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingView: View {
+    
+    @StateObject private var viewModel = SettingViewModel()
+    
     var body: some View {
         NavigationView {
             List {
@@ -25,7 +28,7 @@ struct SettingView: View {
                 }
                 
                 Section(header: Text("건강 정보")) {
-                    NavigationLink(destination: RestingHeartRateView()) {
+                    NavigationLink(destination: RestingHeartRateView().environmentObject(viewModel)){
                         Text("안정시 심박수 설정")
                     }
                 }
@@ -109,90 +112,80 @@ struct BlockedUsersView: View {
 
 struct RestingHeartRateView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModel: SettingViewModel
     
-    @State private var heartRate: String = "40"
-    @State private var isValid: Bool = true
+    //@State private var heartRate: String = "40"
+    //@State private var isValid: Bool = true
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            ZStack {
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: 120, height: 120)
-                Image(systemName: "heart.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.white)
-                    .frame(width: 60, height: 60)
-            }
-            .padding(.top, 20)
-            
-            HStack {
-                TextField(" ", text: $heartRate)
-                    .keyboardType(.numberPad)
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(10)
-                    .frame(width: 150)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(isValid ? Color.clear : Color.red, lineWidth: 2)
-                    )
-                    .onChange(of: heartRate) { newValue in
-                        validateHeartRate(newValue)
-                    }
-                
-                Text("bpm")
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .bold()
-            }
-            
-            if !isValid {
-                Text("심박수는 40~120 사이여야 합니다.")
-                    .foregroundColor(.red)
-                    .font(.footnote)
-                    .bold()
-                    .padding(.top, 5)
-            }
-            
-            Spacer()
-            
-            Button(action: {
-                if validateHeartRate(heartRate) {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            }) {
-                Text("저장")
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(isValid ? Color.blue : Color.gray)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .disabled(!isValid)
-            .padding(.horizontal)
-        }
-        .padding()
-        .background(Color.black.edgesIgnoringSafeArea(.all))
-    }
-    
-    private func validateHeartRate(_ value: String) -> Bool {
-        if let intValue = Int(value), intValue >= 40, intValue <= 120 {
-            isValid = true
-            return true
-        } else {
-            isValid = false
-            return false
-        }
-    }
-}
+          VStack(spacing: 20) {
+              ZStack {
+                  Circle()
+                      .fill(Color.red)
+                      .frame(width: 120, height: 120)
+                  Image(systemName: "heart.fill")
+                      .resizable()
+                      .scaledToFit()
+                      .foregroundColor(.white)
+                      .frame(width: 60, height: 60)
+              }
+              .padding(.top, 20)
+              
+              HStack {
+                  TextField(" ", text: $viewModel.heartRate)
+                      .keyboardType(.numberPad)
+                      .font(.largeTitle)
+                      .foregroundColor(.blue)
+                      .bold()
+                      .multilineTextAlignment(.center)
+                      .padding()
+                      .background(Color.gray.opacity(0.2))
+                      .cornerRadius(10)
+                      .frame(width: 150)
+                      .overlay(
+                          RoundedRectangle(cornerRadius: 10)
+                            .stroke(viewModel.isValid ? Color.clear : Color.red, lineWidth: 2)
+                      )
+                      .onChange(of: viewModel.heartRate) { _ in
+                          viewModel.validateHeartRate()
+                      }
+                  
+                  Text("bpm")
+                      .font(.title)
+                      .foregroundColor(.white)
+                      .bold()
+              }
+              
+              if !viewModel.isValid {
+                  Text("심박수는 40~120 사이여야 합니다.")
+                      .foregroundColor(.red)
+                      .font(.footnote)
+                      .bold()
+                      .padding(.top, 5)
+              }
+              
+              Spacer()
+              
+              Button(action: {
+                  if viewModel.validateHeartRate() {
+                      self.presentationMode.wrappedValue.dismiss()
+                  }
+              }) {
+                  Text("저장")
+                      .bold()
+                      .frame(maxWidth: .infinity)
+                      .padding()
+                      .background(viewModel.isValid ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .cornerRadius(10)
+              }
+              .disabled(!viewModel.isValid)
+              .padding(.horizontal)
+          }
+          .padding()
+          .background(Color.black.edgesIgnoringSafeArea(.all))
+      }
+  }
 
 struct MembershipBenefitsView: View {
     var body: some View {
