@@ -55,7 +55,8 @@ let project = Project(
                 dependencies: [
                     .target(name: "Core"),
                     .target(name: "Shared"),
-                    .external(name: "Kingfisher")
+                    .external(name: "Kingfisher"),
+                    .external(name: "FSCalendar"),
                 ]
             ),
         

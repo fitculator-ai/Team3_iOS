@@ -151,11 +151,9 @@ public struct HomeView: View {
                                 }
                             }
                             if showDatePicker {
-                                DatePicker("", selection: $viewModel.selectedDate, displayedComponents: .date)
-                                    .datePickerStyle(GraphicalDatePickerStyle())
-                                    .labelsHidden()
-                                // TODO: Calendar 디자인 변경
-                                    .background(Color.black)
+                                CustomCalendarView(selectedDate: $viewModel.selectedDate)
+                                    .frame(height: 300)
+                                    .background(.black)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .shadow(radius: 5)
                             }
@@ -167,6 +165,7 @@ public struct HomeView: View {
                 .scrollIndicators(.never)
             }
             .onAppear {
+                viewModel.selectedDate = Date()
                 viewModel.updateStartAndEndOfWeek()
             }
             .onChange(of: viewModel.selectedDate) {
