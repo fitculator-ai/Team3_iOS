@@ -2,8 +2,8 @@ import SwiftUI
 import Features
 
 struct ContentView: View {
-    @State private var isModalPresented = false
-
+    @StateObject private var addModalManager = AddModalManager()
+    
     var body: some View {
         ZStack {
             TabView {
@@ -23,6 +23,7 @@ struct ContentView: View {
                     .tabItem {
                         Text("")
                     }
+                    .allowsHitTesting(true)
                 
                 Text("커뮤니티")
                     .tabItem {
@@ -40,33 +41,26 @@ struct ContentView: View {
                 }
             }
             
-            VStack {
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    
-                    Button(action: {
-                        isModalPresented.toggle()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .background(Color.white.opacity(0.8))
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
-                    }
-                    .sheet(isPresented: $isModalPresented) {
-//                        ExerciseListView()
-                    }
-                    
-                    Spacer()
-                }
+            Button(action: {
+                addModalManager.isModalPresented.toggle()
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+                    .background(Color.white.opacity(0.8))
+                    .clipShape(Circle())
+                    .shadow(radius: 4)
             }
+            .sheet(isPresented: $addModalManager.isModalPresented) {
+                AddExerciseListView()
+                    .environmentObject(addModalManager)
+            }
+            .offset(x: 0, y: (UIScreen.main.bounds.height/2)-74)
         }
     }
 }
 
+
 #Preview {
-  ContentView()
+    ContentView()
 }
