@@ -16,7 +16,7 @@ public class DateFormatterUtil {
     
     public static let dateFormatTime: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return formatter
     }()
 }
