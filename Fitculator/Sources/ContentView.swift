@@ -1,5 +1,6 @@
 import SwiftUI
 import Features
+import Shared
 
 struct ContentView: View {
     @StateObject private var addModalManager = AddModalManager()
@@ -31,14 +32,15 @@ struct ContentView: View {
                     }
                 NavigationStack {
                     //NavigationLink(destination: ProfileView()) {
-                        ProfileView()
-                   // }
+                    ProfileView()
+                    // }
                 }
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("마이")
                 }
             }
+            .tint(Color.fitculatorLogo)
             
             Button(action: {
                 addModalManager.isModalPresented.toggle()
@@ -47,6 +49,7 @@ struct ContentView: View {
                     .resizable()
                     .frame(width: 35, height: 35)
                     .background(Color.white.opacity(0.8))
+                    .foregroundStyle(Color.fitculatorLogo)
                     .clipShape(Circle())
                     .shadow(radius: 4)
                     .padding(30)
