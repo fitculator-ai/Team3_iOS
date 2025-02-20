@@ -1,5 +1,5 @@
 //
-//  MyExerciseDetailView.swift
+//  MyWorkoutDetailView.swift
 //  Features
 //
 //  Created by JIHYE SEOK on 2/14/25.
@@ -7,8 +7,9 @@
 
 import SwiftUI
 import Shared
+import Core
 
-struct MyExerciseDetailView: View {
+struct MyWorkoutDetailView: View {
     @State private var showDialog: Bool = false
     @State private var isEditing: Bool = false
     @State private var textEditor: String = ""
@@ -17,6 +18,12 @@ struct MyExerciseDetailView: View {
     @FocusState private var isFocused: Bool
     
     @Environment(\.presentationMode) var presentationMode
+    
+//    let workout: WorkoutRecord // workout을 저장할 프로퍼티 추가
+//    
+//    public init(workout: WorkoutRecord) { // 이니셜라이저 추가
+//        self.workout = workout
+//    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -94,15 +101,15 @@ struct MyExerciseDetailView: View {
             
             Text("메모")
                 .font(AppFont.subTitle)
-
+            
             ScrollableTextEditor(
                 text: $textEditor,
                 isEditing: isEditing,
                 isFocused: $isFocused
             )
-                .frame(height: 150)
-                .focused($isFocused)
-                .cornerRadius(10)
+            .frame(height: 150)
+            .focused($isFocused)
+            .cornerRadius(10)
             Spacer()
         }
         .frame(width: UIScreen.main.bounds.width * 0.88)
@@ -148,9 +155,8 @@ struct MyExerciseDetailView: View {
                 }
             }
         }
-        .confirmationDialog("MyExerciseEdit", isPresented: $showDialog) {
+        .confirmationDialog("MyWorkoutEdit", isPresented: $showDialog) {
             Button("수정") {
-//                originalText = textEditor
                 isEditing = true
                 isFocused = true
             }
@@ -164,6 +170,6 @@ struct MyExerciseDetailView: View {
 
 #Preview {
     NavigationStack {
-        MyExerciseDetailView()
+        MyWorkoutDetailView()
     }
 }

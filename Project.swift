@@ -17,6 +17,9 @@ let project = Project(
             deploymentTargets: .iOS("16.6"),
             infoPlist: .extendingDefault(
                 with: [
+                    "NSAppTransportSecurity": [
+                        "NSAllowsArbitraryLoads": true
+                    ],
                     "UILaunchScreen": [
                         "UIColorName": "",
                         "UIImageName": "",
