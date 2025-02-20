@@ -9,11 +9,11 @@ import Foundation
 
 public struct MyPageRequest: Codable {
     let userId: Int
-    let userName: String
-    let userGender: String
-    let weight: Int
-    let height: Int
-    let userBirth: String
+    var userName: String
+    var userGender: String
+    var userweight: Int
+    var userheight: Int
+    var userBirth: String
     let socialProvider: String
     
     public func toDictionary() -> [String: Any] {
@@ -21,8 +21,8 @@ public struct MyPageRequest: Codable {
             "user_id": userId,
             "user_name": userName,
             "user_gender": userGender,
-            "weight": weight,
-            "height": height,
+            "userweight": userweight,
+            "userheight": userheight,
             "user_birth": userBirth,
             "social_provider": socialProvider
         ]
