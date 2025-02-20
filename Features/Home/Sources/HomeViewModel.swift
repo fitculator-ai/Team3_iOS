@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Core
 
 public class HomeViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
@@ -46,7 +45,8 @@ public class HomeViewModel: ObservableObject {
     }
     
     func getSelectedWeekString() -> String {
-        let formatter = DateFormatterUtil.dateFormatDate
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
         let selectedWeekString = "\(formatter.string(from: startOfWeek)) ~ \(formatter.string(from: endOfWeek))"
         return selectedWeekString
     }

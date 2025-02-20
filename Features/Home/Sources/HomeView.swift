@@ -45,7 +45,7 @@ public struct HomeView: View {
                                 .font(.subheadline)
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
-                                .frame(width: 240)
+                                .frame(width: 228)
                                 .background(Color.cellColor)
                                 .clipShape(RoundedRectangle(cornerRadius: 36))
                                 .onTapGesture {
