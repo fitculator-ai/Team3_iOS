@@ -1,8 +1,9 @@
 import SwiftUI
+import Features
 
 struct ContentView: View {
-    @State private var isModalPresented = false
-
+    @StateObject private var addModalManager = AddModalManager()
+    
     var body: some View {
         ZStack {
             TabView {
@@ -28,41 +29,38 @@ struct ContentView: View {
                         Image(systemName: "person.2")
                         Text("커뮤니티")
                     }
-                
-                Text("마이")
-                    .tabItem {
-                        Image(systemName: "person.crop.circle")
-                        Text("마이")
-                    }
-            }
-            
-            VStack {
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    
-                    Button(action: {
-                        isModalPresented.toggle()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .background(Color.white.opacity(0.8))
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
-                    }
-                    .sheet(isPresented: $isModalPresented) {
-//                        ExerciseListView()
-                    }
-                    
-                    Spacer()
+                NavigationStack {
+                    //NavigationLink(destination: ProfileView()) {
+                        ProfileView()
+                   // }
+                }
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("마이")
                 }
             }
+            
+            Button(action: {
+                addModalManager.isModalPresented.toggle()
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+                    .background(Color.white.opacity(0.8))
+                    .clipShape(Circle())
+                    .shadow(radius: 4)
+                    .padding(30)
+            }
+            .sheet(isPresented: $addModalManager.isModalPresented) {
+                AddExerciseListView()
+                    .environmentObject(addModalManager)
+            }
+            .offset(x: 0, y: (UIScreen.main.bounds.height/2)-74)
         }
     }
 }
 
+
 #Preview {
-  ContentView()
+    ContentView()
 }
