@@ -10,6 +10,7 @@ import Core
 
 struct AddExerciseDetailView: View {
     let exerciseName: String
+    let exerciseValues: String
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var modalManager: AddModalManager
     @ObservedObject var viewModel = AddExerciseDetailViewModel()
@@ -74,7 +75,6 @@ struct AddExerciseDetailView: View {
                 }
                 .padding()
             }
-            // DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate))")
             .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
             .padding(.top, 10)
             
@@ -121,5 +121,5 @@ struct AddExerciseDetailView: View {
 }
 
 #Preview {
-    AddExerciseDetailView(exerciseName: "런닝")
+    AddExerciseDetailView(exerciseName: "런닝", exerciseValues: "CARDIO")
 }

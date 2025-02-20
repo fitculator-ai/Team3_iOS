@@ -35,9 +35,9 @@ public struct AddExerciseListView: View {
                 .padding(.vertical, 5)
                 
                 if selectedPicker == .aerobic {
-                    AddExerciseAerobicListView()
+                    ExerciseTypeListView(exerciseValues: "CARDIO")
                 } else {
-                    AddExerciseAnaerobicListView()
+                    ExerciseTypeListView(exerciseValues: "STRENGTH")
                 }
             }
         }
@@ -45,11 +45,12 @@ public struct AddExerciseListView: View {
     }
 }
 
-struct AddExerciseAerobicListView: View {
+struct ExerciseTypeListView: View {
+    let exerciseValues: String
     var body: some View {
         ForEach(dummyExerciseTypeList) { item in
             NavigationLink {
-                AddExerciseDetailView(exerciseName: item.exerciseName)
+                AddExerciseDetailView(exerciseName: item.exerciseName, exerciseValues: exerciseValues)
             } label: {
                 HStack {
                     Image(systemName: item.exerciseImage)
@@ -68,35 +69,6 @@ struct AddExerciseAerobicListView: View {
                     Spacer()
                 }
                 
-                .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
-                .background(Color.cellColor)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
-        }
-    }
-}
-
-struct AddExerciseAnaerobicListView: View {
-    var body: some View {
-        ForEach(dummyExerciseTypeList.reversed()) { item in
-            NavigationLink {
-                AddExerciseDetailView(exerciseName: item.exerciseName)
-            } label: {
-                HStack {
-                    Image(systemName: item.exerciseImage)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .padding(8)
-                        .background(Color(hex: item.exerciseColor))
-                        .clipShape(Circle())
-                        .padding(.leading, 20)
-                    
-                    
-                    Text(item.exerciseName)
-                        .bold()
-                        .padding(.leading, 10)
-                    Spacer()
-                }
                 .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
                 .background(Color.cellColor)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
