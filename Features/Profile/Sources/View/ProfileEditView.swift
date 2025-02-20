@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import UIKit
 import Shared
 
-struct ProfileEditView: View {
+public struct ProfileEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ProfileViewModel
@@ -17,24 +18,37 @@ struct ProfileEditView: View {
     @State private var showDatePickerSheet = false
     @State private var showWeightSheet = false
     
-    var body: some View {
+    @State private var showImagePicker = false
+    @State private var showActionSheet = false
+    
+    @State private var imageSourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var selectedImage: UIImage?
+    
+    public var body: some View {
         VStack {
             HStack {
                 Spacer()
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white, lineWidth: 4)
-                    )
-                    .shadow(radius: 5)
-                    .padding(.leading, 5)
+                Button(action: {
+                    
+                    showActionSheet = true
+                    
+                }) {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 140, height: 140)
+                        .clipShape(Circle())
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white, lineWidth: 4)
+                        )
+                        .shadow(radius: 5)
+                        .padding(.leading, 5)
+                }
                 Spacer()
             }
             .padding(.bottom, 10)
+            .buttonStyle(PlainButtonStyle())
 
             Spacer()
                 .frame(height: 50)
@@ -215,7 +229,26 @@ struct ProfileEditView: View {
             WeightInputSheetView(Weight: $viewModel.profiledata.userweight)
                 .presentationDetents([.fraction(0.35)])
         }
-        
+        .actionSheet(isPresented: $showActionSheet) {
+            ActionSheet(
+                title: Text("이미지 선택"),
+                buttons: [
+                    .default(Text("갤러리")) {
+                        imageSourceType = .photoLibrary
+                        showImagePicker = true
+                        
+                    },
+                    .default(Text("사진 촬영")) {
+                        imageSourceType = .camera
+                        showImagePicker = true
+                    },
+                    .cancel()
+                ]
+            )
+        }
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(isImagePickerPresented: $showImagePicker, selectedImage: $selectedImage, imageSourceType: $imageSourceType)
+        }
         .frame(width: UIScreen.main.bounds.width * 0.88)
     }
 }
@@ -339,6 +372,7 @@ struct BirthdateDatePickerSheetView: View {
         }
     }
 }
+
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
