@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Shared
+import Core
 
 struct MyWorkoutDetailView: View {
     @State private var showDialog: Bool = false
@@ -17,6 +18,12 @@ struct MyWorkoutDetailView: View {
     @FocusState private var isFocused: Bool
     
     @Environment(\.presentationMode) var presentationMode
+    
+//    let workout: WorkoutRecord // workout을 저장할 프로퍼티 추가
+//    
+//    public init(workout: WorkoutRecord) { // 이니셜라이저 추가
+//        self.workout = workout
+//    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -94,15 +101,15 @@ struct MyWorkoutDetailView: View {
             
             Text("메모")
                 .font(AppFont.subTitle)
-
+            
             ScrollableTextEditor(
                 text: $textEditor,
                 isEditing: isEditing,
                 isFocused: $isFocused
             )
-                .frame(height: 150)
-                .focused($isFocused)
-                .cornerRadius(10)
+            .frame(height: 150)
+            .focused($isFocused)
+            .cornerRadius(10)
             Spacer()
         }
         .frame(width: UIScreen.main.bounds.width * 0.88)
