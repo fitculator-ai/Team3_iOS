@@ -104,7 +104,7 @@ struct ExercisePieChartView: View {
                 VStack {
                     Text("유산소")
                         .font(.subheadline)
-                    Text("80").font(.largeTitle) + Text(" %").font(.subheadline)
+                    Text("\(Int(total/250 * 100))").font(.largeTitle) + Text(" %").font(.subheadline)
                     Spacer().frame(height: 4)
                     Button(action: {
                         print("info")

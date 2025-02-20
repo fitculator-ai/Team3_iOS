@@ -18,7 +18,7 @@ struct CustomCalendarView: UIViewRepresentable {
         calendar.appearance.titleDefaultColor = .white
         calendar.appearance.weekdayTextColor = .gray
         calendar.appearance.headerTitleColor = .white
-        calendar.appearance.todayColor = UIColor.blue.withAlphaComponent(0.3)
+        calendar.appearance.todayColor = UIColor.purple.withAlphaComponent(0.5)
         calendar.appearance.selectionColor = .blue
         calendar.placeholderType = .none
         calendar.headerHeight = 0

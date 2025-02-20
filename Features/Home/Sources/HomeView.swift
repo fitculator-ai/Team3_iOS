@@ -41,11 +41,11 @@ public struct HomeView: View {
                                     .foregroundStyle(.white)
                             }
                             
-                            // TODO: 너비 고정
                             Text(viewModel.getSelectedWeekString())
                                 .font(.subheadline)
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
+                                .frame(width: 240)
                                 .background(Color.cellColor)
                                 .clipShape(RoundedRectangle(cornerRadius: 36))
                                 .onTapGesture {
