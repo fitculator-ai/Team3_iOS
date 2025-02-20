@@ -23,7 +23,7 @@ struct ExercisePoint {
     }
 }
 
-//TODO: 운동 종류 추가, 색상 변경, info 버튼
+//TODO: 운동 종류 추가, 색상 변경
 struct ExercisePieChartView: View {
     @State private var showPopover = false
     let exerciseIcons: [String: String] = [
