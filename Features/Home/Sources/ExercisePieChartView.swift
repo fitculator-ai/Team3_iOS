@@ -25,6 +25,7 @@ struct ExercisePoint {
 
 //TODO: 운동 종류 추가, 색상 변경, info 버튼
 struct ExercisePieChartView: View {
+    @State private var showPopover = false
     let exerciseIcons: [String: String] = [
         "달리기": "figure.run",
         "HIIT": "bolt.fill",
@@ -98,7 +99,7 @@ struct ExercisePieChartView: View {
                 }
         }
         .chartLegend(.hidden)
-        .chartBackground { chartProxy in
+        .chartOverlay { chartProxy in
             GeometryReader { geometry in
                 if let plotFrame = chartProxy.plotFrame {
                     let frame = geometry[plotFrame]
@@ -108,11 +109,18 @@ struct ExercisePieChartView: View {
                         Text("\(Int(total/250 * 100))").font(.largeTitle) + Text(" %").font(.subheadline)
                         Spacer().frame(height: 4)
                         Button(action: {
-                            print("info")
+                            showPopover.toggle()
                         }) {
                             Image(systemName: "info.circle")
                                 .foregroundStyle(.white)
                                 .font(.caption)
+                        }
+                        .popover(isPresented: $showPopover, arrowEdge: .top) {
+                            Text("세계보건기구 신체활동 가이드라인 기준\n나의 주간 운동량입니다.")
+                                .font(.caption)
+                                .padding([.leading, .trailing], 10)
+                                .presentationBackground(.gray.opacity(0.3))
+                            .presentationCompactAdaptation(.popover)
                         }
                     }
                     .position(x: frame.midX, y: frame.midY)
