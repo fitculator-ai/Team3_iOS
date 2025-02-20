@@ -118,17 +118,19 @@ struct CustomCalendarView: UIViewRepresentable {
         @objc func goToPreviousMonth() {
             guard let calendarView = calendarView else { return }
             let currentPage = calendarView.currentPage
-            let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentPage)!
-            calendarView.setCurrentPage(previousMonth, animated: true)
-            updateTitleLabel()
+            if let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentPage) {
+                calendarView.setCurrentPage(previousMonth, animated: true)
+                updateTitleLabel()
+            }
         }
 
         @objc func goToNextMonth() {
             guard let calendarView = calendarView else { return }
             let currentPage = calendarView.currentPage
-            let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage)!
-            calendarView.setCurrentPage(nextMonth, animated: true)
-            updateTitleLabel()
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage) {
+                calendarView.setCurrentPage(nextMonth, animated: true)
+                updateTitleLabel()
+            }
         }
         
         func updateTitleLabel() {

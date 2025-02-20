@@ -100,22 +100,24 @@ struct ExercisePieChartView: View {
         .chartLegend(.hidden)
         .chartBackground { chartProxy in
             GeometryReader { geometry in
-                let frame = geometry[chartProxy.plotFrame!]
-                VStack {
-                    Text("유산소")
-                        .font(.subheadline)
-                    Text("\(Int(total/250 * 100))").font(.largeTitle) + Text(" %").font(.subheadline)
-                    Spacer().frame(height: 4)
-                    Button(action: {
-                        print("info")
-                    }) {
-                        Image(systemName: "info.circle")
-                            .foregroundStyle(.white)
-                            .font(.caption)
+                if let plotFrame = chartProxy.plotFrame {
+                    let frame = geometry[plotFrame]
+                    VStack {
+                        Text("유산소")
+                            .font(.subheadline)
+                        Text("\(Int(total/250 * 100))").font(.largeTitle) + Text(" %").font(.subheadline)
+                        Spacer().frame(height: 4)
+                        Button(action: {
+                            print("info")
+                        }) {
+                            Image(systemName: "info.circle")
+                                .foregroundStyle(.white)
+                                .font(.caption)
+                        }
                     }
+                    .position(x: frame.midX, y: frame.midY)
+                    .offset(x: 0, y: frame.height * 0.03)
                 }
-                .position(x: frame.midX, y: frame.midY)
-                .offset(x: 0, y: frame.height * 0.03)
             }
         }
         .padding()
