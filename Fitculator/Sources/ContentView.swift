@@ -7,7 +7,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView {
-                Text("홈화면")
+                HomeView()
                     .tabItem {
                         Image(systemName: "house")
                         Text("홈")
