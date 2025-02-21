@@ -7,17 +7,29 @@
 
 import Foundation
 
-public struct ExerciseType: Identifiable {  // <- public 추가
-    public let id = UUID()
-    public var exerciseName: String
-    public var exerciseType: String
-    public var exerciseColor: String
-    public var exerciseImage: String
+public struct ExerciseTypeResponse: Codable {
+    public let success: Bool
+    public let message: String
+    public let data: [ExerciseType]
+}
 
-    public init(exerciseName: String, exerciseType: String, exerciseColor: String, exerciseImage: String) {
-        self.exerciseName = exerciseName
-        self.exerciseType = exerciseType
-        self.exerciseColor = exerciseColor
-        self.exerciseImage = exerciseImage
+public struct ExerciseType: Codable, Identifiable {
+    public var id: Int { exerciseId }
+    public let exerciseId: Int
+    public let exerciseKorName: String
+    public let exerciseEngName: String
+    public let exerciseType: String
+    public let exerciseColor: String
+    public let exerciseImg: String
+    public let favoriteYn: String
+
+    init() {
+        self.exerciseId = 0
+        self.exerciseKorName = ""
+        self.exerciseEngName = ""
+        self.exerciseType = ""
+        self.exerciseColor = ""
+        self.exerciseImg = ""
+        self.favoriteYn = ""
     }
 }
