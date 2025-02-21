@@ -8,6 +8,7 @@
 import SwiftUI
 import Core
 import Combine
+import Alamofire
 
 class AddExerciseDetailViewModel: ObservableObject {
     @Published var averageHeartRate: String = ""
@@ -34,20 +35,18 @@ class AddExerciseDetailViewModel: ObservableObject {
         self.networkService = networkService
     }
     
-    public func fetchCreateWorkout(request: WorkoutRequest) {
-        networkService.request(APIEndpoint.createWorkout(request: request))
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { completion in
-                    if case .failure(let error) = completion {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                },
-                receiveValue: { [weak self] (response: WorkoutRequest) in
-                    print("\(response)")
-                    self?.addWorkout = response
+    public func fetchAddExercises(_ workoutData: WorkoutRequest) {
+        let url = "http://13.125.175.216:8080/api/workout"
+
+        AF.request(url, method: .post, parameters: workoutData, encoder: JSONParameterEncoder.default)
+            .validate()
+            .responseDecodable(of: WorkoutRequestResponse.self) { response in
+                switch response.result {
+                case .success(let result):
+                    print("✅ Success: ")
+                case .failure(let error):
+                    print("❌ Error: \(error.localizedDescription)")
                 }
-            )
-            .store(in: &cancellables)
+            }
     }
 }

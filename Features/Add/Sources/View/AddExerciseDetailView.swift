@@ -110,11 +110,25 @@ struct AddExerciseDetailView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
+                Button("저장") {
                     modalManager.isModalPresented = false
-                }) {
-                    Text("저장")
+                    
+                    let exerciseData = WorkoutRequest(
+                        userId: 1,
+                        exerciseType: "CARDIO",
+                        exerciseKorName: exerciseName,
+                        exerciseEngName: exerciseName,
+                        recordDate: DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate),
+                        recordStart: DateFormatterUtil.dateFormatTime.string(from: viewModel.selectedDate),
+                        duration: Int(viewModel.workoutDuration)!,
+                        avgHeartRate: Int(viewModel.averageHeartRate) ?? 0,
+                        highHeartRate: Int(viewModel.maxHeartRate) ?? 0,
+                        memo: viewModel.workoutMemo
+                    )
+                    print("recordStart: \(exerciseData)")
+                    viewModel.fetchAddExercises(exerciseData)
                 }
+                
             }
         }
     }
