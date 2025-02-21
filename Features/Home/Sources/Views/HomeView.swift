@@ -169,9 +169,14 @@ public struct HomeView: View {
                 .scrollIndicators(.never)
             }
             .onChange(of: viewModel.selectedDate) {
-                viewModel.updateStartAndEndOfWeek()
+                // 날짜 변경 시 주가 바뀌었을 때만 fetch
+                guard let newWeek = viewModel.getStartAndEndOfWeek(from: $0), let oldWeek = viewModel.getStartAndEndOfWeek(from: $1), newWeek == oldWeek else {
+                    viewModel.updateStartAndEndOfWeek()
+                    showDatePicker = false
+                    viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
+                    return
+                }
                 showDatePicker = false
-                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
         }
     }

@@ -52,7 +52,7 @@ public class HomeViewModel: ObservableObject {
     }
     
     // 주의 첫날과 마지막날 날짜 구하기
-    private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
+    func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
         let calendar = Calendar.current
         guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: date) else {
             return nil
