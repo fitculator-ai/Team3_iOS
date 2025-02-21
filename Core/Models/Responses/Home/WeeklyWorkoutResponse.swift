@@ -26,6 +26,20 @@ public struct WorkoutData: Codable {
 }
 
 public struct WorkoutRecord: Codable, Identifiable, Hashable {
+    //TODO: init 삭제 -> test 위해 생성
+    public init(recordId: Int, exerciseKorName: String, exerciseEngName: String, exerciseImg: String, exerciseColor: String, avgHeartRate: Int, duration: Int, intensity: String, recordPoint: Int, memo: String?) {
+        self.recordId = recordId
+        self.exerciseKorName = exerciseKorName
+        self.exerciseEngName = exerciseEngName
+        self.exerciseImg = exerciseImg
+        self.exerciseColor = exerciseColor
+        self.avgHeartRate = avgHeartRate
+        self.duration = duration
+        self.intensity = intensity
+        self.recordPoint = recordPoint
+        self.memo = memo
+    }
+    
     public var id: Int { recordId }
     
     public let recordId: Int

@@ -8,16 +8,49 @@
 import Foundation
 import Core
 import SwiftUICore
+import Combine
 
 public class HomeViewModel: ObservableObject {
     //TODO: API 연동, selectedDate에 따라 갱신
     //TODO: workoutRecords 갱신되면 -> workoutRecordPointSums 갱신 -> 파이차트 갱신
-    @Published var selectedDate: Date = Date()
+    var selectedDate: Date = Date()
     @Published var weeklyWorkoutData: WorkoutData = WorkoutData(records: [], weekStrengthCount: 0, weekIntensity: "운동이 부족합니다")
     var selectedWeekString = ""
     private var startOfWeek = Date()
     private var endOfWeek = Date()
     var workoutRecordPointSums: [WorkoutRecordPointSum] = []
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let networkService: NetworkServiceProtocol
+    @Published public var isLoading: Bool = false
+    @Published public var error: Error?
+    
+    public init(networkService: NetworkServiceProtocol = NetworkService()) {
+        self.networkService = networkService
+    }
+    
+    public func fetchWeeklyWorkout(userId: Int, targetDate: String) {
+        isLoading = true
+        networkService.request(APIEndpoint.getWeeklyWorkout(userId: userId, targetDate: targetDate))
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveCompletion: { [weak self] _ in
+                self?.isLoading = false
+            })
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("Error: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
+                    print("\(response)")
+                    self?.weeklyWorkoutData = response.data
+                    self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: response.data.records)
+                }
+            )
+            .store(in: &cancellables)
+    }
     
     // 주의 첫날과 마지막날 날짜 구하기
     private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
@@ -70,8 +103,8 @@ public class HomeViewModel: ObservableObject {
     }
     
     // PieChart를 위한 데이터 변환
-    private func getWorkoutRecordSum() {
-        let grouped = Dictionary(grouping: weeklyWorkoutData.records) { $0.exerciseKorName }
+    private func updateWorkoutRecordSum(weeklyWorkoutDataRecords: [WorkoutRecord]) {
+        let grouped = Dictionary(grouping: weeklyWorkoutDataRecords) { $0.exerciseKorName }
         var result: [WorkoutRecordPointSum] = []
         
         for (exerciseKorName, records) in grouped {

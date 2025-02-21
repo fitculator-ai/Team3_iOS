@@ -169,6 +169,7 @@ public struct HomeView: View {
             .onAppear {
                 viewModel.selectedDate = Date()
                 viewModel.updateStartAndEndOfWeek()
+                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: "2025-01-13")
             }
             .onChange(of: viewModel.selectedDate) {
                 viewModel.updateStartAndEndOfWeek()
