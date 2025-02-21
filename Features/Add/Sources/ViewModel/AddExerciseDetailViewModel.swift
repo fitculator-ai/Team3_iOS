@@ -11,10 +11,10 @@ import Combine
 import Alamofire
 
 public class AddExerciseDetailViewModel: ObservableObject {
-    @Published var averageHeartRate: String = ""
+    @Published var avgHeartRate: String = ""
     @Published var maxHeartRate: String = ""
-    @Published var workoutDuration: String = ""
-    @Published var workoutMemo: String = ""
+    @Published var duration: String = ""
+    @Published var memo: String = ""
     @Published var selectedDate = Date()
     
     private var cancellables = Set<AnyCancellable>()
@@ -30,7 +30,6 @@ public class AddExerciseDetailViewModel: ObservableObject {
             .sink(
                 receiveCompletion: { completion in
                     if case .failure(_) = completion {
-//                        print("Error: \(error.localizedDescription)")
                     }
                 },
                 receiveValue: { (responseData: Data) in
