@@ -125,10 +125,10 @@ struct AddExerciseDetailView: View {
                         highHeartRate: Int(viewModel.maxHeartRate) ?? 0,
                         memo: viewModel.workoutMemo
                     )
+                    
                     print("recordStart: \(exerciseData)")
-                    viewModel.fetchAddExercises(exerciseData)
+                    viewModel.fetchCreateWorkout(request: exerciseData)
                 }
-                
             }
         }
     }
