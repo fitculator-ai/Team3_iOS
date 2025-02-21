@@ -29,8 +29,8 @@ public class AddExerciseDetailViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { completion in
-                    if case .failure(let error) = completion {
-                        print("Error: \(error.localizedDescription)")
+                    if case .failure(_) = completion {
+//                        print("Error: \(error.localizedDescription)")
                     }
                 },
                 receiveValue: { (responseData: Data) in
