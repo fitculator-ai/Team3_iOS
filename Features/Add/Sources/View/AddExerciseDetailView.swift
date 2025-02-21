@@ -17,81 +17,84 @@ struct AddExerciseDetailView: View {
     @ObservedObject var viewModel = AddExerciseDetailViewModel()
     
     var body: some View {
-        VStack {
-            ZStack {
-                Rectangle()
-                    .fill(Color.cellColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                
-                VStack {
-                    HStack {
-                        Text("평균 심박수")
-                            .opacity(0.7)
-                        NumberTextField(text: $viewModel.avgHeartRate)
+        ZStack {
+            Color.background.ignoresSafeArea()
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .fill(Color.cellColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
+                    VStack {
+                        HStack {
+                            Text("평균 심박수")
+                                .opacity(0.7)
+                            NumberTextField(text: $viewModel.avgHeartRate)
+                        }
+                        
+                        Divider()
+                            .padding(.bottom, 5)
+                        
+                        HStack {
+                            Text("최대 심박수")
+                                .opacity(0.7)
+                            NumberTextField(text: $viewModel.maxHeartRate)
+                        }
                     }
-                    
-                    Divider()
-                        .padding(.bottom, 5)
-                    
-                    HStack {
-                        Text("최대 심박수")
-                            .opacity(0.7)
-                        NumberTextField(text: $viewModel.maxHeartRate)
-                    }
+                    .padding()
                 }
-                .padding()
-            }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 95)
-            .padding(.top, 10)
-            
-            ZStack {
-                Rectangle()
-                    .fill(Color.cellColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 95)
+                .padding(.top, 10)
                 
-                VStack(alignment: .leading) {
-                    DatePicker("시작 날짜", selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
-                        .opacity(0.7)
-                        .padding(.top, -8)
+                ZStack {
+                    Rectangle()
+                        .fill(Color.cellColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
-                    Divider()
-                    
-                    DatePicker("시작 시간", selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
-                        .opacity(0.7)
-                    
-                    Divider()
-                        .padding(.bottom, 7)
-                    
-                    HStack {
-                        Text("운동 시간(분)")
+                    VStack(alignment: .leading) {
+                        DatePicker("시작 날짜", selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
                             .opacity(0.7)
-                        NumberTextField(text: $viewModel.duration)
+                            .padding(.top, -8)
+                        
+                        Divider()
+                        
+                        DatePicker("시작 시간", selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
+                            .opacity(0.7)
+                        
+                        Divider()
+                            .padding(.bottom, 7)
+                        
+                        HStack {
+                            Text("운동 시간(분)")
+                                .opacity(0.7)
+                            NumberTextField(text: $viewModel.duration)
+                        }
                     }
+                    .padding()
                 }
-                .padding()
-            }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
-            .padding(.top, 10)
-            
-            ZStack {
-                Color.cellColor
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
+                .padding(.top, 10)
                 
-                VStack(alignment:.leading) {
-                    Text("메모")
-                        .opacity(0.7)
+                ZStack {
+                    Color.cellColor
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
-                    Divider()
-                    
-                    TextEditor(text: $viewModel.memo)
-                        .scrollContentBackground(.hidden)
+                    VStack(alignment:.leading) {
+                        Text("메모")
+                            .opacity(0.7)
+                        
+                        Divider()
+                        
+                        TextEditor(text: $viewModel.memo)
+                            .scrollContentBackground(.hidden)
+                    }
+                    .padding()
                 }
-                .padding()
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 200)
+                .padding(.top, 10)
+                
+                Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 200)
-            .padding(.top, 10)
-            
-            Spacer()
         }
         .navigationTitle(exerciseKRName)
         .navigationBarTitleDisplayMode(.inline)

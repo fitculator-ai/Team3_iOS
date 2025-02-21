@@ -25,20 +25,24 @@ public struct AddExerciseListView: View {
     
     public var body: some View {
         NavigationStack {
-            ScrollView {
-                Picker("운동 종류", selection: $selectedPicker) {
-                    ForEach(tapInfo.allCases, id: \.self) { option in
-                        Text(option.rawValue)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .frame(width: UIScreen.main.bounds.width * 0.88)
-                .padding(.vertical, 5)
+            ZStack {
+                    Color.background.ignoresSafeArea()
                 
-                if selectedPicker == .aerobic {
-                    ExerciseTypeListView(exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
-                } else {
-                    ExerciseTypeListView(exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
+                ScrollView {
+                    Picker("운동 종류", selection: $selectedPicker) {
+                        ForEach(tapInfo.allCases, id: \.self) { option in
+                            Text(option.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: UIScreen.main.bounds.width * 0.88)
+                    .padding(.vertical, 5)
+                    
+                    if selectedPicker == .aerobic {
+                        ExerciseTypeListView(exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
+                    } else {
+                        ExerciseTypeListView(exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
+                    }
                 }
             }
         }
