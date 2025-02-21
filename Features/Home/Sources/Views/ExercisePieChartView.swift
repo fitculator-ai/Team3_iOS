@@ -10,7 +10,7 @@ import Charts
 
 struct WorkoutRecordPointSum {
     let exerciseKorName: String
-    let exerciseImg: String
+    let exerciseImg: String?
     let recordPointSum: Double
     let exerciseColor: Color
     
@@ -24,7 +24,6 @@ struct WorkoutRecordPointSum {
     }
 }
 
-//TODO: 운동 종류 추가, 색상 변경
 struct ExercisePieChartView: View {
     @State private var showPopover = false
     var data: [WorkoutRecordPointSum]
@@ -35,7 +34,7 @@ struct ExercisePieChartView: View {
         //TODO: maximum point 변경
         if total < 250 {
             let remaining = 250 - total
-            return data + [WorkoutRecordPointSum(exerciseKorName: "empty", exerciseImg: "", recordPointSum: remaining, exerciseColor: Color.cellColor)]
+            return data + [WorkoutRecordPointSum(exerciseKorName: "empty", exerciseImg: nil, recordPointSum: remaining, exerciseColor: Color.cellColor)]
         }
         return data
     }
@@ -75,12 +74,14 @@ struct ExercisePieChartView: View {
                         let offsetX = radius * cos(centerAngle) * ratio
                         let offsetY = radius * sin(centerAngle) * ratio
                         
-                        Image(systemName: element.exerciseImg)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.white)
-                            .position(x: frame.midX - offsetX, y: frame.midY - offsetY)
+                        if let exerciseImg = element.exerciseImg {
+                            Image(systemName: exerciseImg)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                                .position(x: frame.midX - offsetX, y: frame.midY - offsetY)
+                        }
                     }
                 }
         }
