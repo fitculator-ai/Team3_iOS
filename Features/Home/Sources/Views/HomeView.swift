@@ -8,11 +8,14 @@
 import SwiftUI
 import UIKit
 import Shared
+import Core
 
 public struct HomeView: View {
     public init() {}
     @StateObject private var viewModel = HomeViewModel()
+    
     @State private var showDatePicker = false
+    @State private var selectedWorkout: WorkoutRecord?
     private let sidePadding = UIScreen.main.bounds.width * (1 - 0.88) / 2
     
     public var body: some View {
@@ -23,7 +26,6 @@ public struct HomeView: View {
                 
                 ScrollView {
                     VStack {
-                       
                         HomeNavigationBar()
                         
                         HStack(spacing: 20) {
@@ -159,6 +161,7 @@ public struct HomeView: View {
                             }
                         }
                     }
+                    MyWorkoutListView(viewModel: viewModel, selectedWorkout: $selectedWorkout)
                 }
                 .padding([.leading, .trailing, .bottom], sidePadding)
                 .modifier(ScrollClipModifier())
