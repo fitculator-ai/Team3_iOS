@@ -45,6 +45,9 @@ public struct HomeView: View {
                             
                             Text(viewModel.getSelectedWeekString())
                                 .font(.subheadline)
+                                .fontWeight(
+                                    ["이번주 운동량", "지난주 운동량"].contains(viewModel.getSelectedWeekString()) ? .semibold : .regular
+                                )
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
                                 .frame(width: 228)

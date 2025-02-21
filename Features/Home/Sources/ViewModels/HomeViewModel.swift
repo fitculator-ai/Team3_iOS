@@ -74,6 +74,17 @@ public class HomeViewModel: ObservableObject {
     }
     
     func getSelectedWeekString() -> String {
+        if let todayWeek = getStartAndEndOfWeek(from: Date()),
+           let selectedDateWeek = getStartAndEndOfWeek(from: selectedDate), todayWeek == selectedDateWeek {
+            return "이번주 운동량"
+        }
+        if let todayWeek = getStartAndEndOfWeek(from: Date()),
+           let nextWeekFromSelectedDate = Calendar.current.date(byAdding: .day, value: 7, to: selectedDate),
+           let nextWeekFromSelectedWeek = getStartAndEndOfWeek(from: nextWeekFromSelectedDate),
+           todayWeek == nextWeekFromSelectedWeek {
+            return "지난주 운동량"
+        }
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd"
         let selectedWeekString = "\(formatter.string(from: startOfWeek)) ~ \(formatter.string(from: endOfWeek))"
