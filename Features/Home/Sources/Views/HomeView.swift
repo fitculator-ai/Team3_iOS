@@ -70,7 +70,7 @@ public struct HomeView: View {
                         }
                         ZStack(alignment: .top) {
                             VStack {
-                                ExercisePieChartView(data: viewModel.weeklyExercisePoints)
+                                ExercisePieChartView(data: viewModel.workoutRecordPointSums)
                                     .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.7)
                                 
                                 HStack {
@@ -82,7 +82,6 @@ public struct HomeView: View {
                                 Spacer()
                                     .frame(height: 20)
                                 
-                                //TODO: 색상 변경
                                 HStack(spacing: 16) {
                                     // 근력
                                     VStack {
@@ -98,17 +97,19 @@ public struct HomeView: View {
                                         }
                                         Spacer()
                                         HStack(spacing: 4) {
+                                            // progressbar 색상과 동일하게
                                             RoundedRectangle(cornerRadius: 8)
+                                                .foregroundStyle(viewModel.getStrenthCount() > 0 ?  Color(.blue) : Color(hex: "#494a59"))
                                             RoundedRectangle(cornerRadius: 8)
+                                                .foregroundStyle(viewModel.getStrenthCount() > 1 ?  Color(.blue) : Color(hex: "#494a59"))
                                         }
-                                        .foregroundStyle(.blue)
                                         .frame(height: 12)
                                         
                                         Spacer()
                                         
                                         HStack {
                                             Spacer()
-                                            Text(viewModel.getStrenthPoint()).font(AppFont.subTitle) + Text("/2").font(.subheadline)
+                                            Text("\(viewModel.getStrenthCount())").font(AppFont.subTitle) + Text("/2").font(.subheadline)
                                         }
                                     }
                                     .padding(12)
@@ -127,7 +128,7 @@ public struct HomeView: View {
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
-                                        ProgressView(value: viewModel.getWorkoutLoad())
+                                        ProgressView(value: viewModel.getWeekIntensityPoint())
                                             .progressViewStyle(.linear)
                                             .scaleEffect(y: 2.5)
                                             .frame(height: 20)
@@ -144,7 +145,7 @@ public struct HomeView: View {
                                         Spacer()
                                             .frame(height: 8)
                                         
-                                        Text("적당한 운동중")
+                                        Text(viewModel.getWeekIntensityString())
                                             .font(.subheadline)
                                     }
                                     .padding(12)
@@ -168,8 +169,8 @@ public struct HomeView: View {
                 .scrollIndicators(.never)
             }
             .onAppear {
-                viewModel.selectedDate = Date()
                 viewModel.updateStartAndEndOfWeek()
+                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: "2025-01-13")
             }
             .onChange(of: viewModel.selectedDate) {
                 viewModel.updateStartAndEndOfWeek()
