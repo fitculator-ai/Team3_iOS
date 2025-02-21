@@ -28,6 +28,8 @@ public struct WorkoutRecord: Codable, Identifiable {
     public let exerciseImg: String
     public let exerciseColor: String
     public let avgHeartRate: Int
+    public let recordStart: String
+    public let recordEnd: String
     public let duration: Int
     public let intensity: String
     public let recordPoint: Int
