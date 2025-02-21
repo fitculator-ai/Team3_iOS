@@ -173,6 +173,14 @@ public struct HomeView: View {
                 .modifier(ScrollClipModifier())
                 .scrollIndicators(.never)
             }
+            .onAppear {
+                viewModel.selectedDate = Date()
+                viewModel.updateStartAndEndOfWeek()
+                // TODO: formatter 삭제 예정
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: formatter.string(from: viewModel.selectedDate))
+            }
             .onChange(of: viewModel.selectedDate) {
                 // 날짜 변경 시 주가 바뀌었을 때만 fetch
                 guard let newWeek = viewModel.getStartAndEndOfWeek(from: $0), let oldWeek = viewModel.getStartAndEndOfWeek(from: $1), newWeek == oldWeek else {

@@ -31,20 +31,27 @@ struct MyWorkoutListView: View {
                 Text("운동을 시작해보세요!🏋️‍♀️")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
-                LazyVStack {
-                    ForEach(viewModel.workoutData?.records.sorted(by: { $0.recordStart > $1.recordStart }) ?? []
-                            , id: \.id) { workout in
-                        WorkoutRecordRow(workout: workout, viewModel: viewModel, selectedWorkout: $selectedWorkout)
+                NavigationStack {
+                    LazyVStack {
+                        ForEach(viewModel.workoutData?.records.sorted(by: { $0.recordStart > $1.recordStart }) ?? []
+                                , id: \.id) { workout in
+                            NavigationLink(value: workout) {
+                                WorkoutRecordRow(workout: workout, viewModel: viewModel, selectedWorkout: $selectedWorkout)
+                            }
+                            .buttonStyle(.plain)
+                            .simultaneousGesture(TapGesture().onEnded {
+                                selectedWorkout = workout
+                                print(workout)
+                            })
+                        }
+                    }
+                    .navigationDestination(for: WorkoutRecord.self) { workout in
+                        MyWorkoutDetailView(viewModel: viewModel, workout: workout)
                     }
                 }
             }
         }
         .padding(.top)
-        .onAppear {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            viewModel.fetchWeeklyWorkout(userId: 1, targetDate: formatter.string(from: viewModel.selectedDate))
-        }
     }
 }
 
@@ -59,9 +66,6 @@ struct WorkoutRecordRow: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.cellColor)
                 .frame(height: 160)
-                .onTapGesture {
-                    selectedWorkout = workout
-                }
             VStack {
                 HStack {
                     ZStack {
@@ -115,7 +119,3 @@ struct WorkoutRecordRow: View {
         }
     }
 }
-
-//#Preview {
-//    MyWorkoutListView()
-//}
