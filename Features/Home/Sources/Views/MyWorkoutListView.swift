@@ -22,24 +22,23 @@ struct MyWorkoutListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("나의 운동 기록")
-                .font(AppFont.mainTitle)
+                .font(AppFont.subTitle)
             
             if viewModel.isLoading {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else if viewModel.workoutData?.records.isEmpty ?? true {
-                Text("운동 기록이 없습니다.")
-                    .font(AppFont.subTitle)
+                Text("운동을 시작해보세요!🏋️‍♀️")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
                 LazyVStack {
                     ForEach(viewModel.workoutData?.records ?? [], id: \.id) { workout in
-                        WorkoutRecordRow(workout: workout, selectedWorkout: $selectedWorkout)
+                        WorkoutRecordRow(workout: workout, viewModel: viewModel, selectedWorkout: $selectedWorkout)
                     }
                 }
             }
         }
-        .padding()
+        .padding(.top)
         .onAppear {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
@@ -51,6 +50,7 @@ struct MyWorkoutListView: View {
 // WorkoutRecordRow를 별도의 View로 분리
 struct WorkoutRecordRow: View {
     let workout: WorkoutRecord
+    let viewModel: HomeViewModel
     @Binding var selectedWorkout: WorkoutRecord?
     
     var body: some View {
@@ -74,7 +74,7 @@ struct WorkoutRecordRow: View {
                     VStack(alignment: .leading) {
                         Text(workout.exerciseKorName)
                             .font(AppFont.subTitle)
-                        Text("02.11 오후 6:50")
+                        Text(workout.recordStart)
                             .font(.system(size: 13))
                             .opacity(0.8)
                     }
@@ -91,7 +91,11 @@ struct WorkoutRecordRow: View {
                     Spacer()
                     workoutInfo(title: "평균 심박수", value: "\(workout.avgHeartRate)bpm")
                     Spacer()
-                    workoutInfo(title: "운동 강도", value: workout.intensity, color: .green)
+                    workoutInfo(
+                        title: "운동 강도",
+                        value: viewModel.getIntensityText(workout.intensity),
+                        color: viewModel.getIntensityColor(workout.intensity)
+                    )
                 }
                 .padding(.horizontal, 30)
             }
