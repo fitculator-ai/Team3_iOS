@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import Combine
+import Core
 
 public class HomeViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
+    @Published public var workoutData: WorkoutData?
+    @Published public var isLoading: Bool = false
+    @Published public var error: Error?
+    
     var selectedWeekString = ""
     private var startOfWeek = Date()
     private var endOfWeek = Date()
@@ -21,6 +27,35 @@ public class HomeViewModel: ObservableObject {
     ]
     private var strengthPoint: Int = 3
     private var workoutLoad: Double = 0.5
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let networkService: NetworkServiceProtocol
+    
+    init(networkService: NetworkServiceProtocol = NetworkService()) {
+        self.networkService = networkService
+    }
+    
+    func fetchWeeklyWorkout(userId: Int, targetDate: String) {
+        isLoading = true
+        networkService.request(APIEndpoint.getWeeklyWorkout(userId: userId, targetDate: targetDate))
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveCompletion: { [weak self] _ in
+                self?.isLoading = false
+            })
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("Error: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
+                    print("\(response)")
+                    self?.workoutData = response.data
+                }
+            )
+            .store(in: &cancellables)
+    }
     
     // 주의 첫날과 마지막날 날짜 구하기
     private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
