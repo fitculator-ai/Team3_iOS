@@ -9,7 +9,8 @@ import SwiftUI
 import Core
 
 struct AddExerciseDetailView: View {
-    let exerciseName: String
+    let exerciseKRName: String
+    let exerciseENName: String
     let exerciseValues: String
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var modalManager: AddModalManager
@@ -98,7 +99,7 @@ struct AddExerciseDetailView: View {
             
             Spacer()
         }
-        .navigationTitle(exerciseName)
+        .navigationTitle(exerciseKRName)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .toolbar {
@@ -116,8 +117,8 @@ struct AddExerciseDetailView: View {
                     let exerciseData = WorkoutRequest(
                         userId: 1,
                         exerciseType: "CARDIO",
-                        exerciseKorName: exerciseName,
-                        exerciseEngName: exerciseName,
+                        exerciseKorName: exerciseKRName,
+                        exerciseEngName: exerciseENName,
                         recordDate: DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate),
                         recordStart: DateFormatterUtil.dateFormatTime.string(from: viewModel.selectedDate),
                         duration: Int(viewModel.workoutDuration)!,
