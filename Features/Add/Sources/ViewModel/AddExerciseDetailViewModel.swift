@@ -8,7 +8,6 @@
 import SwiftUI
 import Core
 import Combine
-import Alamofire
 
 public class AddExerciseDetailViewModel: ObservableObject {
     @Published var avgHeartRate: String = ""
