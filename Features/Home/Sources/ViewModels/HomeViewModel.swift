@@ -13,7 +13,7 @@ import SwiftUICore
 public class HomeViewModel: ObservableObject {
     //TODO: API 연동, selectedDate에 따라 갱신
     //TODO: workoutRecords 갱신되면 -> workoutRecordPointSums 갱신 -> 파이차트 갱신
-    var selectedDate: Date = Date()
+    @Published var selectedDate: Date = Date()
     @Published public var workoutData: WorkoutData?
     @Published public var isLoading: Bool = false
     @Published public var error: Error?
@@ -44,7 +44,6 @@ public class HomeViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
-                    print("\(response)")
                     self?.workoutData = response.data
                     self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: response.data.records)
                 }
@@ -89,11 +88,15 @@ public class HomeViewModel: ObservableObject {
     func getWeekIntensityPoint() -> Double {
         guard let weekIntensity = workoutData?.weekIntensity else { return 0.0 }
         switch weekIntensity {
-        case "운동이 부족합니다" :
+        case "VERY LOW" :
             return 0.0
-        case "적당한 운동중" :
+        case "LOW" :
+            return 0.25
+        case "MEDIUM" :
             return 0.5
-        case "운동이 과합니다" :
+        case "HIGH" :
+            return 0.75
+        case "VERY HIGH" :
             return 1.0
         default:
             return 0.0
@@ -124,5 +127,10 @@ public class HomeViewModel: ObservableObject {
         }
         
         workoutRecordPointSums = result
+    }
+    
+    func getSelectedDateString() -> String {
+        let dateFormatter = DateFormatterUtil.dateFormatDate
+        return dateFormatter.string(from: selectedDate)
     }
 }

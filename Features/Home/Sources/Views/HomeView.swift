@@ -168,13 +168,10 @@ public struct HomeView: View {
                 .modifier(ScrollClipModifier())
                 .scrollIndicators(.never)
             }
-            .onAppear {
-                viewModel.updateStartAndEndOfWeek()
-                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: "2025-01-13")
-            }
             .onChange(of: viewModel.selectedDate) {
                 viewModel.updateStartAndEndOfWeek()
                 showDatePicker = false
+                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
         }
     }
