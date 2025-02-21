@@ -1,5 +1,6 @@
 import SwiftUI
 import FSCalendar
+import Shared
 
 struct CustomCalendarView: UIViewRepresentable {
     @Binding var selectedDate: Date
@@ -19,7 +20,7 @@ struct CustomCalendarView: UIViewRepresentable {
         calendar.appearance.weekdayTextColor = .gray
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.todayColor = UIColor.purple.withAlphaComponent(0.5)
-        calendar.appearance.selectionColor = .blue
+        calendar.appearance.selectionColor = UIColor(Color.fitculatorLogo)
         calendar.placeholderType = .none
         calendar.headerHeight = 0
         calendar.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +103,7 @@ struct CustomCalendarView: UIViewRepresentable {
             let currentWeek = calendar.component(.weekOfYear, from: date)
             
             if selectedWeek == currentWeek {
-                return .blue
+                return UIColor(Color.fitculatorLogo.opacity(0.8))
             }
             return nil
         }
