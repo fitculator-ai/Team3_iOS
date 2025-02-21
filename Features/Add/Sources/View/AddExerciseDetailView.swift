@@ -27,9 +27,7 @@ struct AddExerciseDetailView: View {
                     HStack {
                         Text("평균 심박수")
                             .opacity(0.7)
-                        TextField("", text: $viewModel.averageHeartRate)
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
+                        NumberTextField(text: $viewModel.averageHeartRate)
                     }
                     
                     Divider()
@@ -38,9 +36,7 @@ struct AddExerciseDetailView: View {
                     HStack {
                         Text("최대 심박수")
                             .opacity(0.7)
-                        TextField("", text: $viewModel.maxHeartRate)
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
+                        NumberTextField(text: $viewModel.maxHeartRate)
                     }
                 }
                 .padding()
@@ -69,9 +65,7 @@ struct AddExerciseDetailView: View {
                     HStack {
                         Text("운동 시간(분)")
                             .opacity(0.7)
-                        TextField("", text: $viewModel.workoutDuration)
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
+                        NumberTextField(text: $viewModel.workoutDuration)
                     }
                 }
                 .padding()
@@ -127,14 +121,9 @@ struct AddExerciseDetailView: View {
                         memo: viewModel.workoutMemo
                     )
                     
-                    print("recordStart: \(exerciseData)")
                     viewModel.fetchCreateWorkout(request: exerciseData)
                 }
             }
         }
     }
-}
-
-#Preview {
-    AddExerciseDetailView(exerciseName: "런닝", exerciseValues: "CARDIO")
 }
