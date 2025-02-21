@@ -9,7 +9,7 @@ import SwiftUI
 import Core
 import Combine
 
-public class AddExerciseDetailViewModel: ObservableObject {
+class AddExerciseDetailViewModel: ObservableObject {
     @Published var avgHeartRate: String = ""
     @Published var maxHeartRate: String = ""
     @Published var duration: String = ""
@@ -19,11 +19,11 @@ public class AddExerciseDetailViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let networkService: NetworkServiceProtocol
     
-    public init(networkService: NetworkServiceProtocol = NetworkService()) {
+    init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
     }
     
-    public func fetchCreateWorkout(request: WorkoutRequest) {
+    func fetchCreateWorkout(request: WorkoutRequest) {
         networkService.request(APIEndpoint.createWorkout(request: request))
             .receive(on: DispatchQueue.main)
             .sink(

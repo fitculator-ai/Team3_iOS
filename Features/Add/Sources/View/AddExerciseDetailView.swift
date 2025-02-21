@@ -11,7 +11,7 @@ import Core
 struct AddExerciseDetailView: View {
     let exerciseKRName: String
     let exerciseENName: String
-    let exerciseValues: String
+    let exerciseValue: String
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var modalManager: AddModalManager
     @ObservedObject var viewModel = AddExerciseDetailViewModel()
@@ -113,7 +113,7 @@ struct AddExerciseDetailView: View {
                     
                     let exerciseData = WorkoutRequest(
                         userId: 1,
-                        exerciseType: "CARDIO",
+                        exerciseType: exerciseValue,
                         exerciseKorName: exerciseKRName,
                         exerciseEngName: exerciseENName,
                         recordDate: DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate),

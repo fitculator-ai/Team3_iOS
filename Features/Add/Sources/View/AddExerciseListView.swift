@@ -61,7 +61,7 @@ struct ExerciseTypeListView: View {
     var body: some View {
         ForEach(exerciseList) { item in
             NavigationLink {
-                AddExerciseDetailView(exerciseKRName: item.exerciseKorName, exerciseENName: item.exerciseEngName, exerciseValues: exerciseValues)
+                AddExerciseDetailView(exerciseKRName: item.exerciseKorName, exerciseENName: item.exerciseEngName, exerciseValue: exerciseValues)
             } label: {
                 HStack {
                     Image(systemName: item.exerciseImg)

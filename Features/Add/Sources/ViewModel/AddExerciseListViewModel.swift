@@ -16,11 +16,11 @@ class AddExerciseListViewModel: ObservableObject {
     @Published var exerciseCardioList = [ExerciseType]()
     @Published var exerciseStrengthList = [ExerciseType]()
     
-    public init(networkService: NetworkServiceProtocol = NetworkService()) {
+    init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
     }
     
-    public func fetchAddExerciseList(exerciseType: String, userId: String) {
+    func fetchAddExerciseList(exerciseType: String, userId: String) {
         networkService.request(APIEndpoint.getExercises(exerciseType: exerciseType, userId: userId))
             .sink(receiveCompletion: { (completion: Subscribers.Completion<Error>) in
                 switch completion {
