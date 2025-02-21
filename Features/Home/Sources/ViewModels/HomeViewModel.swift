@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 import Core
 
@@ -92,5 +93,45 @@ public class HomeViewModel: ObservableObject {
     
     func getWorkoutLoad() -> Double {
         return workoutLoad
+    }
+    
+    func getIntensityColor(_ intensity: String) -> Color {
+        return ExerciseIntensity.from(intensity).color
+    }
+
+    func getIntensityText(_ intensity: String) -> String {
+        return ExerciseIntensity.from(intensity).koreanText
+    }
+    
+    enum ExerciseIntensity: String {
+        case veryHigh = "VERY HIGH"
+        case high = "HIGH"
+        case medium = "MEDIUM"
+        case low = "LOW"
+        case veryLow = "VERY LOW"
+        
+        var koreanText: String {
+            switch self {
+            case .veryHigh: return "매우 높음"
+            case .high: return "높음"
+            case .medium: return "보통"
+            case .low: return "낮음"
+            case .veryLow: return "매우 낮음"
+            }
+        }
+        
+        var color: Color {
+            switch self {
+            case .veryHigh: return .red
+            case .high: return .purple
+            case .medium: return Color.fitculatorLogo
+            case .low: return .yellow
+            case .veryLow: return .green
+            }
+        }
+        
+        static func from(_ intensity: String) -> ExerciseIntensity {
+            return ExerciseIntensity(rawValue: intensity) ?? .medium
+        }
     }
 }
