@@ -25,6 +25,9 @@ struct WorkoutRecordPointSum {
 }
 
 struct ExercisePieChartView: View {
+    // info button 최초 한번만 뜨게 하기 위함
+    @AppStorage("hasSeenInfoButton") private var hasSeenInfoButton: Bool = false
+    @State private var updateHasSeenInfoButton: Bool = false
     @State private var showPopover = false
     var data: [WorkoutRecordPointSum]
     var total: Double {
@@ -94,20 +97,23 @@ struct ExercisePieChartView: View {
                         Text("유산소")
                             .font(.subheadline)
                         Text("\(Int(total/250 * 100))").font(.largeTitle) + Text(" %").font(.subheadline)
-                        Spacer().frame(height: 4)
-                        Button(action: {
-                            showPopover.toggle()
-                        }) {
-                            Image(systemName: "info.circle")
-                                .foregroundStyle(.white)
-                                .font(.caption)
-                        }
-                        .popover(isPresented: $showPopover, arrowEdge: .top) {
-                            Text("세계보건기구 신체활동 가이드라인 기준\n나의 주간 운동량입니다.")
-                                .font(.caption)
-                                .padding([.leading, .trailing], 10)
-                                .presentationBackground(.gray.opacity(0.3))
-                                .presentationCompactAdaptation(.popover)
+                        if !hasSeenInfoButton {
+                            Spacer().frame(height: 4)
+                            Button(action: {
+                                showPopover.toggle()
+                                updateHasSeenInfoButton = true
+                            }) {
+                                Image(systemName: "info.circle")
+                                    .foregroundStyle(.white)
+                                    .font(.caption)
+                            }
+                            .popover(isPresented: $showPopover, arrowEdge: .top) {
+                                Text("세계보건기구 신체활동 가이드라인 기준\n나의 주간 운동량입니다.")
+                                    .font(.caption)
+                                    .padding([.leading, .trailing], 10)
+                                    .presentationBackground(.gray.opacity(0.3))
+                                    .presentationCompactAdaptation(.popover)
+                            }
                         }
                     }
                     .position(x: frame.midX, y: frame.midY)
@@ -117,5 +123,10 @@ struct ExercisePieChartView: View {
         }
         .padding()
         .scaledToFit()
+        .onDisappear {
+            if updateHasSeenInfoButton {
+                hasSeenInfoButton = true
+            }
+        }
     }
 }
