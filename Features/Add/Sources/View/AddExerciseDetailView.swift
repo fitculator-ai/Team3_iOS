@@ -9,96 +9,94 @@ import SwiftUI
 import Core
 
 struct AddExerciseDetailView: View {
-    let exerciseName: String
+    let exerciseKRName: String
+    let exerciseENName: String
+    let exerciseValue: String
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var modalManager: AddModalManager
     @ObservedObject var viewModel = AddExerciseDetailViewModel()
     
     var body: some View {
-        VStack {
-            ZStack {
-                Rectangle()
-                    .fill(Color.cellColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                
-                VStack {
-                    HStack {
-                        Text("평균 심박수")
-                            .opacity(0.7)
-                        TextField("", text: $viewModel.averageHeartRate)
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
+        ZStack {
+            Color.background.ignoresSafeArea()
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .fill(Color.cellColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
+                    VStack {
+                        HStack {
+                            Text("평균 심박수")
+                                .opacity(0.7)
+                            NumberTextField(text: $viewModel.avgHeartRate)
+                        }
+                        
+                        Divider()
+                            .padding(.bottom, 5)
+                        
+                        HStack {
+                            Text("최대 심박수")
+                                .opacity(0.7)
+                            NumberTextField(text: $viewModel.maxHeartRate)
+                        }
                     }
-                    
-                    Divider()
-                        .padding(.bottom, 5)
-                    
-                    HStack {
-                        Text("최대 심박수")
-                            .opacity(0.7)
-                        TextField("", text: $viewModel.maxHeartRate)
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
-                    }
+                    .padding()
                 }
-                .padding()
-            }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 95)
-            .padding(.top, 10)
-            
-            ZStack {
-                Rectangle()
-                    .fill(Color.cellColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 95)
+                .padding(.top, 10)
                 
-                VStack(alignment: .leading) {
-                    DatePicker("시작 날짜", selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
-                        .opacity(0.7)
-                        .padding(.top, -8)
+                ZStack {
+                    Rectangle()
+                        .fill(Color.cellColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
-                    Divider()
-                    
-                    DatePicker("시작 시간", selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
-                        .opacity(0.7)
-                    
-                    Divider()
-                        .padding(.bottom, 7)
-                    
-                    HStack {
-                        Text("운동 시간(분)")
+                    VStack(alignment: .leading) {
+                        DatePicker("시작 날짜", selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
                             .opacity(0.7)
-                        TextField("", text: $viewModel.workoutDuration)
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
+                            .padding(.top, -8)
+                        
+                        Divider()
+                        
+                        DatePicker("시작 시간", selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
+                            .opacity(0.7)
+                        
+                        Divider()
+                            .padding(.bottom, 7)
+                        
+                        HStack {
+                            Text("운동 시간(분)")
+                                .opacity(0.7)
+                            NumberTextField(text: $viewModel.duration)
+                        }
                     }
+                    .padding()
                 }
-                .padding()
-            }
-            // DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate))")
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
-            .padding(.top, 10)
-            
-            ZStack {
-                Color.cellColor
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 154)
+                .padding(.top, 10)
                 
-                VStack(alignment:.leading) {
-                    Text("메모")
-                        .opacity(0.7)
+                ZStack {
+                    Color.cellColor
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
-                    Divider()
-                    
-                    TextEditor(text: $viewModel.workoutMemo)
-                        .scrollContentBackground(.hidden)
+                    VStack(alignment:.leading) {
+                        Text("메모")
+                            .opacity(0.7)
+                        
+                        Divider()
+                        
+                        TextEditor(text: $viewModel.memo)
+                            .scrollContentBackground(.hidden)
+                    }
+                    .padding()
                 }
-                .padding()
+                .frame(width: UIScreen.main.bounds.width * 0.88, height: 200)
+                .padding(.top, 10)
+                
+                Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width * 0.88, height: 200)
-            .padding(.top, 10)
-            
-            Spacer()
         }
-        .navigationTitle(exerciseName)
+        .navigationTitle(exerciseKRName)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .toolbar {
@@ -110,16 +108,25 @@ struct AddExerciseDetailView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
+                Button("저장") {
                     modalManager.isModalPresented = false
-                }) {
-                    Text("저장")
+                    
+                    let exerciseData = WorkoutRequest(
+                        userId: 1,
+                        exerciseType: exerciseValue,
+                        exerciseKorName: exerciseKRName,
+                        exerciseEngName: exerciseENName,
+                        recordDate: DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate),
+                        recordStart: DateFormatterUtil.dateFormatTime.string(from: viewModel.selectedDate),
+                        duration: Int(viewModel.duration)!,
+                        avgHeartRate: Int(viewModel.avgHeartRate) ?? 0,
+                        highHeartRate: Int(viewModel.maxHeartRate) ?? 0,
+                        memo: viewModel.memo
+                    )
+                    
+                    viewModel.fetchCreateWorkout(request: exerciseData)
                 }
             }
         }
     }
-}
-
-#Preview {
-    AddExerciseDetailView(exerciseName: "런닝")
 }

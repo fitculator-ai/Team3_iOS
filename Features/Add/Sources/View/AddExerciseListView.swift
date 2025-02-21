@@ -14,6 +14,7 @@ enum tapInfo : String, CaseIterable {
 }
 
 public struct AddExerciseListView: View {
+    @StateObject private var viewModel = AddExerciseListViewModel()
     @State private var selectedPicker: tapInfo = .aerobic
     
     public init() {
@@ -24,66 +25,46 @@ public struct AddExerciseListView: View {
     
     public var body: some View {
         NavigationStack {
-            ScrollView {
-                Picker("운동 종류", selection: $selectedPicker) {
-                    ForEach(tapInfo.allCases, id: \.self) { option in
-                        Text(option.rawValue)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .frame(width: UIScreen.main.bounds.width * 0.88)
-                .padding(.vertical, 5)
+            ZStack {
+                    Color.background.ignoresSafeArea()
                 
-                if selectedPicker == .aerobic {
-                    AddExerciseAerobicListView()
-                } else {
-                    AddExerciseAnaerobicListView()
+                ScrollView {
+                    Picker("운동 종류", selection: $selectedPicker) {
+                        ForEach(tapInfo.allCases, id: \.self) { option in
+                            Text(option.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: UIScreen.main.bounds.width * 0.88)
+                    .padding(.vertical, 5)
+                    
+                    if selectedPicker == .aerobic {
+                        ExerciseTypeListView(exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
+                    } else {
+                        ExerciseTypeListView(exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
+                    }
                 }
             }
         }
         .buttonStyle(.plain)
-    }
-}
-
-struct AddExerciseAerobicListView: View {
-    var body: some View {
-        ForEach(dummyExerciseTypeList) { item in
-            NavigationLink {
-                AddExerciseDetailView(exerciseName: item.exerciseName)
-            } label: {
-                HStack {
-                    Image(systemName: item.exerciseImage)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .padding(8)
-                        .background(Color(hex: item.exerciseColor))
-                        .clipShape(Circle())
-                        .padding(.leading, 20)
-                    
-                    
-                    Text(item.exerciseName)
-                        .bold()
-                        .padding(.leading, 10)
-                    
-                    Spacer()
-                }
-                
-                .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
-                .background(Color.cellColor)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
+        .onAppear {
+            viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
+            viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
         }
     }
 }
 
-struct AddExerciseAnaerobicListView: View {
+struct ExerciseTypeListView: View {
+    let exerciseValues: String
+    let exerciseList: [ExerciseType]
+    
     var body: some View {
-        ForEach(dummyExerciseTypeList.reversed()) { item in
+        ForEach(exerciseList) { item in
             NavigationLink {
-                AddExerciseDetailView(exerciseName: item.exerciseName)
+                AddExerciseDetailView(exerciseKRName: item.exerciseKorName, exerciseENName: item.exerciseEngName, exerciseValue: exerciseValues)
             } label: {
                 HStack {
-                    Image(systemName: item.exerciseImage)
+                    Image(systemName: item.exerciseImg)
                         .resizable()
                         .frame(width: 30, height: 30)
                         .padding(8)
@@ -91,10 +72,10 @@ struct AddExerciseAnaerobicListView: View {
                         .clipShape(Circle())
                         .padding(.leading, 20)
                     
-                    
-                    Text(item.exerciseName)
+                    Text(item.exerciseKorName)
                         .bold()
                         .padding(.leading, 10)
+                    
                     Spacer()
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
