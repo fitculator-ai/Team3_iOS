@@ -8,25 +8,19 @@
 import Foundation
 import Combine
 import Core
+import SwiftUICore
 
 public class HomeViewModel: ObservableObject {
-    @Published var selectedDate: Date = Date()
+    //TODO: API 연동, selectedDate에 따라 갱신
+    //TODO: workoutRecords 갱신되면 -> workoutRecordPointSums 갱신 -> 파이차트 갱신
+    var selectedDate: Date = Date()
     @Published public var workoutData: WorkoutData?
     @Published public var isLoading: Bool = false
     @Published public var error: Error?
-    
     var selectedWeekString = ""
     private var startOfWeek = Date()
     private var endOfWeek = Date()
-    //TODO: API 연동, selectedDate에 따라 갱신
-    var weeklyExercisePoints: [ExercisePoint] = [
-        ExercisePoint(exerciseType: "달리기", point: 50),
-        ExercisePoint(exerciseType: "HIIT", point: 50),
-        ExercisePoint(exerciseType: "수영", point: 50),
-        ExercisePoint(exerciseType: "테니스", point: 50),
-    ]
-    private var strengthPoint: Int = 3
-    private var workoutLoad: Double = 0.5
+    var workoutRecordPointSums: [WorkoutRecordPointSum] = []
     
     private var cancellables = Set<AnyCancellable>()
     private let networkService: NetworkServiceProtocol
@@ -52,6 +46,7 @@ public class HomeViewModel: ObservableObject {
                 receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
                     print("\(response)")
                     self?.workoutData = response.data
+                    self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: response.data.records)
                 }
             )
             .store(in: &cancellables)
@@ -86,11 +81,48 @@ public class HomeViewModel: ObservableObject {
         return selectedWeekString
     }
     
-    func getStrenthPoint() -> String {
-        return "\(strengthPoint)"
+    func getStrenthCount() -> Int {
+        guard let weekStrengthCount = workoutData?.weekStrengthCount else { return 0}
+        return weekStrengthCount
     }
     
-    func getWorkoutLoad() -> Double {
-        return workoutLoad
+    func getWeekIntensityPoint() -> Double {
+        guard let weekIntensity = workoutData?.weekIntensity else { return 0.0 }
+        switch weekIntensity {
+        case "운동이 부족합니다" :
+            return 0.0
+        case "적당한 운동중" :
+            return 0.5
+        case "운동이 과합니다" :
+            return 1.0
+        default:
+            return 0.0
+        }
+    }
+    
+    func getWeekIntensityString() -> String {
+        guard let weekIntensity = workoutData?.weekIntensity else { return "운동이 부족합니다" }
+        return weekIntensity
+    }
+    
+    // PieChart를 위한 데이터 변환
+    private func updateWorkoutRecordSum(weeklyWorkoutDataRecords: [WorkoutRecord]) {
+        let grouped = Dictionary(grouping: weeklyWorkoutDataRecords) { $0.exerciseKorName }
+        var result: [WorkoutRecordPointSum] = []
+        
+        for (exerciseKorName, records) in grouped {
+            let totalPoints = records.reduce(0) { $0 + Double($1.recordPoint) }
+            let exerciseImg = records.first?.exerciseImg ?? ""
+            let exerciseColor = Color(hex: records.first?.exerciseColor ?? "#000000")
+            
+            result.append(WorkoutRecordPointSum(
+                exerciseKorName: exerciseKorName,
+                exerciseImg: exerciseImg,
+                recordPointSum: totalPoints,
+                exerciseColor: exerciseColor
+            ))
+        }
+        
+        workoutRecordPointSums = result
     }
 }
