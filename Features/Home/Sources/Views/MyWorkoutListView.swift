@@ -32,7 +32,8 @@ struct MyWorkoutListView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
                 LazyVStack {
-                    ForEach(viewModel.workoutData?.records ?? [], id: \.id) { workout in
+                    ForEach(viewModel.workoutData?.records.sorted(by: { $0.recordStart > $1.recordStart }) ?? []
+                            , id: \.id) { workout in
                         WorkoutRecordRow(workout: workout, viewModel: viewModel, selectedWorkout: $selectedWorkout)
                     }
                 }
