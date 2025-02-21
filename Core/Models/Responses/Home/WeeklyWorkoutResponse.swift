@@ -14,6 +14,12 @@ public struct WeeklyWorkoutResponse: Codable {
 }
 
 public struct WorkoutData: Codable {
+    //TODO: init 삭제 -> test 위해 생성
+    public init(records: [WorkoutRecord], weekStrengthCount: Int, weekIntensity: String) {
+        self.records = records
+        self.weekStrengthCount = weekStrengthCount
+        self.weekIntensity = weekIntensity
+    }
     public let records: [WorkoutRecord]
     public let weekStrengthCount: Int
     public let weekIntensity: String

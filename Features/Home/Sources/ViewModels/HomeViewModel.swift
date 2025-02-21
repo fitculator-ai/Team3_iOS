@@ -6,21 +6,18 @@
 //
 
 import Foundation
+import Core
+import SwiftUICore
 
 public class HomeViewModel: ObservableObject {
+    //TODO: API 연동, selectedDate에 따라 갱신
+    //TODO: workoutRecords 갱신되면 -> workoutRecordPointSums 갱신 -> 파이차트 갱신
     @Published var selectedDate: Date = Date()
+    @Published var weeklyWorkoutData: WorkoutData = WorkoutData(records: [], weekStrengthCount: 0, weekIntensity: "운동이 부족합니다")
     var selectedWeekString = ""
     private var startOfWeek = Date()
     private var endOfWeek = Date()
-    //TODO: API 연동, selectedDate에 따라 갱신
-    var weeklyExercisePoints: [ExercisePoint] = [
-        ExercisePoint(exerciseType: "달리기", point: 50),
-        ExercisePoint(exerciseType: "HIIT", point: 50),
-        ExercisePoint(exerciseType: "수영", point: 50),
-        ExercisePoint(exerciseType: "테니스", point: 50),
-    ]
-    private var strengthPoint: Int = 3
-    private var workoutLoad: Double = 0.5
+    var workoutRecordPointSums: [WorkoutRecordPointSum] = []
     
     // 주의 첫날과 마지막날 날짜 구하기
     private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
@@ -52,10 +49,44 @@ public class HomeViewModel: ObservableObject {
     }
     
     func getStrenthPoint() -> String {
-        return "\(strengthPoint)"
+        return "\(weeklyWorkoutData.weekStrengthCount)"
     }
     
-    func getWorkoutLoad() -> Double {
-        return workoutLoad
+    func getWeekIntensityPoint() -> Double {
+        switch weeklyWorkoutData.weekIntensity {
+        case "운동이 부족합니다" :
+            return 0.0
+        case "적당한 운동중" :
+            return 0.5
+        case "운동이 과합니다" :
+            return 1.0
+        default:
+            return 0.0
+        }
+    }
+    
+    func getWeekIntensityString() -> String {
+        return weeklyWorkoutData.weekIntensity
+    }
+    
+    // PieChart를 위한 데이터 변환
+    private func getWorkoutRecordSum() {
+        let grouped = Dictionary(grouping: weeklyWorkoutData.records) { $0.exerciseKorName }
+        var result: [WorkoutRecordPointSum] = []
+        
+        for (exerciseKorName, records) in grouped {
+            let totalPoints = records.reduce(0) { $0 + Double($1.recordPoint) }
+            let exerciseImg = records.first?.exerciseImg ?? ""
+            let exerciseColor = Color(hex: records.first?.exerciseColor ?? "#000000")
+            
+            result.append(WorkoutRecordPointSum(
+                exerciseKorName: exerciseKorName,
+                exerciseImg: exerciseImg,
+                recordPointSum: totalPoints,
+                exerciseColor: exerciseColor
+            ))
+        }
+        
+        workoutRecordPointSums = result
     }
 }

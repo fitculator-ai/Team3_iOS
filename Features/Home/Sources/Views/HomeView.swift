@@ -68,7 +68,7 @@ public struct HomeView: View {
                         }
                         ZStack(alignment: .top) {
                             VStack {
-                                ExercisePieChartView(data: viewModel.weeklyExercisePoints)
+                                ExercisePieChartView(data: viewModel.workoutRecordPointSums)
                                     .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.7)
                                 
                                 HStack {
@@ -96,10 +96,12 @@ public struct HomeView: View {
                                         }
                                         Spacer()
                                         HStack(spacing: 4) {
+                                            // progressbar 색상과 동일하게
                                             RoundedRectangle(cornerRadius: 8)
+                                                .foregroundStyle(viewModel.weeklyWorkoutData.weekStrengthCount > 0 ?  Color(.blue) : Color(hex: "#494a59"))
                                             RoundedRectangle(cornerRadius: 8)
+                                                .foregroundStyle(viewModel.weeklyWorkoutData.weekStrengthCount > 1 ?  Color(.blue) : Color(hex: "#494a59"))
                                         }
-                                        .foregroundStyle(.blue)
                                         .frame(height: 12)
                                         
                                         Spacer()
@@ -125,7 +127,7 @@ public struct HomeView: View {
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
-                                        ProgressView(value: viewModel.getWorkoutLoad())
+                                        ProgressView(value: viewModel.getWeekIntensityPoint())
                                             .progressViewStyle(.linear)
                                             .scaleEffect(y: 2.5)
                                             .frame(height: 20)
@@ -142,7 +144,7 @@ public struct HomeView: View {
                                         Spacer()
                                             .frame(height: 8)
                                         
-                                        Text("적당한 운동중")
+                                        Text(viewModel.getWeekIntensityString())
                                             .font(.subheadline)
                                     }
                                     .padding(12)
