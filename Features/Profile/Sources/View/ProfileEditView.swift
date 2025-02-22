@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Core
 import Shared
 
 public struct ProfileEditView: View {
@@ -21,8 +22,12 @@ public struct ProfileEditView: View {
     @State private var showImagePicker = false
     @State private var showActionSheet = false
     
+    @State private var userBirth: Date = Date()
+    
     @State private var imageSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
+    
+    @State private var showImageCropper = false
     
     public var body: some View {
         VStack {
@@ -33,37 +38,56 @@ public struct ProfileEditView: View {
                     showActionSheet = true
                     
                 }) {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 140, height: 140)
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 4)
-                        )
-                        .shadow(radius: 5)
-                        .padding(.leading, 5)
+                    if let selectedImage = selectedImage {
+                        Image(uiImage: selectedImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 140, height: 140)
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 4)
+                            )
+                            .shadow(radius: 5)
+                            .padding(.leading, 5)
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 140, height: 140)
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 4)
+                            )
+                            .shadow(radius: 5)
+                            .padding(.leading, 5)
+                    }
                 }
                 Spacer()
             }
             .padding(.bottom, 10)
             .buttonStyle(PlainButtonStyle())
-
+            
             Spacer()
                 .frame(height: 50)
             
-            // 닉네임
+            //닉네임
             HStack {
                 Text("닉네임")
                     .foregroundColor(.white)
                     .frame(width: 100, alignment: .leading)
-                TextField("공백 없이 최대 15자까지 입력 가능", text: $viewModel.profiledata.userName)
-                    .multilineTextAlignment(.trailing)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .padding(.trailing, -20)
+                TextField("공백 없이 최대 15자까지 입력 가능", text: Binding(
+                    get: { viewModel.MyPageRecord?.userName ?? "" }, // nil일 경우 기본값 ""
+                    set: { newValue in
+                        viewModel.MyPageRecord?.userName = newValue
+                    }
+                ))
+                .multilineTextAlignment(.trailing)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .frame(maxWidth: .infinity)
+                .padding(.trailing, -20)
             }
             .padding(.horizontal)
             
@@ -77,11 +101,11 @@ public struct ProfileEditView: View {
                 Text("닉네임을 입력해주세요.")
                     .foregroundColor(.red)
                     .font(.footnote)
-                    .padding(.top, 4)
+                    .padding(.top, -20)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
-
+            
             // 성별
             HStack {
                 Text("성별")
@@ -91,7 +115,7 @@ public struct ProfileEditView: View {
                 Button(action: {
                     showGenderSheet = true
                 }) {
-                    Text(viewModel.profiledata.userGender)
+                    Text(viewModel.userGender.description)
                         .padding()
                         .foregroundColor(.white)
                         .cornerRadius(8)
@@ -117,7 +141,7 @@ public struct ProfileEditView: View {
                 Button(action: {
                     showWeightSheet = true
                 }) {
-                    Text(String(viewModel.profiledata.userweight))
+                    Text(String(format: "%.1f", viewModel.MyPageRecord?.userWeight ?? 0.0))
                         .padding()
                         .foregroundColor(.white)
                         .cornerRadius(8)
@@ -136,22 +160,36 @@ public struct ProfileEditView: View {
                 Text("올바른 몸무게를 입력해주세요.")
                     .foregroundColor(.red)
                     .font(.footnote)
-                    .padding(.top, 4)
+                    .padding(.top, -20)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
 
-            // 신장
+            //신장
             HStack {
                 Text("신장 (cm)")
                     .foregroundColor(.white)
                     .frame(width: 100, alignment: .leading)
-                TextField("", text: Binding(
-                    get: { String(viewModel.profiledata.userheight) },
-                    set: { viewModel.profiledata.userheight = Int32($0) ?? 0 }
-                ))
+                
+                TextField(" ", text: Binding(
+                       get: {
+                           // userheight가 nil일 경우 빈 문자열 반환
+                           return viewModel.MyPageRecord?.userHeight != nil ? String(viewModel.MyPageRecord?.userHeight ?? 0) : ""
+                       },
+                       set: { newValue in
+                           // 새로운 값이 숫자인지 확인하고 userheight에 설정
+                           if let height = Int(newValue), height > 0, newValue.count <= 3 {
+                               // userheight 값이 nil일 경우 빈 값으로 시작
+                               if viewModel.MyPageRecord?.userHeight == nil {
+                                   viewModel.MyPageRecord?.userHeight = height
+                               } else {
+                                   viewModel.MyPageRecord?.userHeight = height
+                               }
+                           }
+                       }
+                   ))
                 .multilineTextAlignment(.trailing)
-                .keyboardType(.decimalPad)
+                .keyboardType(.decimalPad) // 키패드를 숫자형으로 설정
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -174,17 +212,18 @@ public struct ProfileEditView: View {
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
-
+            
             // 생년월일
             HStack {
                 Text("생년월일")
                     .foregroundColor(.white)
                     .frame(width: 100, alignment: .leading)
                 Spacer()
+                
                 Button(action: {
                     showDatePickerSheet = true
                 }) {
-                    Text(viewModel.profiledata.userBirth)
+                    Text(viewModel.dateFormatter.string(from: userBirth)) 
                         .padding()
                         .foregroundColor(.white)
                         .cornerRadius(8)
@@ -211,23 +250,54 @@ public struct ProfileEditView: View {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.white)
             },
-            trailing: Button(action: {}) {
+            trailing: Button(action: {
+//                viewModel.saveUserProfile()
+//                let request = MyPageRequest(
+//                    from: <#any Decoder#>, userId: viewModel.MyPageRecord?.userId ?? 0,
+//                    userName: viewModel.MyPageRecord?.userName ?? "",
+//                    userGender: viewModel.MyPageRecord?.userGender ?? "",
+//                    userWeight: viewModel.MyPageRecord?.userWeight ?? 0.0,
+//                    userHeight: Int(viewModel.MyPageRecord?.userHeight ?? 0),
+//                    userBirth: viewModel.MyPageRecord?.userBirth ?? "",
+//                    socialProvider: "App"
+//                )
+//                viewModel.updateMyPage(request: request)
+            }) {
                 Text("Save")
                     .foregroundColor(viewModel.isFormValid ? Color.blue : Color.gray)
                     .disabled(!viewModel.isFormValid)
             }
         )
         .sheet(isPresented: $showGenderSheet) {
-            GenderSettingSheetView(selectedGender: $viewModel.profiledata.userGender)
-                .presentationDetents([.fraction(0.35)])
+            GenderSettingSheetView(selectedGender: Binding(
+                get: { viewModel.userGender },
+                set: { newGender in
+                    viewModel.userGender = newGender 
+                }
+            ))
+            .presentationDetents([.fraction(0.35)])
         }
         .sheet(isPresented: $showWeightSheet) {
-            WeightSettingSheetView(Weight: $viewModel.profiledata.userweight)
-                .presentationDetents([.fraction(0.35)])
+            WeightSettingSheetView(Weight: Binding(
+                get: {
+                    Double(viewModel.MyPageRecord?.userWeight ?? 0)
+                },
+                set: { newWeight in
+                    viewModel.MyPageRecord?.userWeight = (newWeight)
+                }
+            ))
+            .presentationDetents([.fraction(0.35)])
         }
         .sheet(isPresented: $showDatePickerSheet) {
-            BirthDatePickerSheetView(birthdate: $viewModel.profiledata.userBirth)
+            if let userBirth = viewModel.MyPageRecord?.userBirth {
+                BirthDatePickerSheetView(birthdate: Binding(
+                    get: { userBirth },
+                    set: { viewModel.MyPageRecord?.userBirth = $0 }
+                ))
                 .presentationDetents([.fraction(0.35)])
+            } else {
+                Text("생년월일 미입력")
+            }
         }
         .actionSheet(isPresented: $showActionSheet) {
             ActionSheet(
@@ -248,6 +318,11 @@ public struct ProfileEditView: View {
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(isImagePickerPresented: $showImagePicker, selectedImage: $selectedImage, imageSourceType: $imageSourceType)
+                .onDisappear {
+                    if selectedImage != nil {
+                        showImageCropper = true
+                    }
+                }
         }
         .frame(width: UIScreen.main.bounds.width * 0.88)
     }

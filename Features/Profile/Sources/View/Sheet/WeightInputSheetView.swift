@@ -18,6 +18,18 @@ struct WeightSettingSheetView: View {
     @State private var frontValue: Double = 70
     @State private var backValue: Double = 0
     
+    init(Weight: Binding<Double>) {
+          if Weight.wrappedValue.isNaN {
+              _Weight = Weight
+              _frontValue = State(initialValue: 0)
+              _backValue = State(initialValue: 0)
+          } else {
+              _Weight = Weight
+              _frontValue = State(initialValue: Weight.wrappedValue)
+              _backValue = State(initialValue: 0)
+          }
+      }
+    
     var body: some View {
         VStack {
             Text("몸무게를 입력하세요.")

@@ -11,20 +11,20 @@ public struct MyPageRequest: Codable {
     let userId: Int
     var userName: String
     var userGender: String
-    var userweight: Int
-    var userheight: Int
+    var userWeight: Double
+    var userHeight: Int
     var userBirth: String
     let socialProvider: String
     
     public func toDictionary() -> [String: Any] {
         return [
-            "user_id": userId,
-            "user_name": userName,
-            "user_gender": userGender,
-            "userweight": userweight,
-            "userheight": userheight,
-            "user_birth": userBirth,
-            "social_provider": socialProvider
+            "userId": userId,
+            "userName": userName,
+            "userGender": userGender,
+            "userWeight": userWeight,
+            "userHeight": userHeight,
+            "userBirth": userBirth,
+            "socialProvider": socialProvider
         ]
     }
 }

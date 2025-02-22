@@ -51,7 +51,7 @@ struct ExerciseData {
 
 public struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
-
+    
     var followingCount: Int = 123
     var followerCount: Int = 155
     
@@ -75,10 +75,10 @@ public struct ProfileView: View {
                         Spacer()
                     }
                     .padding(.top, -50)
-
+                    
                     VStack(alignment: .center) {
                         HStack {
-                            Text("사용자 이름")
+                            Text(viewModel.MyPageRecord?.userName ?? "테스트")
                                 .font(AppFont.profileItemFont)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -94,7 +94,7 @@ public struct ProfileView: View {
                         }
                         .frame(maxWidth: .infinity)
                     }
-
+                    
                     HStack {
                         HStack(alignment: .center, spacing: 10) {
                             Text("팔로워 \(followerCount)")
@@ -158,6 +158,10 @@ public struct ProfileView: View {
                     .padding(.trailing, 10)
             })
         }
+        .onAppear{
+            viewModel.fetchMyPage(userId: 1)
+        }
+        .environmentObject(viewModel) 
     }
 }
 
