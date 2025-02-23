@@ -46,8 +46,7 @@ struct MyWorkoutDetailView: View {
                     VStack(alignment: .leading) {
                         Text(workout.exerciseKorName)
                             .font(AppFont.subTitle)
-                        Text("\(workout.recordStart) - \(workout.recordEnd)")
-                        // 오후 2:11 - 오후 3:40
+                        Text("\(viewModel.getDateToTime(dateString: workout.recordStart)) - \(viewModel.getDateToTime(dateString: workout.recordEnd))")
                             .font(.system(size: 16))
                     }
                     Spacer()
@@ -121,7 +120,7 @@ struct MyWorkoutDetailView: View {
                 Spacer()
             }
             .frame(width: UIScreen.main.bounds.width * 0.88)
-            .navigationTitle(workout.recordStart)
+            .navigationTitle(viewModel.getDateToDay(dateString: workout.recordStart))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {
