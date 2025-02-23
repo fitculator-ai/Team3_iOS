@@ -79,7 +79,7 @@ struct WorkoutRecordRow: View {
                     VStack(alignment: .leading) {
                         Text(workout.exerciseKorName)
                             .font(AppFont.subTitle)
-                        Text(workout.recordStart)
+                        Text(viewModel.getDateToDateTime(dateString: workout.recordStart))
                             .font(.system(size: 13))
                             .opacity(0.8)
                     }
