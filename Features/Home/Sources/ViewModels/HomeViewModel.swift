@@ -63,10 +63,21 @@ public class HomeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private func getPreviousWeekDate(from targetDate: String) -> String {
-        let dateFormatter = DateFormatterUtil.dateFormatDate
-        guard let date = dateFormatter.date(from: targetDate), let previousDate = Calendar.current.date(byAdding: .day, value: -7, to: date) else { return targetDate }
-        return dateFormatter.string(from: previousDate)
+    func updateWorkoutMemo(request: WorkoutUpdateRequest) {
+        networkService.request(APIEndpoint.updateWorkout(request: request))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("메모 업데이트 실패: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { (response: UpdateWorkoutResponse) in
+                    print("메모 업데이트 성공: \(response.message)")
+                }
+            )
+            .store(in: &cancellables)
     }
     
     // 주의 첫날과 마지막날 날짜 구하기
@@ -179,7 +190,7 @@ public class HomeViewModel: ObservableObject {
     func getIntensityColor(_ intensity: String) -> Color {
         return ExerciseIntensity.from(intensity).color
     }
-
+    
     func getIntensityText(_ intensity: String) -> String {
         return ExerciseIntensity.from(intensity).koreanText
     }

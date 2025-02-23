@@ -55,7 +55,7 @@ struct MyWorkoutListView: View {
     }
 }
 
-// WorkoutRecordRow를 별도의 View로 분리
+// Workout Cell View
 struct WorkoutRecordRow: View {
     let workout: WorkoutRecord
     let viewModel: HomeViewModel
