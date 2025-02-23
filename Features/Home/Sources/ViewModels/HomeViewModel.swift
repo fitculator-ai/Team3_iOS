@@ -133,9 +133,32 @@ public class HomeViewModel: ObservableObject {
         return selectedWeekString
     }
     
-    func getStrenthCount() -> Int {
-        guard let weekStrengthCount = workoutData?.weekStrengthCount else { return 0}
-        return weekStrengthCount
+    func getDateToTime(dateString: String) -> String {
+        if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
+            let dateToTime = DateFormatterUtil.dateToTime.string(from: date)
+            return dateToTime
+        }
+        return ""
+    }
+    
+    func getDateToDay(dateString: String) -> String {
+        if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
+            let dateToDay = DateFormatterUtil.dateToDay.string(from: date)
+            return dateToDay
+        }
+        return ""
+    }
+    
+    func getDateToDateTime(dateString: String) -> String {
+        if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
+            let dateToDateTime = DateFormatterUtil.dateToDateTime.string(from: date)
+            return dateToDateTime
+        }
+        return ""
+    }
+    
+    func getStrenthPoint() -> String {
+        return "\(strengthPoint)"
     }
     
     func getWeekIntensityPoint() -> Double {
