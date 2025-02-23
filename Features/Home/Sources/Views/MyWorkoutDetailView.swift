@@ -22,6 +22,13 @@ struct MyWorkoutDetailView: View {
     
     var workout: WorkoutRecord
     
+    init(viewModel: HomeViewModel, workout: WorkoutRecord) {
+        self.viewModel = viewModel
+        self.workout = workout
+        _textEditor = State(initialValue: workout.memo ?? "")
+        _originalText = State(initialValue: workout.memo ?? "")
+    }
+    
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
@@ -150,6 +157,12 @@ struct MyWorkoutDetailView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("저장") {
                             originalText = textEditor
+                            viewModel.updateWorkoutMemo(
+                                request: WorkoutUpdateRequest(
+                                    recordId: workout.recordId,
+                                    userId: 1,
+                                    memo: originalText)
+                            )
                             isEditing = false
                             isFocused = false
                         }

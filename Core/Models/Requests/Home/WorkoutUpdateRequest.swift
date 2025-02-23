@@ -12,6 +12,12 @@ public struct WorkoutUpdateRequest: Codable {
     let userId: Int
     let memo: String
     
+    public init(recordId: Int, userId: Int, memo: String) {
+        self.recordId = recordId
+        self.userId = userId
+        self.memo = memo
+    }
+    
     public func toDictionary() -> [String: Any] {
         return [
             "recordId": recordId,

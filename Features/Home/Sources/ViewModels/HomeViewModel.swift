@@ -58,6 +58,23 @@ public class HomeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func updateWorkoutMemo(request: WorkoutUpdateRequest) {
+        networkService.request(APIEndpoint.updateWorkout(request: request))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("메모 업데이트 실패: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { (response: UpdateWorkoutResponse) in
+                    print("메모 업데이트 성공: \(response.message)")
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
     // 주의 첫날과 마지막날 날짜 구하기
     private func getStartAndEndOfWeek(from date: Date) -> (start: Date, end: Date)? {
         let calendar = Calendar.current
@@ -98,7 +115,7 @@ public class HomeViewModel: ObservableObject {
     func getIntensityColor(_ intensity: String) -> Color {
         return ExerciseIntensity.from(intensity).color
     }
-
+    
     func getIntensityText(_ intensity: String) -> String {
         return ExerciseIntensity.from(intensity).koreanText
     }
