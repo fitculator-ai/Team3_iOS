@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Core
+import Shared
 
 struct SettingView: View {
     
@@ -91,6 +93,7 @@ struct SettingView: View {
                     .buttonStyle(PlainButtonStyle())
                     .multilineTextAlignment(.trailing)
                 }
+                .background(Color.background)
                 .listRowBackground(Color.clear)
                 
             }
@@ -114,9 +117,6 @@ struct RestingHeartRateView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: SettingViewModel
     
-    //@State private var heartRate: String = "40"
-    //@State private var isValid: Bool = true
-    
     var body: some View {
           VStack(spacing: 20) {
               ZStack {
@@ -132,23 +132,32 @@ struct RestingHeartRateView: View {
               .padding(.top, 20)
               
               HStack {
-                  TextField(" ", text: $viewModel.heartRate)
-                      .keyboardType(.numberPad)
-                      .font(.largeTitle)
-                      .foregroundColor(.blue)
-                      .bold()
-                      .multilineTextAlignment(.center)
-                      .padding()
-                      .background(Color.gray.opacity(0.2))
-                      .cornerRadius(10)
-                      .frame(width: 150)
-                      .overlay(
-                          RoundedRectangle(cornerRadius: 10)
-                            .stroke(viewModel.isValid ? Color.clear : Color.red, lineWidth: 2)
-                      )
-                      .onChange(of: viewModel.heartRate) { _ in
-                          viewModel.validateHeartRate()
-                      }
+                    TextField(" ", text: Binding(
+                        get: {
+                            return "\(viewModel.HeartRateRequest?.userHeartRate)"
+                        },
+                        set: { newValue in
+                            if let newHeartRate = Int(newValue) {
+                                viewModel.HeartRateRequest?.userHeartRate = newHeartRate
+                            }
+                        }
+                    ))
+                  .keyboardType(.numberPad)
+                  .font(.largeTitle)
+                  .foregroundColor(.blue)
+                  .bold()
+                  .multilineTextAlignment(.center)
+                  .padding()
+                  .background(Color.gray.opacity(0.2))
+                  .cornerRadius(10)
+                  .frame(width: 150)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(viewModel.isValid ? Color.clear : Color.red, lineWidth: 2)
+                  )
+                  .onReceive(viewModel.$HeartRateRequest) { _ in
+                      viewModel.validateHeartRate()
+                  }
                   
                   Text("bpm")
                       .font(.title)
@@ -168,7 +177,6 @@ struct RestingHeartRateView: View {
               
               Button(action: {
                   if viewModel.validateHeartRate() {
-                      self.presentationMode.wrappedValue.dismiss()
                   }
               }) {
                   Text("저장")

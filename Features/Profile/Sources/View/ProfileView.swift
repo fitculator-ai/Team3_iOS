@@ -59,109 +59,113 @@ public struct ProfileView: View {
     
     public var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    
-                    HStack {
-                        Spacer()
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 100)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 5)
-                            .padding(.leading, 5)
-                        Spacer()
-                    }
-                    .padding(.top, -50)
-                    
-                    VStack(alignment: .center) {
-                        HStack {
-                            Text(viewModel.MyPageRecord?.userName ?? "테스트")
-                                .font(AppFont.profileItemFont)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            
-                            Capsule(style: .continuous)
-                                .fill(.blue)
-                                .frame(width: 70, height: 30)
-                                .overlay(
-                                    Text("PRO")
-                                        .font(AppFont.profileContentTextFont)
-                                        .foregroundColor(.white)
-                                )
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
-                    
-                    HStack {
-                        HStack(alignment: .center, spacing: 10) {
-                            Text("팔로워 \(followerCount)")
-                                .font(AppFont.profileContentTextFont)
-                                .foregroundColor(.white)
-                            
-                            Divider()
-                                .frame(height: 20)
-                                .background(Color.white)
-                            
-                            Text("팔로윙 \(followingCount)")
-                                .font(AppFont.profileContentTextFont)
-                                .foregroundColor(.white)
-                        }
-                        .padding(10)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray))
-                        .frame(width: 180)
-                        
-                        NavigationLink(destination: ProfileEditView().environmentObject(viewModel))  {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.editButtonColor)
-                                .frame(width: 100, height: 40)
-                                .overlay(
-                                    Text("프로필 편집")
-                                        .foregroundColor(.white)
-                                        .font(AppFont.profileContentTextFont)
-                                )
-                        }
-                    }
-                    .padding([.leading, .trailing], 30)
-                    
-                    Divider()
-                        .background(Color.white)
-                        .frame(height: 30)
-                        .padding(.horizontal, 0)
-                    
+            ZStack {
+                Color.background
+                    .ignoresSafeArea()
+                ScrollView {
                     VStack(alignment: .leading) {
-                        Text("주간 운동량")
-                            .font(AppFont.mainTitle)
-                        WeeklyActivityChart()
                         
-                        Spacer()
-                            .frame(height: 50)
+                        HStack {
+                            Spacer()
+                            Image(uiImage: viewModel.profileImage ?? UIImage(named: "person.circle.fill") ?? UIImage())
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                .shadow(radius: 5)
+                                .padding(.leading, 5)
+                            Spacer()
+                        }
+                        .padding(.top, -50)
                         
-                        Text("피로도 그래프")
-                            .font(AppFont.mainTitle)
-                        FatigueChart()
+                        VStack(alignment: .center) {
+                            HStack {
+                                Text(viewModel.MyPageRecord?.userName ?? "테스트")
+                                    .font(AppFont.profileItemFont)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                
+                                Capsule(style: .continuous)
+                                    .fill(.blue)
+                                    .frame(width: 70, height: 30)
+                                    .overlay(
+                                        Text("PRO")
+                                            .font(AppFont.profileContentTextFont)
+                                            .foregroundColor(.white)
+                                    )
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                        
+                        HStack {
+                            HStack(alignment: .center, spacing: 10) {
+                                Text("팔로워 \(followerCount)")
+                                    .font(AppFont.profileContentTextFont)
+                                    .foregroundColor(.white)
+                                
+                                Divider()
+                                    .frame(height: 20)
+                                    .background(Color.white)
+                                
+                                Text("팔로윙 \(followingCount)")
+                                    .font(AppFont.profileContentTextFont)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(10)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray))
+                            .frame(width: 180)
+                            
+                            NavigationLink(destination: ProfileEditView().environmentObject(viewModel))  {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.editButtonColor)
+                                    .frame(width: 100, height: 40)
+                                    .overlay(
+                                        Text("프로필 편집")
+                                            .foregroundColor(.white)
+                                            .font(AppFont.profileContentTextFont)
+                                    )
+                            }
+                        }
+                        .padding([.leading, .trailing], 30)
+                        
+                        Divider()
+                            .background(Color.white)
+                            .frame(height: 30)
+                            .padding(.horizontal, 0)
+                        
+                        VStack(alignment: .leading) {
+                            Text("주간 운동량")
+                                .font(AppFont.mainTitle)
+                            WeeklyActivityChart()
+                            
+                            Spacer()
+                                .frame(height: 50)
+                            
+                            Text("피로도 그래프")
+                                .font(AppFont.mainTitle)
+                            FatigueChart()
+                        }
                     }
+                    .frame(width: UIScreen.main.bounds.width * 0.88)
+                    .frame(maxHeight: .infinity)
                 }
-                .frame(width: UIScreen.main.bounds.width * 0.88)
-                .frame(maxHeight: .infinity)
+                .navigationTitle("마이")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: NavigationLink(destination: SettingView()) {
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.white)
+                        .padding(.trailing, 10)
+                })
             }
-            .navigationTitle("마이")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: NavigationLink(destination: SettingView()) {
-                Image(systemName: "gearshape.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.white)
-                    .padding(.trailing, 10)
-            })
+            .onAppear{
+                viewModel.fetchMyPage(userId: 1)
+            }
+            .environmentObject(viewModel)
         }
-        .onAppear{
-            viewModel.fetchMyPage(userId: 1)
-        }
-        .environmentObject(viewModel) 
     }
 }
 
