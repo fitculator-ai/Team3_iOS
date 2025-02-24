@@ -7,12 +7,6 @@
 
 import Foundation
 
-public struct ExerciseTypeResponse: Codable {
-    public let success: Bool
-    public let message: String
-    public let data: [ExerciseType]
-}
-
 public struct ExerciseType: Codable, Identifiable {
     public var id: Int { exerciseId }
     public let exerciseId: Int

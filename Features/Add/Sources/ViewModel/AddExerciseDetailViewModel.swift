@@ -26,19 +26,20 @@ class AddExerciseDetailViewModel: ObservableObject {
     func fetchCreateWorkout(request: WorkoutRequest) {
         networkService.request(APIEndpoint.createWorkout(request: request))
             .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { completion in
-                    if case .failure(_) = completion {
-                    }
-                },
-                receiveValue: { (responseData: Data) in
-                    if responseData.isEmpty {
-                        print("✅ 서버 응답이 비어 있음 (정상일 수도 있음)")
-                    } else {
-                        debugPrint("📢 Raw Response:", responseData)
-                    }
+            .sink(receiveCompletion: { (completion: Subscribers.Completion<Error>) in
+                switch completion {
+                case .failure(let error):
+                    print("오류: \(error.localizedDescription)")
+                case .finished:
+                    break
                 }
-            )
+            }, receiveValue: { (response: AddExerciseTypeResponse) in
+                if response.success {
+                    print("✅ 운동추가 성공")
+                } else {
+                    debugPrint("📢 Raw Response:", response)
+                }
+            })
             .store(in: &cancellables)
     }
 }

@@ -20,6 +20,8 @@ public enum APIEndpoint {
     case getMyPage(userId: Int)
     case updateMyPage(request: MyPageRequest)
     case updateHeartRate(request: HeartRateRequest)
+    case addFavorite(request: FavoriteRequest)
+    case removeFavorite(request: FavoriteRequest)
     
     public var baseURL: String {
         return NetworkConstants.baseURL
@@ -45,6 +47,10 @@ public enum APIEndpoint {
             return "/mypage"
         case .updateHeartRate: 
             return "/mypage/heartUpdate"
+        case .addFavorite:
+            return "/favorite"
+        case .removeFavorite:
+            return "/favorite"
         }
     }
     
@@ -55,9 +61,9 @@ public enum APIEndpoint {
             return .get
         case .updateWorkout, .updateMyPage, .updateHeartRate:
             return .put
-        case .deleteWorkout:
+        case .deleteWorkout, .removeFavorite:
             return .delete
-        case .createWorkout:
+        case .createWorkout, .addFavorite:
             return .post
         }
     }
@@ -84,6 +90,8 @@ public enum APIEndpoint {
         case .updateMyPage(let request):
             return request.toDictionary()
         case .updateHeartRate(let request):
+            return request.toDictionary()
+        case .addFavorite(let request), .removeFavorite(let request):
             return request.toDictionary()
         }
     }
