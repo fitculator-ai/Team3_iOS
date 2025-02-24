@@ -37,6 +37,7 @@ public struct AddExerciseListView: View {
                     .pickerStyle(.segmented)
                     .frame(width: UIScreen.main.bounds.width * 0.88)
                     .padding(.vertical, 5)
+                    .padding(.top, 10)
                     
                     if selectedPicker == .aerobic {
                         ExerciseTypeListView(viewModel: viewModel, exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
