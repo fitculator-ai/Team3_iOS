@@ -31,7 +31,6 @@ public struct HomeView: View {
                         HStack(spacing: 20) {
                             Spacer()
                             
-                            // TODO: 조건에 따라 버튼 disabled 처리
                             Button(action: {
                                 if let previousWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: viewModel.selectedDate) {
                                     viewModel.selectedDate = previousWeekDate
@@ -40,8 +39,9 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.left")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(viewModel.checkIsFirstWeek() ? Color(.darkGray) : Color(.white))
                             }
+                            .disabled(viewModel.checkIsFirstWeek())
                             
                             Text(viewModel.getSelectedWeekString())
                                 .font(.subheadline)
@@ -57,7 +57,6 @@ public struct HomeView: View {
                                     showDatePicker.toggle()
                                 }
                             
-                            // TODO: 조건에 따라 버튼 disabled 처리
                             Button(action: {
                                 if let nextWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: +1, to: viewModel.selectedDate) {
                                     viewModel.selectedDate = nextWeekDate
@@ -66,8 +65,9 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.right")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(viewModel.checkIsCurrentWeek() ? Color(.darkGray) : Color(.white))
                             }
+                            .disabled(viewModel.checkIsCurrentWeek())
                             
                             Spacer()
                         }
@@ -77,8 +77,8 @@ public struct HomeView: View {
                                     .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.7)
                                 
                                 HStack {
-                                    Image(systemName: "arrowshape.down.circle")
-                                    Text("지난 주 대비 19%")
+                                    Image(systemName: viewModel.getDistanceBetweenWeeklyPoints() >= 0 ? "arrowshape.up.circle" : "arrowshape.down.circle")
+                                    Text("지난 주 대비 \(viewModel.getDistanceBetweenWeeklyPoints())%")
                                 }
                                 .font(.subheadline)
                                 
