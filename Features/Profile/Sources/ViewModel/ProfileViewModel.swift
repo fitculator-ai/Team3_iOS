@@ -9,6 +9,7 @@ import Foundation
 import Core
 import Combine
 import UIKit
+import Kingfisher
 
 class ProfileViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
@@ -158,42 +159,23 @@ class ProfileViewModel: ObservableObject {
                 }
             }, receiveValue: { profileImageResponse in
                 print("가져온 프로필 이미지 URL: \(profileImageResponse)")
+                
                 if let imageFileName = profileImageResponse.data as? String {
                     print("파일명: \(imageFileName)")
                     
                     if let url = URL(string: imageFileName) {
                         print("전체 이미지 URL: \(url.absoluteString)")
                         
-                        URLSession.shared.dataTask(with: url) { data, response, error in
-                            if let error = error {
-                                print("이미지 요청 네트워크 오류: \(error.localizedDescription)")
-                                return
+                        ImageDownloader.default.downloadImage(with: url) { result in
+                            switch result {
+                            case .success(let value):
+                                print("이미지 로딩 성공: \(value.image)")
+                                self.profileImage = value.image
+                                print("프로필 이미지 업데이트 완료")
+                            case .failure(let error):
+                                print("이미지 로딩 실패: \(error.localizedDescription)")
                             }
-                            
-                            if let httpResponse = response as? HTTPURLResponse {
-                                print("HTTP 응답 코드: \(httpResponse.statusCode)")
-                                if httpResponse.statusCode != 200 {
-                                    print("이미지 요청 실패, 상태 코드: \(httpResponse.statusCode)")
-                                    return
-                                }
-                            }
-                            
-                            // 데이터 로드 및 이미지 변
-                            if let data = data {
-                                print("받은 데이터 크기: \(data.count) bytes")
-                                
-                                if let image = UIImage(data: data) {
-                                    DispatchQueue.main.async {
-                                        self.profileImage = image
-                                        print("프로필 이미지 업데이트 완료")
-                                    }
-                                } else {
-                                    print("이미지 변환 오류: 데이터가 UIImage로 변환되지 않음")
-                                }
-                            } else {
-                                print("이미지 데이터 없음")
-                            }
-                        }.resume()
+                        }
                     } else {
                         print("유효하지 않은 URL: \(imageFileName)")
                     }
@@ -202,6 +184,7 @@ class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
+    
     //MARK: 프로필 사진 post
     func createProfileImage(userId: Int, image: UIImage) {
         isLoading = true
