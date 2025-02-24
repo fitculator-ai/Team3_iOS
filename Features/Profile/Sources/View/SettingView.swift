@@ -177,6 +177,17 @@ struct RestingHeartRateView: View {
               
               Button(action: {
                   if viewModel.validateHeartRate() {
+                      let request = HeartRateRequest(userId: 1, userHeartRate: viewModel.HeartRateRequest?.userHeartRate ?? 40)
+                      
+//                      viewModel.updateHeartRate(request: request) { success, error in
+//                          if success {
+//                              self.presentationMode.wrappedValue.dismiss()
+//                          } else {
+//                              if let error = error {
+//                                  print("Error: \(error.localizedDescription)")
+//                              }
+//                          }
+//                      }
                   }
               }) {
                   Text("저장")

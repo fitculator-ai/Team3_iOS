@@ -43,16 +43,6 @@ class ProfileViewModel: ObservableObject {
     func updateGender(from string: String) {
         self.userGender = Gender.fromString(string)
     }
-    
-//    if let userBirthString = viewModel.MyPageRecord?.userBirth, !userBirthString.isEmpty {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"  // 날짜 포맷이 맞는지 확인
-//        if let convertedDate = dateFormatter.date(from: userBirthString) {
-//            userBirth = convertedDate
-//        }
-//    } else {
-//        userBirth = Date() // 기본값 설정
-//    }
 
     public lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
