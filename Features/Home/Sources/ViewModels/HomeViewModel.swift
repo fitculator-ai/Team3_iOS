@@ -15,6 +15,7 @@ public class HomeViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published public var workoutData: WorkoutData?
     @Published var pointPercentageDifference: Int = 0
+    @Published var firstWorkoutDate: Date = Date()
     @Published public var isLoading: Bool = false
     @Published public var error: Error?
     var selectedWeekString = ""
@@ -60,6 +61,24 @@ public class HomeViewModel: ObservableObject {
                     self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: currentWorkout.workoutData.records)
                 }
             )
+            .store(in: &cancellables)
+    }
+    
+    // 운동 기록이 있는 최초 날짜 불러오기
+    func fetchFirstWorkoutDate(userId: Int) {
+        networkService.request(APIEndpoint.getFirstWorkoutDate(userId: userId))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error
+                    print("Error: \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] (response: FirstWorkoutResponse) in
+                let dateFormatter = DateFormatterUtil.dateFormatDate
+                if let firstWorkoutDate = dateFormatter.date(from: response.data) {
+                    self?.firstWorkoutDate = firstWorkoutDate
+                }
+            })
             .store(in: &cancellables)
     }
     
@@ -133,7 +152,11 @@ public class HomeViewModel: ObservableObject {
     }
     
     func checkIsFirstWeek() -> Bool {
-        //TODO: 첫번째 데이터 검사 로직 추가
+        if let selectedWeek = getStartAndEndOfWeek(from: selectedDate),
+           let firstWorkoutWeek = getStartAndEndOfWeek(from: firstWorkoutDate),
+           selectedWeek == firstWorkoutWeek {
+            return true
+        }
         return false
     }
     
