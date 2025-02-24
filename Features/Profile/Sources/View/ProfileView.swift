@@ -158,7 +158,7 @@ public struct ProfileView: View {
                         .scaledToFit()
                         .frame(width: 24, height: 24)
                         .foregroundColor(.white)
-                        .padding(.trailing, 10)
+                        .padding(.trailing, 5)
                 })
             }
             .onAppear{
@@ -168,8 +168,6 @@ public struct ProfileView: View {
         }
     }
 }
-
-//임시
 struct WeeklyActivityChart: View {
     let daysOfWeek = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
     
@@ -178,23 +176,39 @@ struct WeeklyActivityChart: View {
             VStack(alignment: .leading) {
                 ForEach(ExerciseData.exercises) { exercise in
                     VStack(alignment: .leading) {
-                        Chart {
-                            ForEach(daysOfWeek, id: \.self) { day in
-                                if let percentages = exercise.weeklyPercentage[day] {
-                                    ForEach(percentages.keys.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
-                                        if let value = percentages[type] {
-                                            BarMark(
-                                                x: .value("Day", day),
-                                                y: .value(type.rawValue, value)
-                                            )
-                                            .foregroundStyle(by: .value("Type", type.rawValue))
+                        ZStack {
+                            // 그래프 배경 (블러 처리)
+                            Chart {
+                                ForEach(daysOfWeek, id: \.self) { day in
+                                    if let percentages = exercise.weeklyPercentage[day] {
+                                        ForEach(percentages.keys.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
+                                            if let value = percentages[type] {
+                                                BarMark(
+                                                    x: .value("Day", day),
+                                                    y: .value(type.rawValue, value)
+                                                )
+                                                .foregroundStyle(by: .value("Type", type.rawValue))
+                                            }
                                         }
                                     }
                                 }
                             }
+                            .frame(height: 250)
+                            .padding()
+                            .blur(radius: 10)
+
+                            // 운동 추가 문구
+                            VStack {
+                                Spacer()
+                                Text("그래프를 확인해보세요!\n운동을 추가하여 분석을 확인할 수 있습니다.")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.5)))
+                                    .padding()
+                            }
                         }
-                        .frame(height: 250)
-                        .padding()
                     }
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
                     .padding(.horizontal)
@@ -204,7 +218,6 @@ struct WeeklyActivityChart: View {
     }
 }
 
-//임시
 struct FatigueChart: View {
     let daysOfWeek = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
     
@@ -213,32 +226,47 @@ struct FatigueChart: View {
             VStack(alignment: .leading) {
                 ForEach(ExerciseData.exercises) { exercise in
                     VStack(alignment: .leading) {
-                        Chart {
-                            ForEach(daysOfWeek, id: \.self) { day in
-                                if let percentages = exercise.weeklyPercentage[day] {
-                                    let totalPercentage = calculateTotalExercisePercentage(for: percentages)
-                                    
-                                    // Bar chart
-                                    BarMark(
-                                        x: .value("Day", day),
-                                        y: .value("Total", totalPercentage)
-                                    )
-                                    .foregroundStyle(Color.blue)
-                                    
-                                    // Line chart
-                                    LineMark(
-                                        x: .value("Day", day),
-                                        y: .value("Total", totalPercentage)
-                                    )
-                                    .foregroundStyle(Color.red)
-                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
-                                    .symbol(.circle)
-                                    .symbolSize(10)
+                        ZStack {
+                            // 그래프 배경 (블러 처리)
+                            Chart {
+                                ForEach(daysOfWeek, id: \.self) { day in
+                                    if let percentages = exercise.weeklyPercentage[day] {
+                                        let totalPercentage = calculateTotalExercisePercentage(for: percentages)
+                                        
+                                        // Bar chart
+                                        BarMark(
+                                            x: .value("Day", day),
+                                            y: .value("Total", totalPercentage)
+                                        )
+                                        .foregroundStyle(Color.blue)
+                                        
+                                        // Line chart
+                                        LineMark(
+                                            x: .value("Day", day),
+                                            y: .value("Total", totalPercentage)
+                                        )
+                                        .foregroundStyle(Color.red)
+                                        .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                                        .symbol(.circle)
+                                        .symbolSize(10)
+                                    }
                                 }
                             }
+                            .frame(height: 300)
+                            .padding()
+                            .blur(radius: 15)
+
+                            VStack {
+                                Spacer()
+                                Text("그래프를 확인해보세요!\n운동을 추가하여 분석을 확인할 수 있습니다.")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.5)))
+                                    .padding()
+                            }
                         }
-                        .frame(height: 300)
-                        .padding()
                     }
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
                     .padding(.horizontal)
