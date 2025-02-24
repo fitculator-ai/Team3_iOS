@@ -20,7 +20,7 @@ public enum APIEndpoint {
     case updateMyPage(request: MyPageRequest)
     case updateHeartRate(request: HeartRateRequest)
     case getMyPageProfileImage(userId: Int)
-    case updateMyPageProfileImage(userId: Int)
+    case createMyPageProfileImage(userId: Int, filedata: String)
     
     public var baseURL: String {
         return NetworkConstants.baseURL
@@ -28,23 +28,23 @@ public enum APIEndpoint {
 
     public var path: String {
         switch self {
-        case .getWeeklyWorkout: 
+        case .getWeeklyWorkout:
             return "/workout/week"
-        case .getWorkoutCount: 
+        case .getWorkoutCount:
             return "/workout/count"
-        case .getWorkoutIntensity: 
+        case .getWorkoutIntensity:
             return "/workout/intensity"
-        case .getWorkoutDetail(let recordId): 
+        case .getWorkoutDetail(let recordId):
             return "/workout/\(recordId)"
-        case .updateWorkout, .deleteWorkout, .createWorkout: 
+        case .updateWorkout, .deleteWorkout, .createWorkout:
             return "/workout"
-        case .getExercises: 
+        case .getExercises:
             return "/exercise"
-        case .getMyPage, .updateMyPage: 
+        case .getMyPage, .updateMyPage:
             return "/mypage"
-        case .updateHeartRate: 
+        case .updateHeartRate:
             return "/mypage/heartUpdate"
-        case .getMyPageProfileImage, .updateMyPageProfileImage:
+        case .getMyPageProfileImage, .createMyPageProfileImage:
             return "/img"
         }
     }
@@ -54,11 +54,11 @@ public enum APIEndpoint {
         case .getWeeklyWorkout, .getWorkoutCount, .getWorkoutIntensity,
                 .getWorkoutDetail, .getExercises, .getMyPage, .getMyPageProfileImage :
             return .get
-        case .updateWorkout, .updateMyPage, .updateHeartRate, .updateMyPageProfileImage:
+        case .updateWorkout, .updateMyPage, .updateHeartRate:
             return .put
         case .deleteWorkout:
             return .delete
-        case .createWorkout, .updateMyPageProfileImage:
+        case .createWorkout, .createMyPageProfileImage: // `.createMyPageProfileImage`는 `post` 메서드로 변경
             return .post
         }
     }
@@ -87,9 +87,8 @@ public enum APIEndpoint {
             return request.toDictionary()
         case .getMyPageProfileImage(userId: let userId):
             return ["userId": userId]
-        case .updateMyPageProfileImage(userId: let userId):
-            return ["userId": userId]
+        case .createMyPageProfileImage(userId: let userId, let filedata): // `filedata`를 받아오는 부분
+            return ["userId": userId, "filedata": filedata]
         }
     }
 }
-
