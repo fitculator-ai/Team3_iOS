@@ -207,29 +207,6 @@ public class HomeViewModel: ObservableObject {
         return ""
     }
     
-    func getWeekIntensityPoint() -> Double {
-        guard let weekIntensity = workoutData?.weekIntensity else { return 0.0 }
-        switch weekIntensity {
-        case "VERY LOW" :
-            return 0.0
-        case "LOW" :
-            return 0.25
-        case "MEDIUM" :
-            return 0.5
-        case "HIGH" :
-            return 0.75
-        case "VERY HIGH" :
-            return 1.0
-        default:
-            return 0.0
-        }
-    }
-    
-    func getWeekIntensityString() -> String {
-        guard let weekIntensity = workoutData?.weekIntensity else { return "운동이 부족합니다" }
-        return weekIntensity
-    }
-    
     // PieChart를 위한 데이터 변환
     private func updateWorkoutRecordSum(weeklyWorkoutDataRecords: [WorkoutRecord]) {
         let grouped = Dictionary(grouping: weeklyWorkoutDataRecords) { $0.exerciseKorName }
@@ -264,6 +241,10 @@ public class HomeViewModel: ObservableObject {
         return ExerciseIntensity.from(intensity).koreanText
     }
     
+    func getWeekIntensityPercentage(_ intensity: String) -> Double {
+        return ExerciseIntensity.from(intensity).progressPercentage
+    }
+    
     enum ExerciseIntensity: String {
         case veryHigh = "VERY HIGH"
         case high = "HIGH"
@@ -288,6 +269,16 @@ public class HomeViewModel: ObservableObject {
             case .medium: return Color.fitculatorLogo
             case .low: return .yellow
             case .veryLow: return .green
+            }
+        }
+        
+        var progressPercentage: Double {
+            switch self {
+            case .veryLow : return 0.0
+            case .low : return 0.25
+            case .medium : return 0.5
+            case .high : return 0.75
+            case .veryHigh : return 1.0
             }
         }
         

@@ -133,7 +133,7 @@ public struct HomeView: View {
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
-                                        ProgressView(value: viewModel.getWeekIntensityPoint())
+                                        ProgressView(value: viewModel.getWeekIntensityPercentage(viewModel.workoutData?.weekIntensity ?? ""))
                                             .progressViewStyle(.linear)
                                             .scaleEffect(y: 2.5)
                                             .frame(height: 20)
@@ -150,8 +150,9 @@ public struct HomeView: View {
                                         Spacer()
                                             .frame(height: 8)
                                         
-                                        Text(viewModel.getWeekIntensityString())
+                                        Text(viewModel.getIntensityText(viewModel.workoutData?.weekIntensity ?? ""))
                                             .font(.subheadline)
+                                            .foregroundStyle(viewModel.getIntensityColor(viewModel.workoutData?.weekIntensity ?? ""))
                                     }
                                     .padding(12)
                                     .background(Color.cellColor)
