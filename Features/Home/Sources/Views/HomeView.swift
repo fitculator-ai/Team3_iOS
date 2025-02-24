@@ -77,10 +77,12 @@ public struct HomeView: View {
                                     .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.7)
                                 
                                 HStack {
-                                    Image(systemName: viewModel.getDistanceBetweenWeeklyPoints() >= 0 ? "arrowshape.up.circle" : "arrowshape.down.circle")
-                                    Text("지난 주 대비 \(viewModel.getDistanceBetweenWeeklyPoints())%")
+                                    Image(systemName: viewModel.pointPercentageDifference >= 0 ? "arrowshape.up.circle" : "arrowshape.down.circle")
+                                    Text("지난 주 대비 \(abs(viewModel.pointPercentageDifference))%")
                                 }
                                 .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(viewModel.pointPercentageDifference >= 0 ? Color(.systemBlue) : Color(.systemRed))
                                 
                                 Spacer()
                                     .frame(height: 20)
