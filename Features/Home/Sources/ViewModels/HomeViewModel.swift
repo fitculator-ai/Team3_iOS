@@ -13,14 +13,13 @@ import SwiftUICore
 public class HomeViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published public var workoutData: WorkoutData?
+    @Published var pointPercentageDifference: Int = 0
     @Published public var isLoading: Bool = false
     @Published public var error: Error?
     var selectedWeekString = ""
     private var startOfWeek = Date()
     private var endOfWeek = Date()
     var workoutRecordPointSums: [WorkoutRecordPointSum] = []
-    private var previousWeeklyWorkoutPoint: Int = 0
-    private var weeklyWorkoutPoint: Int = 0
     
     private var cancellables = Set<AnyCancellable>()
     private let networkService: NetworkServiceProtocol
@@ -31,46 +30,42 @@ public class HomeViewModel: ObservableObject {
     
     func fetchWeeklyWorkout(userId: Int, targetDate: String) {
         isLoading = true
-        networkService.request(APIEndpoint.getWeeklyWorkout(userId: userId, targetDate: targetDate))
+        let currentWorkoutPublisher = networkService.request(APIEndpoint.getWeeklyWorkout(userId: userId, targetDate: targetDate))
+            .map { (response: WeeklyWorkoutResponse) -> (workoutData: WorkoutData, weeklyWorkoutPoint: Int) in
+                        let workoutPoint = response.data.records.reduce(0) { $0 + Int($1.recordPoint) }
+                        return (response.data, workoutPoint)
+                    }
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveCompletion: { [weak self] _ in
-                self?.isLoading = false
-            })
+
+        let previousWorkoutPublisher = networkService.request(APIEndpoint.getWeeklyWorkout(userId: userId, targetDate: getPreviousWeekDate(from: targetDate)))
+            .map { (response: WeeklyWorkoutResponse) -> Int in
+                return response.data.records.reduce(0) { $0 + Int($1.recordPoint) }
+            }
+            .receive(on: DispatchQueue.main)
+        
+        Publishers.Zip(currentWorkoutPublisher, previousWorkoutPublisher)
             .sink(
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
                         self?.error = error
                         print("Error: \(error.localizedDescription)")
                     }
+                    self?.isLoading = false
                 },
-                receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
-                    self?.workoutData = response.data
-                    self?.weeklyWorkoutPoint = response.data.records.reduce(0) { $0 + Int($1.recordPoint) }
-                    self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: response.data.records)
+                receiveValue: { [weak self] (currentWorkout, previousWorkoutPoint) in
+                    self?.workoutData = currentWorkout.workoutData
+                    //TODO: MaxPoint 변경
+                    self?.pointPercentageDifference = (currentWorkout.weeklyWorkoutPoint - previousWorkoutPoint) * 100 / 250
+                    self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: currentWorkout.workoutData.records)
                 }
             )
             .store(in: &cancellables)
     }
     
-    func fetchPreviousWeeklyWorkout(userId: Int, targetDate: String) {
-        isLoading = true
-        networkService.request(APIEndpoint.getWeeklyWorkout(userId: userId, targetDate: targetDate))
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveCompletion: { [weak self] _ in
-                self?.isLoading = false
-            })
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    if case .failure(let error) = completion {
-                        self?.error = error
-                        print("Error: \(error.localizedDescription)")
-                    }
-                },
-                receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
-                    self?.previousWeeklyWorkoutPoint = response.data.records.reduce(0) { $0 + Int($1.recordPoint) }
-                }
-            )
-            .store(in: &cancellables)
+    private func getPreviousWeekDate(from targetDate: String) -> String {
+        let dateFormatter = DateFormatterUtil.dateFormatDate
+        guard let date = dateFormatter.date(from: targetDate), let previousDate = Calendar.current.date(byAdding: .day, value: -7, to: date) else { return targetDate }
+        return dateFormatter.string(from: previousDate)
     }
     
     // 주의 첫날과 마지막날 날짜 구하기
@@ -106,11 +101,6 @@ public class HomeViewModel: ObservableObject {
     func checkIsFirstWeek() -> Bool {
         //TODO: 첫번째 데이터 검사 로직 추가
         return false
-    }
-    
-    func getDistanceBetweenWeeklyPoints() -> Int {
-        //TODO: maxPoint 변경
-        return (weeklyWorkoutPoint - previousWeeklyWorkoutPoint) / 250 * 100
     }
     
     func getSelectedWeekString() -> String {

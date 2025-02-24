@@ -116,6 +116,38 @@ struct CustomCalendarView: UIViewRepresentable {
             return nil
         }
         
+        // 선택 안되는 날짜 색상 변경
+        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+            let today = Date()
+            let calendar = Calendar.current
+            
+            guard let startOfThisWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)),
+                  let endOfThisWeek = calendar.date(byAdding: .day, value: 6, to: startOfThisWeek)
+            else { return nil }
+            
+            if date > endOfThisWeek {
+                return UIColor(Color(.darkGray))
+            }
+            
+            return nil
+        }
+        
+        // 다음 주부터는 선택 안되도록
+        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+            let today = Date()
+            let calendar = Calendar.current
+            
+            guard let startOfThisWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)),
+                  let endOfThisWeek = calendar.date(byAdding: .day, value: 6, to: startOfThisWeek)
+            else { return false }
+            
+            if date > endOfThisWeek {
+                return false
+            }
+            
+            return true
+        }
+        
         @objc func goToPreviousMonth() {
             guard let calendarView = calendarView else { return }
             let currentPage = calendarView.currentPage
