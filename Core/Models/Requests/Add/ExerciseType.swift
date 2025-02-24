@@ -7,12 +7,6 @@
 
 import Foundation
 
-public struct ExerciseTypeResponse: Codable {
-    public let success: Bool
-    public let message: String
-    public let data: [ExerciseType]
-}
-
 public struct ExerciseType: Codable, Identifiable {
     public var id: Int { exerciseId }
     public let exerciseId: Int
@@ -31,17 +25,5 @@ public struct ExerciseType: Codable, Identifiable {
         self.exerciseColor = ""
         self.exerciseImg = ""
         self.favoriteYn = ""
-    }
-}
-
-public struct FavoriteRequest: Codable {
-    let userId: Int
-    let exerciseId: Int
-
-    public func toDictionary() -> [String: Any] {
-        return [
-            "userId": userId,
-            "exerciseId": exerciseId
-        ]
     }
 }

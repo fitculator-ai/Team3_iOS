@@ -45,9 +45,9 @@ public enum APIEndpoint {
         case .updateHeartRate: 
             return "/mypage/heartUpdate"
         case .addFavorite:
-            return "/favorite/add"
+            return "/favorite"
         case .removeFavorite:
-            return "/favorite/remove"
+            return "/favorite"
         }
     }
     
@@ -58,9 +58,9 @@ public enum APIEndpoint {
             return .get
         case .updateWorkout, .updateMyPage, .updateHeartRate:
             return .put
-        case .deleteWorkout:
+        case .deleteWorkout, .removeFavorite:
             return .delete
-        case .createWorkout, .addFavorite, .removeFavorite:
+        case .createWorkout, .addFavorite:
             return .post
         }
     }
