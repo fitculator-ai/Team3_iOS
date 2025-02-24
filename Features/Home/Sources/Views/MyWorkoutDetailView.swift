@@ -175,6 +175,7 @@ struct MyWorkoutDetailView: View {
                 }
                 Button("삭제", role: .destructive) {
                     viewModel.deleteWorkout(userId: 1, recordId: workout.recordId)
+                    presentationMode.wrappedValue.dismiss()
                 }
                 Button("취소", role: .cancel) {}
             }

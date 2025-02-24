@@ -41,7 +41,6 @@ struct MyWorkoutListView: View {
                             .buttonStyle(.plain)
                             .simultaneousGesture(TapGesture().onEnded {
                                 selectedWorkout = workout
-                                print(workout)
                             })
                         }
                     }
