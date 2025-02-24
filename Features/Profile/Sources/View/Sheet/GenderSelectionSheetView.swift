@@ -27,12 +27,12 @@ enum Gender: Int, CaseIterable, Identifiable {
         case "여성":
             return .female
         default:
-            return .male // 기본값 설정
+            return .male
         }
     }
     
     static func fromInt(_ value: Int) -> Gender {
-        return Gender(rawValue: value) ?? .male // 기본값 설정
+        return Gender(rawValue: value) ?? .male
     }
 }
 
@@ -59,3 +59,4 @@ struct GenderSettingSheetView: View {
         .padding()
     }
 }
+

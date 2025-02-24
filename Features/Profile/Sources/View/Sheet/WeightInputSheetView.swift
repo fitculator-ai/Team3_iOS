@@ -73,6 +73,6 @@ struct WeightSettingSheetView: View {
     }
     
     private func updateWeight() {
-        Weight = frontValue + (backValue * 0.1) // 소수점을 포함한 정확한 값으로 변환
+        Weight = frontValue + (backValue * 0.1)
     }
 }
