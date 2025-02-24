@@ -263,29 +263,16 @@ public struct ProfileEditView: View {
                         .foregroundColor(.white)
                 },
                 trailing: Button(action: {
-                    // Save 버튼 클릭 시 createProfileImage 호출
                     if let userId = viewModel.MyPageRecord?.userId,
-                       let imageString = viewModel.profileImageString { // profileImageString을 사용
-                        // base64-encoded string을 UIImage로 변환
+                       let imageString = viewModel.profileImageString {
                         if let imageData = Data(base64Encoded: imageString),
                            let image = UIImage(data: imageData) {
-                            viewModel.createProfileImage(userId: userId, image: image) // 이미지 데이터를 넘겨줍니다.
+                            viewModel.createProfileImage(userId: userId, image: image)
                         } else {
                             print("Failed to decode base64 string into UIImage")
                         }
                     }
-                    
-                    // 기존의 MyPage 업데이트 로직
-                    // let request = MyPageRequest(
-                    //     from: <#any Decoder#>, userId: viewModel.MyPageRecord?.userId ?? 0,
-                    //     userName: viewModel.MyPageRecord?.userName ?? "",
-                    //     userGender: viewModel.MyPageRecord?.userGender ?? "",
-                    //     userWeight: viewModel.MyPageRecord?.userWeight ?? 0.0,
-                    //     userHeight: Int(viewModel.MyPageRecord?.userHeight ?? 0),
-                    //     userBirth: viewModel.MyPageRecord?.userBirth ?? "",
-                    //     socialProvider: "App"
-                    // )
-                    // viewModel.updateMyPage(request: request)
+                    viewModel.updateMyPage()
                 }) {
                     Text("Save")
                         .foregroundColor(viewModel.isFormValid ? Color.blue : Color.gray)

@@ -93,7 +93,24 @@ class ProfileViewModel: ObservableObject {
     
     
     //MARK: 마이 페이지 (프로필) put
-    func updateMyPage(request: MyPageRequest) {
+    func updateMyPage() {
+        guard let userName = MyPageRecord?.userName,
+              let userGender = MyPageRecord?.userGender,
+              let userWeight = MyPageRecord?.userWeight,
+              let userHeight = MyPageRecord?.userHeight,
+              let userBirth = MyPageRecord?.userBirth else {
+            print("Error: MyPageRecord is nil or incomplete data")
+            return
+        }
+        
+        let request = MyPageRequest(userId: 1,
+                                    userName: userName,
+                                    userGender: userGender,
+                                    userWeight: userWeight,
+                                    userHeight: userHeight,
+                                    userBirth: userBirth,
+                                    socialProvider: "exampleProvider") // 임시 값 추가
+        
         let endpoint = APIEndpoint.updateMyPage(request: request)
         
         networkService.request(endpoint)
@@ -101,17 +118,30 @@ class ProfileViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    // DecodingError가 있는 경우
+                    if let decodingError = error as? DecodingError {
+                        switch decodingError {
+                        case .dataCorrupted(let context):
+                            print("Data corrupted: \(context.debugDescription)")
+                        case .keyNotFound(let key, let context):
+                            print("Key '\(key)' not found: \(context.debugDescription)")
+                        case .valueNotFound(let value, let context):
+                            print("Value '\(value)' not found: \(context.debugDescription)")
+                        case .typeMismatch(let type, let context):
+                            print("Type mismatch for type \(type): \(context.debugDescription)")
+                        @unknown default:
+                            print("Unknown decoding error: \(decodingError)")
+                        }
+                    }
+                    
                 case .finished:
                     break
                 }
             }, receiveValue: { (response: MyPageResponse) in
-                // 응답 처리
                 print("Success: \(response.success), Message: \(response.message)")
             })
             .store(in: &cancellables)
     }
-    
     
     //MARK: 프로필 사진 get
     func fetchProfileImage(userId: Int) {

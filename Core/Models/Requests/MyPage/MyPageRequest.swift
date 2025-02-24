@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Foundation
+
 public struct MyPageRequest: Codable {
     let userId: Int
     var userName: String
@@ -15,6 +17,16 @@ public struct MyPageRequest: Codable {
     var userHeight: Int
     var userBirth: String
     let socialProvider: String
+    
+    public init(userId: Int, userName: String, userGender: String, userWeight: Double, userHeight: Int, userBirth: String, socialProvider: String) {
+        self.userId = userId
+        self.userName = userName
+        self.userGender = userGender
+        self.userWeight = userWeight
+        self.userHeight = userHeight
+        self.userBirth = userBirth
+        self.socialProvider = socialProvider
+    }
     
     public func toDictionary() -> [String: Any] {
         return [
@@ -28,4 +40,5 @@ public struct MyPageRequest: Codable {
         ]
     }
 }
+
 
