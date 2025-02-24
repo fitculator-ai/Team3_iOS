@@ -33,3 +33,15 @@ public struct ExerciseType: Codable, Identifiable {
         self.favoriteYn = ""
     }
 }
+
+public struct FavoriteRequest: Codable {
+    let userId: Int
+    let exerciseId: Int
+
+    public func toDictionary() -> [String: Any] {
+        return [
+            "userId": userId,
+            "exerciseId": exerciseId
+        ]
+    }
+}
