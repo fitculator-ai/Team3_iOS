@@ -78,7 +78,7 @@ public struct ProfileEditView: View {
                     .foregroundColor(.white)
                     .frame(width: 100, alignment: .leading)
                 TextField("공백 없이 최대 15자까지 입력 가능", text: Binding(
-                    get: { viewModel.MyPageRecord?.userName ?? "" }, // nil일 경우 기본값 ""
+                    get: { viewModel.MyPageRecord?.userName ?? "" },
                     set: { newValue in
                         viewModel.MyPageRecord?.userName = newValue
                     }
@@ -173,13 +173,10 @@ public struct ProfileEditView: View {
                 
                 TextField(" ", text: Binding(
                        get: {
-                           // userheight가 nil일 경우 빈 문자열 반환
                            return viewModel.MyPageRecord?.userHeight != nil ? String(viewModel.MyPageRecord?.userHeight ?? 0) : ""
                        },
                        set: { newValue in
-                           // 새로운 값이 숫자인지 확인하고 userheight에 설정
                            if let height = Int(newValue), height > 0, newValue.count <= 3 {
-                               // userheight 값이 nil일 경우 빈 값으로 시작
                                if viewModel.MyPageRecord?.userHeight == nil {
                                    viewModel.MyPageRecord?.userHeight = height
                                } else {
@@ -189,7 +186,7 @@ public struct ProfileEditView: View {
                        }
                    ))
                 .multilineTextAlignment(.trailing)
-                .keyboardType(.decimalPad) // 키패드를 숫자형으로 설정
+                .keyboardType(.decimalPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .frame(maxWidth: .infinity)
