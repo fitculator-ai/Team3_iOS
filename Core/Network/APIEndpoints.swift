@@ -19,6 +19,8 @@ public enum APIEndpoint {
     case getMyPage(userId: Int)
     case updateMyPage(request: MyPageRequest)
     case updateHeartRate(request: HeartRateRequest)
+    case getMyPageProfileImage(userId: Int)
+    case updateMyPageProfileImage(userId: Int)
     
     public var baseURL: String {
         return NetworkConstants.baseURL
@@ -42,24 +44,26 @@ public enum APIEndpoint {
             return "/mypage"
         case .updateHeartRate: 
             return "/mypage/heartUpdate"
+        case .getMyPageProfileImage, .updateMyPageProfileImage:
+            return "/img"
         }
     }
     
     public var method: HTTPMethod {
         switch self {
         case .getWeeklyWorkout, .getWorkoutCount, .getWorkoutIntensity,
-             .getWorkoutDetail, .getExercises, .getMyPage:
+                .getWorkoutDetail, .getExercises, .getMyPage, .getMyPageProfileImage :
             return .get
-        case .updateWorkout, .updateMyPage, .updateHeartRate:
+        case .updateWorkout, .updateMyPage, .updateHeartRate, .updateMyPageProfileImage:
             return .put
         case .deleteWorkout:
             return .delete
-        case .createWorkout:
+        case .createWorkout, .updateMyPageProfileImage:
             return .post
         }
     }
     
-    var parameters: Parameters? {
+    public var parameters: Parameters? {
         switch self {
         case .getWeeklyWorkout(let userId, let targetDate),
              .getWorkoutCount(let userId, let targetDate),
@@ -81,6 +85,10 @@ public enum APIEndpoint {
             return request.toDictionary()
         case .updateHeartRate(let request):
             return request.toDictionary()
+        case .getMyPageProfileImage(userId: let userId):
+            return ["userId": userId]
+        case .updateMyPageProfileImage(userId: let userId):
+            return ["userId": userId]
         }
     }
 }
