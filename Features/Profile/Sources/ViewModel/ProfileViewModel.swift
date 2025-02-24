@@ -15,8 +15,24 @@ class ProfileViewModel: ObservableObject {
     private let networkService: NetworkServiceProtocol
     
     @Published public var MyPageRecord: MyPageData?
+    
     @Published public var isLoading: Bool = false
+    
     @Published public var error: Error?
+    
+    @Published var profileImage: UIImage? {
+        didSet {
+            // 이미지가 변경되면 Base64 문자열로 변환하여 profileImageString에 저장
+            if let image = profileImage {
+                if let imageData = image.jpegData(compressionQuality: 0.8) {
+                    profileImageString = imageData.base64EncodedString()
+                }
+            }
+        }
+    }
+    
+    @Published var profileImageString: String? = nil
+        
     
     @Published var userGender: Gender = .male {
         didSet {
@@ -50,7 +66,7 @@ class ProfileViewModel: ObservableObject {
         self.networkService = networkService
     }
     
-    // MyPage 데이터를 가져오는 메소드
+    //MARK:  마이 페이지 (프로필) get
     public func fetchMyPage(userId: Int) {
         isLoading = true
         
@@ -63,13 +79,12 @@ class ProfileViewModel: ObservableObject {
         
         print("Sending request to: \(urlString)")
         
-        // URLSession 데이터 요청과 Combine 사용
         URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data } // 응답 데이터만 추출
-            .decode(type: MyPageResponse.self, decoder: JSONDecoder()) // JSON 디코딩
-            .receive(on: DispatchQueue.main) // 메인 스레드에서 처리
+            .map { $0.data }
+            .decode(type: MyPageResponse.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveCompletion: { [weak self] _ in
-                self?.isLoading = false // 로딩 상태 종료
+                self?.isLoading = false
             })
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -83,6 +98,97 @@ class ProfileViewModel: ObservableObject {
                     self?.MyPageRecord = response.data
                 }
             )
+            .store(in: &cancellables)
+    }
+    
+    
+    //MARK: 마이 페이지 (프로필) put
+    func updateMyPage(request: MyPageRequest) {
+        let endpoint = APIEndpoint.updateMyPage(request: request)
+        
+        networkService.request(endpoint)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { (response: MyPageResponse) in
+                // 응답 처리
+                print("Success: \(response.success), Message: \(response.message)")
+            })
+            .store(in: &cancellables)
+    }
+    
+    
+    //MARK: 프로필 사진 get
+    func fetchProfileImage(userId: Int) {
+        let networkImageService = NetworkImageService()
+        
+        let endpoint = APIEndpoint.getMyPageProfileImage(userId: userId)
+        
+        networkImageService.fetchProfileImage(userId: userId, to: endpoint)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("이미지 가져오기 오류: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { profileImageResponse in
+                print("가져온 프로필 이미지 URL: \(profileImageResponse)")
+                
+                if let imageUrlString = profileImageResponse as? String,
+                   let url = URL(string: imageUrlString) {
+                    
+                    URLSession.shared.dataTask(with: url) { data, response, error in
+                        if let data = data, let image = UIImage(data: data) {
+                            DispatchQueue.main.async {
+                                self.profileImage = image
+                            }
+                        } else {
+                            print("이미지 로드 오류: \(error?.localizedDescription ?? "알 수 없는 오류")")
+                        }
+                    }.resume()
+                }
+            })
+            .store(in: &cancellables)
+    }
+
+    //MARK: 프로필 사진 post
+    func createProfileImage(userId: Int, image: UIImage) {
+        isLoading = true
+        
+        // UIImage -> Data 변환 (JPEG 형식)
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            print("Failed to convert image to Data")
+            return
+        }
+        
+        let networkImageService = NetworkImageService()
+        
+        let endpoint = APIEndpoint.createMyPageProfileImage(userId: userId, filedata: "dummy")
+        
+        networkImageService.uploadProfileImage(userId: userId, imageData: imageData, to: endpoint)
+            .sink(receiveCompletion: { completion in
+                self.isLoading = false
+                switch completion {
+                case .failure(let error):
+                    print("Upload failed: \(error.localizedDescription)")
+                    self.error = error
+                case .finished:
+                    break
+                }
+            }, receiveValue: { response in
+                if response.success {
+                    print("Profile image uploaded successfully. Message: \(response.message)")
+                    print("Image URL: \(response.data)")
+                } else {
+                    print("Profile image upload failed: \(response.message)")
+                }
+            })
             .store(in: &cancellables)
     }
 
