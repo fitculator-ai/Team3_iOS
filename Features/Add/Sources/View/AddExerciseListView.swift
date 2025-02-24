@@ -39,9 +39,9 @@ public struct AddExerciseListView: View {
                     .padding(.vertical, 5)
                     
                     if selectedPicker == .aerobic {
-                        ExerciseTypeListView(exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
+                        ExerciseTypeListView(viewModel: viewModel, exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
                     } else {
-                        ExerciseTypeListView(exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
+                        ExerciseTypeListView(viewModel: viewModel, exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
                     }
                 }
             }
@@ -55,7 +55,7 @@ public struct AddExerciseListView: View {
 }
 
 struct ExerciseTypeListView: View {
-    @EnvironmentObject var viewModel: AddExerciseListViewModel
+    @ObservedObject var viewModel: AddExerciseListViewModel
     let exerciseValues: String
     let exerciseList: [ExerciseType]
     
@@ -85,15 +85,12 @@ struct ExerciseTypeListView: View {
                     
                     Button {
                         if item.favoriteYn == "N" {
-                            
+                            viewModel.fetchAddFavoriteExercise(userId: 1, exerciseId: item.exerciseId)
                         } else {
-                            
+                            viewModel.fetchRemoveFavoriteExercise(userId: 1, exerciseId: item.exerciseId)
                         }
-                        if item.exerciseType == "CARDIO" {
-                            viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
-                        } else {
-                            viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
-                        }
+                        viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
+                        viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
                     } label: {
                         Image(systemName: item.favoriteYn == "N" ? "bookmark" : "bookmark.fill")
                     }
