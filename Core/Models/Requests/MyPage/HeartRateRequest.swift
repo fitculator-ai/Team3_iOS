@@ -9,7 +9,12 @@ import Foundation
 
 public struct HeartRateRequest: Codable {
     let userId: Int
-    let userHeartRate: Int
+    public var userHeartRate: Int
+    
+    public init(userId: Int, userHeartRate: Int) {
+        self.userId = userId
+        self.userHeartRate = userHeartRate
+    }
     
     public func toDictionary() -> [String: Any] {
         return [
