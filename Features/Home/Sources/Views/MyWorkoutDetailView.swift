@@ -174,7 +174,7 @@ struct MyWorkoutDetailView: View {
                     isFocused = true
                 }
                 Button("삭제", role: .destructive) {
-                    print("삭제 선택됨")
+                    viewModel.deleteWorkout(userId: 1, recordId: workout.recordId)
                 }
                 Button("취소", role: .cancel) {}
             }
