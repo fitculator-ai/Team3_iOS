@@ -59,8 +59,12 @@ struct ExerciseTypeListView: View {
     let exerciseValues: String
     let exerciseList: [ExerciseType]
     
+    var sortedExerciseList: [ExerciseType] {
+        exerciseList.sorted { $0.favoriteYn > $1.favoriteYn }
+    }
+    
     var body: some View {
-        ForEach(exerciseList) { item in
+        ForEach(sortedExerciseList) { item in
             NavigationLink {
                 AddExerciseDetailView(exerciseKRName: item.exerciseKorName, exerciseENName: item.exerciseEngName, exerciseValue: exerciseValues)
             } label: {
