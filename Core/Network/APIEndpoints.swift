@@ -8,6 +8,7 @@
 import Alamofire
 
 public enum APIEndpoint {
+    case getFirstWorkoutDate(userId: Int)
     case getWeeklyWorkout(userId: Int, targetDate: String)
     case getWorkoutCount(userId: Int, targetDate: String)
     case getWorkoutIntensity(userId: Int, targetDate: String)
@@ -26,7 +27,9 @@ public enum APIEndpoint {
 
     public var path: String {
         switch self {
-        case .getWeeklyWorkout: 
+        case .getFirstWorkoutDate:
+            return "workout/firstWorkout"
+        case .getWeeklyWorkout:
             return "/workout/week"
         case .getWorkoutCount: 
             return "/workout/count"
@@ -47,7 +50,7 @@ public enum APIEndpoint {
     
     public var method: HTTPMethod {
         switch self {
-        case .getWeeklyWorkout, .getWorkoutCount, .getWorkoutIntensity,
+        case .getFirstWorkoutDate, .getWeeklyWorkout, .getWorkoutCount, .getWorkoutIntensity,
              .getWorkoutDetail, .getExercises, .getMyPage:
             return .get
         case .updateWorkout, .updateMyPage, .updateHeartRate:
@@ -75,7 +78,8 @@ public enum APIEndpoint {
             return request.toDictionary()
         case .getExercises(let exerciseType, let userId):
             return ["exerciseType": exerciseType, "userId": userId]
-        case .getMyPage(let userId):
+        case .getFirstWorkoutDate(let userId),
+                .getMyPage(let userId):
             return ["userId": userId]
         case .updateMyPage(let request):
             return request.toDictionary()
