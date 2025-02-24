@@ -33,12 +33,8 @@ class AddExerciseDetailViewModel: ObservableObject {
                 case .finished:
                     break
                 }
-            }, receiveValue: { (response: AddExerciseTypeResponse) in
-                if response.success {
-                    print("✅ 운동추가 성공")
-                } else {
-                    debugPrint("📢 Raw Response:", response)
-                }
+            }, receiveValue: { (responseData: AddExerciseTypeResponse) in
+                print(responseData.message)
             })
             .store(in: &cancellables)
     }
