@@ -163,6 +163,7 @@ public struct ProfileView: View {
             }
             .onAppear{
                 viewModel.fetchMyPage(userId: 1)
+                viewModel.fetchProfileImage(userId: 1)
             }
             .environmentObject(viewModel)
         }

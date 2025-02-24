@@ -22,7 +22,6 @@ class ProfileViewModel: ObservableObject {
     
     @Published var profileImage: UIImage? {
         didSet {
-            // 이미지가 변경되면 Base64 문자열로 변환하여 profileImageString에 저장
             if let image = profileImage {
                 if let imageData = image.jpegData(compressionQuality: 0.8) {
                     profileImageString = imageData.base64EncodedString()
@@ -61,7 +60,7 @@ class ProfileViewModel: ObservableObject {
         isLoading = true
         
         // URL 생성
-        let urlString = "http://13.125.175.216:8080/api/mypage?userId=\(userId)"
+        var urlString = NetworkConstants.baseURL + "/mypage?userId=\(userId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL string: \(urlString)")
             return
@@ -159,19 +158,45 @@ class ProfileViewModel: ObservableObject {
                 }
             }, receiveValue: { profileImageResponse in
                 print("가져온 프로필 이미지 URL: \(profileImageResponse)")
-                
-                if let imageUrlString = profileImageResponse as? String,
-                   let url = URL(string: imageUrlString) {
+                if let imageFileName = profileImageResponse.data as? String {
+                    print("파일명: \(imageFileName)")
                     
-                    URLSession.shared.dataTask(with: url) { data, response, error in
-                        if let data = data, let image = UIImage(data: data) {
-                            DispatchQueue.main.async {
-                                self.profileImage = image
+                    if let url = URL(string: imageFileName) {
+                        print("전체 이미지 URL: \(url.absoluteString)")
+                        
+                        URLSession.shared.dataTask(with: url) { data, response, error in
+                            if let error = error {
+                                print("이미지 요청 네트워크 오류: \(error.localizedDescription)")
+                                return
                             }
-                        } else {
-                            print("이미지 로드 오류: \(error?.localizedDescription ?? "알 수 없는 오류")")
-                        }
-                    }.resume()
+                            
+                            if let httpResponse = response as? HTTPURLResponse {
+                                print("HTTP 응답 코드: \(httpResponse.statusCode)")
+                                if httpResponse.statusCode != 200 {
+                                    print("이미지 요청 실패, 상태 코드: \(httpResponse.statusCode)")
+                                    return
+                                }
+                            }
+                            
+                            // 데이터 로드 및 이미지 변
+                            if let data = data {
+                                print("받은 데이터 크기: \(data.count) bytes")
+                                
+                                if let image = UIImage(data: data) {
+                                    DispatchQueue.main.async {
+                                        self.profileImage = image
+                                        print("프로필 이미지 업데이트 완료")
+                                    }
+                                } else {
+                                    print("이미지 변환 오류: 데이터가 UIImage로 변환되지 않음")
+                                }
+                            } else {
+                                print("이미지 데이터 없음")
+                            }
+                        }.resume()
+                    } else {
+                        print("유효하지 않은 URL: \(imageFileName)")
+                    }
                 }
             })
             .store(in: &cancellables)
@@ -181,11 +206,13 @@ class ProfileViewModel: ObservableObject {
     func createProfileImage(userId: Int, image: UIImage) {
         isLoading = true
         
-        // UIImage -> Data 변환 (JPEG 형식)
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             print("Failed to convert image to Data")
             return
         }
+        
+        let fileName = "profile_image_\(userId)_\(Date().timeIntervalSince1970).jpg"
+         print("파일 이름: \(fileName)")
         
         let networkImageService = NetworkImageService()
         
