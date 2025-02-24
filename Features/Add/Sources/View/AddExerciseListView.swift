@@ -89,8 +89,7 @@ struct ExerciseTypeListView: View {
                         } else {
                             viewModel.fetchRemoveFavoriteExercise(userId: 1, exerciseId: item.exerciseId)
                         }
-                        viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
-                        viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
+                        viewModel.fetchAddExerciseList(exerciseType: item.exerciseType, userId: "1")
                     } label: {
                         Image(systemName: item.favoriteYn == "N" ? "bookmark" : "bookmark.fill")
                     }
