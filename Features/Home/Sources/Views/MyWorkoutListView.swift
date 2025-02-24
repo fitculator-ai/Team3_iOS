@@ -22,35 +22,42 @@ struct MyWorkoutListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("나의 운동 기록")
-                .font(AppFont.mainTitle)
+                .font(AppFont.subTitle)
             
             if viewModel.isLoading {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else if viewModel.workoutData?.records.isEmpty ?? true {
-                Text("운동 기록이 없습니다.")
-                    .font(AppFont.subTitle)
+                Text("운동을 시작해보세요!🏋️‍♀️")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
-                LazyVStack {
-                    ForEach(viewModel.workoutData?.records ?? [], id: \.id) { workout in
-                        WorkoutRecordRow(workout: workout, selectedWorkout: $selectedWorkout)
+                NavigationStack {
+                    LazyVStack {
+                        ForEach(viewModel.workoutData?.records.sorted(by: { $0.recordStart > $1.recordStart }) ?? []
+                                , id: \.id) { workout in
+                            NavigationLink(value: workout) {
+                                WorkoutRecordRow(workout: workout, viewModel: viewModel, selectedWorkout: $selectedWorkout)
+                            }
+                            .buttonStyle(.plain)
+                            .simultaneousGesture(TapGesture().onEnded {
+                                selectedWorkout = workout
+                            })
+                        }
+                    }
+                    .navigationDestination(for: WorkoutRecord.self) { workout in
+                        MyWorkoutDetailView(viewModel: viewModel, workout: workout)
                     }
                 }
             }
         }
-        .padding()
-        .onAppear {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            viewModel.fetchWeeklyWorkout(userId: 1, targetDate: formatter.string(from: viewModel.selectedDate))
-        }
+        .padding(.top)
     }
 }
 
-// WorkoutRecordRow를 별도의 View로 분리
+// Workout Cell View
 struct WorkoutRecordRow: View {
     let workout: WorkoutRecord
+    let viewModel: HomeViewModel
     @Binding var selectedWorkout: WorkoutRecord?
     
     var body: some View {
@@ -58,9 +65,6 @@ struct WorkoutRecordRow: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.cellColor)
                 .frame(height: 160)
-                .onTapGesture {
-                    selectedWorkout = workout
-                }
             VStack {
                 HStack {
                     ZStack {
@@ -74,7 +78,7 @@ struct WorkoutRecordRow: View {
                     VStack(alignment: .leading) {
                         Text(workout.exerciseKorName)
                             .font(AppFont.subTitle)
-                        Text("02.11 오후 6:50")
+                        Text(viewModel.getDateToDateTime(dateString: workout.recordStart))
                             .font(.system(size: 13))
                             .opacity(0.8)
                     }
@@ -91,7 +95,11 @@ struct WorkoutRecordRow: View {
                     Spacer()
                     workoutInfo(title: "평균 심박수", value: "\(workout.avgHeartRate)bpm")
                     Spacer()
-                    workoutInfo(title: "운동 강도", value: workout.intensity, color: .green)
+                    workoutInfo(
+                        title: "운동 강도",
+                        value: viewModel.getIntensityText(workout.intensity),
+                        color: viewModel.getIntensityColor(workout.intensity)
+                    )
                 }
                 .padding(.horizontal, 30)
             }
@@ -110,7 +118,3 @@ struct WorkoutRecordRow: View {
         }
     }
 }
-
-//#Preview {
-//    MyWorkoutListView()
-//}

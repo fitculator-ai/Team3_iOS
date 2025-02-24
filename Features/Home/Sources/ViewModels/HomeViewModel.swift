@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 import Core
 import SwiftUICore
@@ -62,6 +63,39 @@ public class HomeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func updateWorkoutMemo(request: WorkoutUpdateRequest) {
+        networkService.request(APIEndpoint.updateWorkout(request: request))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("메모 업데이트 실패: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { (response: WorkoutResponse) in
+                    print("메모 업데이트 성공: \(response.message)")
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func deleteWorkout(userId: Int, recordId: Int) {
+        networkService.request(APIEndpoint.deleteWorkout(userId: userId, recordId: recordId))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("삭제 실패: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { (response: WorkoutResponse) in
+                    print("삭제 성공: \(response.message)")
+                }
+            )
+            .store(in: &cancellables)
+    }
     private func getPreviousWeekDate(from targetDate: String) -> String {
         let dateFormatter = DateFormatterUtil.dateFormatDate
         guard let date = dateFormatter.date(from: targetDate), let previousDate = Calendar.current.date(byAdding: .day, value: -7, to: date) else { return targetDate }
@@ -126,6 +160,30 @@ public class HomeViewModel: ObservableObject {
         return weekStrengthCount
     }
     
+    func getDateToTime(dateString: String) -> String {
+        if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
+            let dateToTime = DateFormatterUtil.dateToTime.string(from: date)
+            return dateToTime
+        }
+        return ""
+    }
+    
+    func getDateToDay(dateString: String) -> String {
+        if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
+            let dateToDay = DateFormatterUtil.dateToDay.string(from: date)
+            return dateToDay
+        }
+        return ""
+    }
+    
+    func getDateToDateTime(dateString: String) -> String {
+        if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
+            let dateToDateTime = DateFormatterUtil.dateToDateTime.string(from: date)
+            return dateToDateTime
+        }
+        return ""
+    }
+    
     func getWeekIntensityPoint() -> Double {
         guard let weekIntensity = workoutData?.weekIntensity else { return 0.0 }
         switch weekIntensity {
@@ -173,5 +231,45 @@ public class HomeViewModel: ObservableObject {
     func getSelectedDateString() -> String {
         let dateFormatter = DateFormatterUtil.dateFormatDate
         return dateFormatter.string(from: selectedDate)
+    }
+    
+    func getIntensityColor(_ intensity: String) -> Color {
+        return ExerciseIntensity.from(intensity).color
+    }
+    
+    func getIntensityText(_ intensity: String) -> String {
+        return ExerciseIntensity.from(intensity).koreanText
+    }
+    
+    enum ExerciseIntensity: String {
+        case veryHigh = "VERY HIGH"
+        case high = "HIGH"
+        case medium = "MEDIUM"
+        case low = "LOW"
+        case veryLow = "VERY LOW"
+        
+        var koreanText: String {
+            switch self {
+            case .veryHigh: return "매우 높음"
+            case .high: return "높음"
+            case .medium: return "보통"
+            case .low: return "낮음"
+            case .veryLow: return "매우 낮음"
+            }
+        }
+        
+        var color: Color {
+            switch self {
+            case .veryHigh: return .red
+            case .high: return .purple
+            case .medium: return Color.fitculatorLogo
+            case .low: return .yellow
+            case .veryLow: return .green
+            }
+        }
+        
+        static func from(_ intensity: String) -> ExerciseIntensity {
+            return ExerciseIntensity(rawValue: intensity) ?? .medium
+        }
     }
 }

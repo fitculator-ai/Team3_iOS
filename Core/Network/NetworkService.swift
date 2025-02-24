@@ -18,11 +18,11 @@ public final class NetworkService: NetworkServiceProtocol {
     
     public func request<T: Codable>(_ endpoint: APIEndpoint) -> AnyPublisher<T, Error> {
         let url = NetworkConstants.baseURL + endpoint.path
-        
+        let encoding: ParameterEncoding = (endpoint.method == .get || endpoint.method == .delete) ? URLEncoding.default : JSONEncoding.default
         return AF.request(url,
                           method: endpoint.method,
                           parameters: endpoint.parameters,
-                          encoding: endpoint.method == .get ? URLEncoding.default : JSONEncoding.default)
+                          encoding: encoding)
             .validate()
             .publishDecodable(type: T.self)
             .value()
@@ -30,4 +30,3 @@ public final class NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
     }
 }
-

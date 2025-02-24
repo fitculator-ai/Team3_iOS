@@ -14,7 +14,7 @@ public enum APIEndpoint {
     case getWorkoutIntensity(userId: Int, targetDate: String)
     case getWorkoutDetail(recordId: String)
     case updateWorkout(request: WorkoutUpdateRequest)
-    case deleteWorkout(userId: Int, workoutId: String)
+    case deleteWorkout(userId: Int, recordId: Int)
     case createWorkout(request: WorkoutRequest)
     case getExercises(exerciseType: String, userId: String)
     case getMyPage(userId: Int)
@@ -72,8 +72,8 @@ public enum APIEndpoint {
             return nil
         case .updateWorkout(let request):
             return request.toDictionary()
-        case .deleteWorkout(let userId, let workoutId):
-            return ["userId": userId, "workoutId": workoutId]
+        case .deleteWorkout(let userId, let recordId):
+            return ["userId": userId, "workoutId": recordId]
         case .createWorkout(let request):
             return request.toDictionary()
         case .getExercises(let exerciseType, let userId):
