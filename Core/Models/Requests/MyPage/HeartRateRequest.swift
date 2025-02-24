@@ -8,10 +8,11 @@
 import Foundation
 
 public struct HeartRateRequest: Codable {
-    let userId: Int
+    public let userId: Int
     public var userHeartRate: Int
     
-    public init(userId: Int, userHeartRate: Int) {
+    // 초기값을 설정한 init 메서드
+    public init(userId: Int = 1, userHeartRate: Int = 40) {
         self.userId = userId
         self.userHeartRate = userHeartRate
     }

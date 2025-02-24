@@ -21,4 +21,5 @@ public struct MyPageData: Codable {
     public var userHeight: Int
     public var userBirth: String
     public let socialProvider: String
+    public var userHeartRate: Int
 }

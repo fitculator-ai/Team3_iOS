@@ -17,8 +17,9 @@ public struct MyPageRequest: Codable {
     var userHeight: Int
     var userBirth: String
     let socialProvider: String
+    var userHeartRate: Int
     
-    public init(userId: Int, userName: String, userGender: String, userWeight: Double, userHeight: Int, userBirth: String, socialProvider: String) {
+    public init(userId: Int, userName: String, userGender: String, userWeight: Double, userHeight: Int, userBirth: String, socialProvider: String, userHeartRate: Int) {
         self.userId = userId
         self.userName = userName
         self.userGender = userGender
@@ -26,6 +27,7 @@ public struct MyPageRequest: Codable {
         self.userHeight = userHeight
         self.userBirth = userBirth
         self.socialProvider = socialProvider
+        self.userHeartRate = userHeartRate
     }
     
     public func toDictionary() -> [String: Any] {
@@ -36,7 +38,8 @@ public struct MyPageRequest: Codable {
             "userWeight": userWeight,
             "userHeight": userHeight,
             "userBirth": userBirth,
-            "socialProvider": socialProvider
+            "socialProvider": socialProvider,
+            "userHeartRate" : userHeartRate
         ]
     }
 }

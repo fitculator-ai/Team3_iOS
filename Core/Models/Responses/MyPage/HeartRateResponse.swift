@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct HeartRateResponse: Codable {
-    var success: Bool
-    var message: String
-    var data: String
+public struct HeartRateResponse: Codable {
+    public var success: Bool
+    public var message: String
+    public var data: String
 }
