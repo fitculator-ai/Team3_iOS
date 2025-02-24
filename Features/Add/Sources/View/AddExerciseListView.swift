@@ -55,6 +55,7 @@ public struct AddExerciseListView: View {
 }
 
 struct ExerciseTypeListView: View {
+    @EnvironmentObject var viewModel: AddExerciseListViewModel
     let exerciseValues: String
     let exerciseList: [ExerciseType]
     
@@ -79,7 +80,16 @@ struct ExerciseTypeListView: View {
                     Spacer()
                     
                     Button {
-                        
+                        if item.favoriteYn == "N" {
+                            
+                        } else {
+                            
+                        }
+                        if item.exerciseType == "CARDIO" {
+                            viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
+                        } else {
+                            viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
+                        }
                     } label: {
                         Image(systemName: item.favoriteYn == "N" ? "bookmark" : "bookmark.fill")
                     }
