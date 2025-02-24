@@ -21,6 +21,8 @@ class ProfileViewModel: ObservableObject {
     
     @Published public var error: Error?
     
+    @Published var heartRateRequest: HeartRateRequest?
+    
     @Published var profileImage: UIImage? {
         didSet {
             if let image = profileImage {
@@ -52,8 +54,17 @@ class ProfileViewModel: ObservableObject {
     }()
     
     
+    @Published var isHeartRateValid: Bool = true
+    
     public init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
+        
+        $MyPageRecord
+                   .map { $0?.userHeartRate ?? 0 }
+                   .sink { [weak self] heartRate in
+                       self?.validateHeartRate(heartRate)
+                   }
+                   .store(in: &cancellables)
     }
     
     //MARK:  마이 페이지 (프로필) get
@@ -86,11 +97,19 @@ class ProfileViewModel: ObservableObject {
                 receiveValue: { [weak self] response in
                     print("Decoded Response: \(response)")
                     self?.MyPageRecord = response.data
+                    
+                    if let heartRate = self?.MyPageRecord?.userHeartRate {
+                        print("User Heart Rate: \(heartRate)")
+                        self?.heartRateRequest = HeartRateRequest(userHeartRate: heartRate)
+                    } else {
+                        self?.heartRateRequest = HeartRateRequest(userHeartRate: 40)
+                        print("Heart rate not found, using default value: 40")
+                    }
                 }
             )
             .store(in: &cancellables)
     }
-    
+                
     
     //MARK: 마이 페이지 (프로필) put
     func updateMyPage() {
@@ -98,7 +117,9 @@ class ProfileViewModel: ObservableObject {
               let userGender = MyPageRecord?.userGender,
               let userWeight = MyPageRecord?.userWeight,
               let userHeight = MyPageRecord?.userHeight,
-              let userBirth = MyPageRecord?.userBirth else {
+              let userBirth = MyPageRecord?.userBirth,
+              let userHeartRate = MyPageRecord?.userHeartRate
+        else {
             print("Error: MyPageRecord is nil or incomplete data")
             return
         }
@@ -109,7 +130,8 @@ class ProfileViewModel: ObservableObject {
                                     userWeight: userWeight,
                                     userHeight: userHeight,
                                     userBirth: userBirth,
-                                    socialProvider: "exampleProvider") // 임시 값 추가
+                                    socialProvider: "exampleProvider", // 임시 값 추가
+                                    userHeartRate: userHeartRate)
         
         let endpoint = APIEndpoint.updateMyPage(request: request)
         
@@ -142,6 +164,43 @@ class ProfileViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    //MARK: 안정시 심박수 put
+    func updateHeartRate() {
+        // HeartRate 값 가져오기
+        guard let heartRate = MyPageRecord?.userHeartRate else {
+            print("Error: Heart rate is nil")
+            return
+        }
+        
+        // HeartRateRequest 객체 생성
+        let request = HeartRateRequest(userId: 1, userHeartRate: heartRate)
+        
+        // API Endpoint 설정
+        let endpoint = APIEndpoint.updateHeartRate(request: request)
+        
+        // 네트워크 요청
+        networkService.request(endpoint)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    // 오류 처리
+                    print("Error: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { (response: HeartRateResponse) in
+                // 서버 응답 처리
+                if response.success {
+                    print("Success: \(response.message), Data: \(response.data)")
+                } else {
+                    print("Failed: \(response.message)")
+                }
+            })
+            .store(in: &cancellables)
+    }
+
     
     //MARK: 프로필 사진 get
     func fetchProfileImage(userId: Int) {
@@ -246,6 +305,18 @@ class ProfileViewModel: ObservableObject {
         }
         return false
     }
+    
+    // 심박수 유효성 검사 로직
+    func validateHeartRate(_ heartRate: Int) {
+         if heartRate >= 40 && heartRate <= 120 {
+             print("Heart rate is valid: \(heartRate)")
+         } else {
+             print("Heart rate is invalid: \(heartRate)")
+         }
+        
+        isHeartRateValid = (heartRate >= 40 && heartRate <= 120)
+     }
+    
     // 사용자 정보 유효성 전체 검사
     public var isFormValid: Bool {
         return isUserNameValid && isUserWeightValid && isUserHeightValid

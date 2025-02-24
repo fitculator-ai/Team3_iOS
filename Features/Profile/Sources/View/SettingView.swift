@@ -11,7 +11,8 @@ import Shared
 
 struct SettingView: View {
     
-    @StateObject private var viewModel = SettingViewModel()
+    @EnvironmentObject var viewModel: ProfileViewModel
+    //@StateObject private var viewModel = SettingViewModel()
     
     var body: some View {
         NavigationView {
@@ -115,96 +116,93 @@ struct BlockedUsersView: View {
 
 struct RestingHeartRateView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var viewModel: SettingViewModel
+    @EnvironmentObject var profileViewModel: ProfileViewModel
     
     var body: some View {
-          VStack(spacing: 20) {
-              ZStack {
-                  Circle()
-                      .fill(Color.red)
-                      .frame(width: 120, height: 120)
-                  Image(systemName: "heart.fill")
-                      .resizable()
-                      .scaledToFit()
-                      .foregroundColor(.white)
-                      .frame(width: 60, height: 60)
-              }
-              .padding(.top, 20)
-              
-              HStack {
-                    TextField(" ", text: Binding(
-                        get: {
-                            return "\(viewModel.HeartRateRequest?.userHeartRate)"
-                        },
-                        set: { newValue in
-                            if let newHeartRate = Int(newValue) {
-                                viewModel.HeartRateRequest?.userHeartRate = newHeartRate
-                            }
+        VStack(spacing: 20) {
+            ZStack {
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: 120, height: 120)
+                Image(systemName: "heart.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .frame(width: 60, height: 60)
+            }
+            .padding(.top, 20)
+            
+            HStack {
+                TextField(" ", text: Binding(
+                    get: {
+                        return "\(profileViewModel.MyPageRecord?.userHeartRate ?? 0)"
+                    },
+                    set: { newValue in
+                        // 입력 값이 유효하면 업데이트
+                        if let newHeartRate = Int(newValue) {
+                            profileViewModel.MyPageRecord?.userHeartRate = newHeartRate
                         }
-                    ))
-                  .keyboardType(.numberPad)
-                  .font(.largeTitle)
-                  .foregroundColor(.blue)
-                  .bold()
-                  .multilineTextAlignment(.center)
-                  .padding()
-                  .background(Color.gray.opacity(0.2))
-                  .cornerRadius(10)
-                  .frame(width: 150)
-                  .overlay(
+                    }
+                ))
+                .keyboardType(.numberPad)
+                .font(.largeTitle)
+                .foregroundColor(.blue)
+                .bold()
+                .multilineTextAlignment(.center)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .frame(width: 150)
+                .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(viewModel.isValid ? Color.clear : Color.red, lineWidth: 2)
-                  )
-                  .onReceive(viewModel.$HeartRateRequest) { _ in
-                      viewModel.validateHeartRate()
-                  }
-                  
-                  Text("bpm")
-                      .font(.title)
-                      .foregroundColor(.white)
-                      .bold()
-              }
-              
-              if !viewModel.isValid {
-                  Text("심박수는 40~120 사이여야 합니다.")
-                      .foregroundColor(.red)
-                      .font(.footnote)
-                      .bold()
-                      .padding(.top, 5)
-              }
-              
-              Spacer()
-              
-              Button(action: {
-                  if viewModel.validateHeartRate() {
-                      let request = HeartRateRequest(userId: 1, userHeartRate: viewModel.HeartRateRequest?.userHeartRate ?? 40)
-                      
-//                      viewModel.updateHeartRate(request: request) { success, error in
-//                          if success {
-//                              self.presentationMode.wrappedValue.dismiss()
-//                          } else {
-//                              if let error = error {
-//                                  print("Error: \(error.localizedDescription)")
-//                              }
-//                          }
-//                      }
-                  }
-              }) {
-                  Text("저장")
-                      .bold()
-                      .frame(maxWidth: .infinity)
-                      .padding()
-                      .background(viewModel.isValid ? Color.blue : Color.gray)
-                      .foregroundColor(.white)
-                      .cornerRadius(10)
-              }
-              .disabled(!viewModel.isValid)
-              .padding(.horizontal)
-          }
-          .padding()
-          .background(Color.black.edgesIgnoringSafeArea(.all))
-      }
-  }
+                        .stroke(profileViewModel.isHeartRateValid ? Color.clear : Color.red, lineWidth: 2)
+                )
+                
+                Text("bpm")
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .bold()
+            }
+            
+            if !profileViewModel.isHeartRateValid {
+                Text("심박수는 40~120 사이여야 합니다.")
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                    .bold()
+                    .padding(.top, 5)
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                if let record = profileViewModel.MyPageRecord {
+                    let request = HeartRateRequest(userId: record.userId, userHeartRate: record.userHeartRate)
+                    print("저장된 심박수: \(request.userHeartRate), userId: \(request.userId)")
+                    
+                    profileViewModel.updateHeartRate()
+                }
+            }) {
+                Text("저장")
+                    .bold()
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(profileViewModel.isHeartRateValid ? Color.blue : Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .disabled(!profileViewModel.isHeartRateValid)  // 유효성에 맞지 않으면 버튼 비활성화
+            .padding(.horizontal)
+        }
+        .padding()
+        .background(Color.black.edgesIgnoringSafeArea(.all))
+        .onAppear {
+            // 최초 로드시, 심박수 데이터를 가져온 후 API 호출을 최소화
+            if profileViewModel.MyPageRecord == nil {
+                profileViewModel.updateHeartRate() // 데이터를 불러오는 메서드 호출
+            }
+        }
+    }
+}
 
 struct MembershipBenefitsView: View {
     var body: some View {
@@ -278,4 +276,5 @@ struct SettingsView_Previews: PreviewProvider {
 
 #Preview {
     SettingView()
+        .environmentObject(ProfileViewModel())
 }

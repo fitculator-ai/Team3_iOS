@@ -152,7 +152,7 @@ public struct ProfileView: View {
                 }
                 .navigationTitle("마이")
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing: NavigationLink(destination: SettingView()) {
+                .navigationBarItems(trailing: NavigationLink(destination: SettingView().environmentObject(ProfileViewModel())) {
                     Image(systemName: "gearshape.fill")
                         .resizable()
                         .scaledToFit()
