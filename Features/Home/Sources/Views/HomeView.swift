@@ -170,6 +170,10 @@ public struct HomeView: View {
             .onAppear {
                 viewModel.selectedDate = Date()
                 viewModel.updateStartAndEndOfWeek()
+                // TODO: formatter 삭제 예정
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: "2025-02-21")
             }
             .onChange(of: viewModel.selectedDate) {
                 viewModel.updateStartAndEndOfWeek()

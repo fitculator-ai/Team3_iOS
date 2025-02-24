@@ -26,11 +26,14 @@ public struct ScrollableTextEditor: UIViewRepresentable {
         textView.backgroundColor = UIColor(Color.cellColor)
         textView.delegate = context.coordinator
         textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        textView.text = text
         return textView
     }
     
     public func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
+        if uiView.text != text {
+            uiView.text = text
+        }
         uiView.isEditable = isEditing
         
         if isEditing && isFocused {
@@ -52,7 +55,9 @@ public struct ScrollableTextEditor: UIViewRepresentable {
         }
         
         public func textViewDidChange(_ textView: UITextView) {
-            parent.text = textView.text
+            DispatchQueue.main.async {
+                self.parent.text = textView.text
+            }
         }
     }
 }
