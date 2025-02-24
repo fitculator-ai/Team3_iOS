@@ -14,7 +14,7 @@ let project = Project(
             destinations: [.iPhone, .iPad],
             product: .app,
             bundleId: "io.fitculator.Fitculator",
-            deploymentTargets: .iOS("16.6"),
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(
                 with: [
                     "NSAppTransportSecurity": [
@@ -42,7 +42,7 @@ let project = Project(
             destinations: [.iPhone, .iPad],
             product: .unitTests,
             bundleId: "io.fitculator.FitculatorTests",
-            deploymentTargets: .iOS("16.6"),
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
             sources: ["Fitculator/Tests/**"],
             resources: [],
@@ -54,13 +54,14 @@ let project = Project(
                 destinations: [.iPhone, .iPad],
                 product: .framework,
                 bundleId: "io.fitculator.Fitculator.features",
-                deploymentTargets: .iOS("16.6"),
+                deploymentTargets: .iOS("17.0"),
                 infoPlist: .default,
                 sources: ["Features/**"],
                 dependencies: [
                     .target(name: "Core"),
                     .target(name: "Shared"),
-                    .external(name: "Kingfisher")
+                    .external(name: "Kingfisher"),
+                    .external(name: "FSCalendar"),
                 ]
             ),
         
@@ -69,7 +70,7 @@ let project = Project(
                 destinations: [.iPhone, .iPad],
                 product: .framework,
                 bundleId: "io.fitculator.Fitculator.core",
-                deploymentTargets: .iOS("16.6"),
+                deploymentTargets: .iOS("17.0"),
                 infoPlist: .default,
                 sources: ["Core/**"],
                 dependencies: [
@@ -82,7 +83,7 @@ let project = Project(
                 destinations: [.iPhone, .iPad],
                 product: .framework,
                 bundleId: "io.fitculator.Fitculator.shared",
-                deploymentTargets: .iOS("16.6"),
+                deploymentTargets: .iOS("17.0"),
                 infoPlist: .default,
                 sources: ["Shared/**"],
                 dependencies: [

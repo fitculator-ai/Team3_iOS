@@ -19,7 +19,7 @@ public struct WorkoutData: Codable {
     public let weekIntensity: String
 }
 
-public struct WorkoutRecord: Codable, Identifiable, Hashable {
+public struct WorkoutRecord: Codable, Identifiable {
     public var id: Int { recordId }
     
     public let recordId: Int
