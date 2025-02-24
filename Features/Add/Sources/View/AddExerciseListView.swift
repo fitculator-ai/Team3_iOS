@@ -77,6 +77,14 @@ struct ExerciseTypeListView: View {
                         .padding(.leading, 10)
                     
                     Spacer()
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: item.favoriteYn == "N" ? "bookmark" : "bookmark.fill")
+                    }
+                    .padding(.trailing, 20)
+                    .buttonStyle(.plain)
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
                 .background(Color.cellColor)
