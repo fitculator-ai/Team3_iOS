@@ -53,8 +53,11 @@ public class HomeViewModel: ObservableObject {
                     }
                     self?.isLoading = false
                 },
-                receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
-                    self?.workoutData = response.data
+                receiveValue: { [weak self] (currentWorkout, previousWorkoutPoint) in
+                    self?.workoutData = currentWorkout.workoutData
+                    //TODO: MaxPoint 변경
+                    self?.pointPercentageDifference = (currentWorkout.weeklyWorkoutPoint - previousWorkoutPoint) * 100 / 250
+                    self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: currentWorkout.workoutData.records)
                 }
             )
             .store(in: &cancellables)
@@ -92,6 +95,11 @@ public class HomeViewModel: ObservableObject {
                 }
             )
             .store(in: &cancellables)
+    }
+    private func getPreviousWeekDate(from targetDate: String) -> String {
+        let dateFormatter = DateFormatterUtil.dateFormatDate
+        guard let date = dateFormatter.date(from: targetDate), let previousDate = Calendar.current.date(byAdding: .day, value: -7, to: date) else { return targetDate }
+        return dateFormatter.string(from: previousDate)
     }
     
     // 주의 첫날과 마지막날 날짜 구하기
@@ -147,6 +155,11 @@ public class HomeViewModel: ObservableObject {
         return selectedWeekString
     }
     
+    func getStrenthCount() -> Int {
+        guard let weekStrengthCount = workoutData?.weekStrengthCount else { return 0}
+        return weekStrengthCount
+    }
+    
     func getDateToTime(dateString: String) -> String {
         if let date = DateFormatterUtil.dateFormatTime.date(from: dateString) {
             let dateToTime = DateFormatterUtil.dateToTime.string(from: date)
@@ -169,10 +182,6 @@ public class HomeViewModel: ObservableObject {
             return dateToDateTime
         }
         return ""
-    }
-    
-    func getStrenthPoint() -> String {
-        return "\(strengthPoint)"
     }
     
     func getWeekIntensityPoint() -> Double {
