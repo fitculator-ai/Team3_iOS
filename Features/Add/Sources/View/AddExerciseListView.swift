@@ -26,7 +26,7 @@ public struct AddExerciseListView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                    Color.background.ignoresSafeArea()
+                Color.background.ignoresSafeArea()
                 
                 ScrollView {
                     Picker("운동 종류", selection: $selectedPicker) {
@@ -39,9 +39,9 @@ public struct AddExerciseListView: View {
                     .padding(.vertical, 5)
                     
                     if selectedPicker == .aerobic {
-                        ExerciseTypeListView(exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
+                        ExerciseTypeListView(viewModel: viewModel, exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
                     } else {
-                        ExerciseTypeListView(exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
+                        ExerciseTypeListView(viewModel: viewModel, exerciseValues: "STRENGTH", exerciseList: viewModel.exerciseStrengthList)
                     }
                 }
             }
@@ -55,11 +55,16 @@ public struct AddExerciseListView: View {
 }
 
 struct ExerciseTypeListView: View {
+    @ObservedObject var viewModel: AddExerciseListViewModel
     let exerciseValues: String
     let exerciseList: [ExerciseType]
     
+    var sortedExerciseList: [ExerciseType] {
+        exerciseList.sorted { $0.favoriteYn > $1.favoriteYn }
+    }
+    
     var body: some View {
-        ForEach(exerciseList) { item in
+        ForEach(sortedExerciseList) { item in
             NavigationLink {
                 AddExerciseDetailView(exerciseKRName: item.exerciseKorName, exerciseENName: item.exerciseEngName, exerciseValue: exerciseValues)
             } label: {
@@ -77,6 +82,20 @@ struct ExerciseTypeListView: View {
                         .padding(.leading, 10)
                     
                     Spacer()
+                    
+                    Button {
+                        if item.favoriteYn == "N" {
+                            viewModel.fetchAddFavoriteExercise(userId: 1, exerciseId: item.exerciseId)
+                        } else {
+                            viewModel.fetchRemoveFavoriteExercise(userId: 1, exerciseId: item.exerciseId)
+                        }
+                        viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
+                        viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
+                    } label: {
+                        Image(systemName: item.favoriteYn == "N" ? "bookmark" : "bookmark.fill")
+                    }
+                    .padding(.trailing, 20)
+                    .buttonStyle(.plain)
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.88, height: 70)
                 .background(Color.cellColor)
