@@ -28,7 +28,7 @@ public enum APIEndpoint {
     public var path: String {
         switch self {
         case .getFirstWorkoutDate:
-            return "workout/firstWorkout"
+            return "/workout/firstWorkout"
         case .getWeeklyWorkout:
             return "/workout/week"
         case .getWorkoutCount: 
