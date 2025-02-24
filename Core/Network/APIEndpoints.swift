@@ -58,7 +58,7 @@ public enum APIEndpoint {
             return .put
         case .deleteWorkout:
             return .delete
-        case .createWorkout, .createMyPageProfileImage: // `.createMyPageProfileImage`는 `post` 메서드로 변경
+        case .createWorkout, .createMyPageProfileImage:
             return .post
         }
     }
@@ -87,7 +87,7 @@ public enum APIEndpoint {
             return request.toDictionary()
         case .getMyPageProfileImage(userId: let userId):
             return ["userId": userId]
-        case .createMyPageProfileImage(userId: let userId, let filedata): // `filedata`를 받아오는 부분
+        case .createMyPageProfileImage(userId: let userId, let filedata): 
             return ["userId": userId, "filedata": filedata]
         }
     }
