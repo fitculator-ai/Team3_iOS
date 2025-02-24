@@ -26,7 +26,7 @@ public struct AddExerciseListView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                    Color.background.ignoresSafeArea()
+                Color.background.ignoresSafeArea()
                 
                 ScrollView {
                     Picker("운동 종류", selection: $selectedPicker) {
