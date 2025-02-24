@@ -51,7 +51,6 @@ public class HomeViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] (response: WeeklyWorkoutResponse) in
-                    print("\(response)")
                     self?.workoutData = response.data
                 }
             )
@@ -68,8 +67,25 @@ public class HomeViewModel: ObservableObject {
                         print("메모 업데이트 실패: \(error.localizedDescription)")
                     }
                 },
-                receiveValue: { (response: UpdateWorkoutResponse) in
+                receiveValue: { (response: WorkoutResponse) in
                     print("메모 업데이트 성공: \(response.message)")
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func deleteWorkout(userId: Int, recordId: Int) {
+        networkService.request(APIEndpoint.deleteWorkout(userId: userId, recordId: recordId))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.error = error
+                        print("삭제 실패: \(error.localizedDescription)")
+                    }
+                },
+                receiveValue: { (response: WorkoutResponse) in
+                    print("삭제 성공: \(response.message)")
                 }
             )
             .store(in: &cancellables)
