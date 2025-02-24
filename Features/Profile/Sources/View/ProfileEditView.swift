@@ -25,8 +25,7 @@ public struct ProfileEditView: View {
     @State private var userBirth: Date = Date()
     
     @State private var imageSourceType: UIImagePickerController.SourceType = .photoLibrary
-   // @State private var selectedImage: UIImage?
-    
+
     @State private var showImageCropper = false
     
     public var body: some View {
