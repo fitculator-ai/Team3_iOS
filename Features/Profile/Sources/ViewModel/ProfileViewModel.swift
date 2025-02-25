@@ -67,7 +67,7 @@ class ProfileViewModel: ObservableObject {
                    .store(in: &cancellables)
     }
     
-    //MARK:  마이 페이지 (프로필) get
+    //MARK: 마이 페이지 (프로필) get
     public func fetchMyPage(userId: Int) {
         isLoading = true
         
@@ -105,11 +105,26 @@ class ProfileViewModel: ObservableObject {
                         self?.heartRateRequest = HeartRateRequest(userHeartRate: 40)
                         print("Heart rate not found, using default value: 40")
                     }
+                    
+                    // S3 보안 설정 때문에 2시간 유효기간이 설정되어 있음
+                    // 따라서 2시간마다 API 요청을 호출해야 함
+                    // 현재는 테스트로 1분 후에 `fetchMyPage`를 호출하는 타이머를 설정
+                    self?.reloadImagePeriodically(userId: userId)
                 }
             )
             .store(in: &cancellables)
     }
-                
+
+    private func reloadImagePeriodically(userId: Int) {
+        // 1분 후(테스트용)에 fetchMyPage를 호출하는 타이머 설정
+        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            self?.fetchMyPage(userId: userId)
+        }
+        
+//        Timer.scheduledTimer(withTimeInterval: 7200, repeats: true) { [weak self] _ in
+//               self?.fetchMyPage(userId: userId)
+//           }
+    }
     
     //MARK: 마이 페이지 (프로필) put
     func updateMyPage() {
