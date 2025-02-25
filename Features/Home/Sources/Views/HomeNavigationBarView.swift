@@ -29,6 +29,7 @@ struct NavigationBarHeightReader: UIViewControllerRepresentable {
 
 
 struct HomeNavigationBar: View {
+    final class BundleFinder {}
     var title: String = "Fitculator"
     var leftIcon: String = "globe"
     var rightIcon: String = "bell"
@@ -36,28 +37,28 @@ struct HomeNavigationBar: View {
     @State private var navBarHeight: CGFloat = 44 // 기본값 설정
 
     var body: some View {
-        VStack {
-            HStack(alignment: .center) {
-                HStack {
-                    Image(systemName: leftIcon)
-                        .font(AppFont.subTitle)
-                    Text(title)
-                        .font(AppFont.mainTitle)
-                        .italic()
-                        .foregroundStyle(.white)
-                }
-
-                Spacer()
-
-                Image(systemName: rightIcon)
-                    .font(AppFont.subTitle)
-                    .foregroundStyle(.white)
-            }
-            .frame(height: navBarHeight) // 동적으로 가져온 높이 적용
-
-            NavigationBarHeightReader { height in
-                self.navBarHeight = height
-            }
+        HStack() {
+            Image("LogoHorizontal", bundle: Bundle(for: BundleFinder.self))
+                .resizable()
+                // 이미지 여백 자르기
+                .scaledToFill()
+                .frame(width: navBarHeight * 5, height: navBarHeight)
+                .offset(x: -navBarHeight * 0.5)
+                .clipped()
+            Spacer()
+            
+            Image(systemName: rightIcon)
+                .font(AppFont.subTitle)
+                .foregroundStyle(.white)
+        }
+        .frame(height: navBarHeight) // 동적으로 가져온 높이 적용
+        
+        NavigationBarHeightReader { height in
+            self.navBarHeight = height
         }
     }
+}
+
+#Preview {
+    HomeNavigationBar()
 }
