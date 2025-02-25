@@ -109,6 +109,7 @@ struct AddExerciseDetailView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("저장") {
+                    modalManager.shouldUpdateHomeView = true
                     modalManager.isModalPresented = false
                     
                     let exerciseData = WorkoutRequest(
@@ -118,7 +119,7 @@ struct AddExerciseDetailView: View {
                         exerciseEngName: exerciseENName,
                         recordDate: DateFormatterUtil.dateFormatDate.string(from: viewModel.selectedDate),
                         recordStart: DateFormatterUtil.dateFormatTime.string(from: viewModel.selectedDate),
-                        duration: Int(viewModel.duration)!,
+                        duration: Int(viewModel.duration) ?? 0,
                         avgHeartRate: Int(viewModel.avgHeartRate) ?? 0,
                         highHeartRate: Int(viewModel.maxHeartRate) ?? 0,
                         memo: viewModel.memo
