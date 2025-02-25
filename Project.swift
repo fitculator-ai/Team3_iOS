@@ -43,7 +43,7 @@ let project = Project(
             deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
             sources: ["Fitculator/Tests/**"],
-            resources: [],
+            resources: ["Features/**/*.xcassets"],
             dependencies: [.target(name: "Fitculator")]
         ),
         
@@ -55,6 +55,7 @@ let project = Project(
                 deploymentTargets: .iOS("17.0"),
                 infoPlist: .default,
                 sources: ["Features/**"],
+                resources: ["Features/**/*.xcassets"],
                 dependencies: [
                     .target(name: "Core"),
                     .target(name: "Shared"),
