@@ -71,6 +71,9 @@ let project = Project(
                 deploymentTargets: .iOS("17.0"),
                 infoPlist: .default,
                 sources: ["Core/**"],
+                resources: [
+                    "Core/Localizable.xcstrings"
+                ],
                 dependencies: [
                     .external(name: "Alamofire")
                 ]

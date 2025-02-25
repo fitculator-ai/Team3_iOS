@@ -78,7 +78,7 @@ struct ExerciseTypeListView: View {
                         .clipShape(Circle())
                         .padding(.leading, 20)
                     
-                    Text(item.exerciseKorName)
+                    Text(currentLanguage() == "en" ? item.exerciseEngName : item.exerciseKorName)
                         .bold()
                         .padding(.leading, 10)
                     

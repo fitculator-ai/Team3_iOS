@@ -96,7 +96,7 @@ public struct HomeView: View {
                                                 .padding(12)
                                                 .background(.blue)
                                                 .clipShape(Circle())
-                                            Text("근 력")
+                                            Text(LocalizedStringKey("stre"), bundle: .core)
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }

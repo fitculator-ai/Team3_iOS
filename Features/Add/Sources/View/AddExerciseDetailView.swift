@@ -96,7 +96,7 @@ struct AddExerciseDetailView: View {
                 Spacer()
             }
         }
-        .navigationTitle(exerciseKRName)
+        .navigationTitle(currentLanguage() == "en" ? exerciseENName : exerciseKRName)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .toolbar {

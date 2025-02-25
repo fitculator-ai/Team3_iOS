@@ -1,0 +1,23 @@
+{
+  "sourceLanguage" : "ko",
+  "strings" : {
+    "strength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strength"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "근 력"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
