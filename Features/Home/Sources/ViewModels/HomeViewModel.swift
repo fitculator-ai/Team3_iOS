@@ -15,6 +15,7 @@ public class HomeViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published public var workoutData: WorkoutData?
     @Published var pointPercentageDifference: Int = 0
+    @Published var firstWorkoutDate: Date = Date()
     @Published public var isLoading: Bool = false
     @Published public var error: Error?
     var selectedWeekString = ""
@@ -60,6 +61,24 @@ public class HomeViewModel: ObservableObject {
                     self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: currentWorkout.workoutData.records)
                 }
             )
+            .store(in: &cancellables)
+    }
+    
+    // 운동 기록이 있는 최초 날짜 불러오기
+    func fetchFirstWorkoutDate(userId: Int) {
+        networkService.request(APIEndpoint.getFirstWorkoutDate(userId: userId))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error
+                    print("Error: \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] (response: FirstWorkoutResponse) in
+                let dateFormatter = DateFormatterUtil.dateFormatDate
+                if let firstWorkoutDate = dateFormatter.date(from: response.data) {
+                    self?.firstWorkoutDate = firstWorkoutDate
+                }
+            })
             .store(in: &cancellables)
     }
     
@@ -133,7 +152,11 @@ public class HomeViewModel: ObservableObject {
     }
     
     func checkIsFirstWeek() -> Bool {
-        //TODO: 첫번째 데이터 검사 로직 추가
+        if let selectedWeek = getStartAndEndOfWeek(from: selectedDate),
+           let firstWorkoutWeek = getStartAndEndOfWeek(from: firstWorkoutDate),
+           selectedWeek == firstWorkoutWeek {
+            return true
+        }
         return false
     }
     
@@ -184,29 +207,6 @@ public class HomeViewModel: ObservableObject {
         return ""
     }
     
-    func getWeekIntensityPoint() -> Double {
-        guard let weekIntensity = workoutData?.weekIntensity else { return 0.0 }
-        switch weekIntensity {
-        case "VERY LOW" :
-            return 0.0
-        case "LOW" :
-            return 0.25
-        case "MEDIUM" :
-            return 0.5
-        case "HIGH" :
-            return 0.75
-        case "VERY HIGH" :
-            return 1.0
-        default:
-            return 0.0
-        }
-    }
-    
-    func getWeekIntensityString() -> String {
-        guard let weekIntensity = workoutData?.weekIntensity else { return "운동이 부족합니다" }
-        return weekIntensity
-    }
-    
     // PieChart를 위한 데이터 변환
     private func updateWorkoutRecordSum(weeklyWorkoutDataRecords: [WorkoutRecord]) {
         let grouped = Dictionary(grouping: weeklyWorkoutDataRecords) { $0.exerciseKorName }
@@ -241,6 +241,10 @@ public class HomeViewModel: ObservableObject {
         return ExerciseIntensity.from(intensity).koreanText
     }
     
+    func getWeekIntensityPercentage(_ intensity: String) -> Double {
+        return ExerciseIntensity.from(intensity).progressPercentage
+    }
+    
     enum ExerciseIntensity: String {
         case veryHigh = "VERY HIGH"
         case high = "HIGH"
@@ -265,6 +269,16 @@ public class HomeViewModel: ObservableObject {
             case .medium: return Color.fitculatorLogo
             case .low: return .yellow
             case .veryLow: return .green
+            }
+        }
+        
+        var progressPercentage: Double {
+            switch self {
+            case .veryLow : return 0.0
+            case .low : return 0.25
+            case .medium : return 0.5
+            case .high : return 0.75
+            case .veryHigh : return 1.0
             }
         }
         

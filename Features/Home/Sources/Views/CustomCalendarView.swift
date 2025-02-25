@@ -4,6 +4,7 @@ import Shared
 
 struct CustomCalendarView: UIViewRepresentable {
     @Binding var selectedDate: Date
+    let firstWorkoutDate: Date
 
     func makeUIView(context: Context) -> UIView {
         let parentView = UIView()
@@ -118,6 +119,7 @@ struct CustomCalendarView: UIViewRepresentable {
         
         // 선택 안되는 날짜 색상 변경
         func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+            // 미래 날짜
             let today = Date()
             let calendar = Calendar.current
             
@@ -129,11 +131,19 @@ struct CustomCalendarView: UIViewRepresentable {
                 return UIColor(Color(.darkGray))
             }
             
+            // 최초 운동 기록 이전 날짜
+            guard let startOfFirstDataWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: parent.firstWorkoutDate)) else { return nil }
+            
+            if date < startOfFirstDataWeek {
+                return UIColor(Color(.darkGray))
+            }
+            
             return nil
         }
         
-        // 다음 주부터는 선택 안되도록
+        // 선택 안되는 날짜
         func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+            // 미래 날짜
             let today = Date()
             let calendar = Calendar.current
             
@@ -142,6 +152,13 @@ struct CustomCalendarView: UIViewRepresentable {
             else { return false }
             
             if date > endOfThisWeek {
+                return false
+            }
+            
+            // 최초 운동 기록 이전 날짜
+            guard let startOfFirstDataWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: parent.firstWorkoutDate)) else { return false }
+            
+            if date < startOfFirstDataWeek {
                 return false
             }
             
