@@ -8,31 +8,24 @@
 import SwiftUI
 
 enum Gender: Int, CaseIterable, Identifiable {
-    case male = 0
-    case female = 1
-    
+    case man = 0
+    case woman = 1
+
     var id: Int { rawValue }
-    
+
     var description: String {
         switch self {
-        case .male: return "남성"
-        case .female: return "여성"
+        case .man: return "남성"
+        case .woman: return "여성"
         }
     }
     
-    static func fromString(_ string: String) -> Gender {
-        switch string {
-        case "남성":
-            return .male
-        case "여성":
-            return .female
-        default:
-            return .male
+    static func fromString(_ value: String) -> Gender? {
+        switch value.uppercased() {
+        case "MAN": return .man
+        case "WOMAN": return .woman
+        default: return nil
         }
-    }
-    
-    static func fromInt(_ value: Int) -> Gender {
-        return Gender(rawValue: value) ?? .male
     }
 }
 
@@ -42,7 +35,7 @@ struct GenderSettingSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedGender: Gender
     
-     var body: some View {
+    var body: some View {
         VStack {
             Text("성별을 선택하세요")
                 .font(.headline)
@@ -50,12 +43,16 @@ struct GenderSettingSheetView: View {
             
             Picker("성별 선택", selection: $selectedGender) {
                 ForEach(Gender.allCases, id: \.self) { gender in
-                    Text(gender.description)
+                    Text(gender.description).tag(gender)  
                 }
             }
             .pickerStyle(WheelPickerStyle())
+            .onChange(of: selectedGender) { newValue in
+                            // 성별이 바뀔 때마다 출력
+                            print("선택된 성별: \(newValue.description)")
+                        }
             Spacer()
-        }
+         }
         .padding()
     }
 }
