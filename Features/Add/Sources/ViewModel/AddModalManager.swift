@@ -9,6 +9,7 @@ import SwiftUI
 
 public class AddModalManager: ObservableObject {
     @Published public var isModalPresented: Bool = false
+    public var shouldUpdateHomeView = false
     
     public init() {}
 }

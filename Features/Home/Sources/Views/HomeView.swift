@@ -12,6 +12,7 @@ import Core
 
 public struct HomeView: View {
     public init() {}
+    @EnvironmentObject var addModalManager: AddModalManager
     @StateObject private var viewModel = HomeViewModel()
     
     @State private var showDatePicker = false
@@ -187,6 +188,13 @@ public struct HomeView: View {
                     return
                 }
                 showDatePicker = false
+            }
+            // 운동 추가 시 HomeView 업데이트 되도록
+            .onChange(of: addModalManager.shouldUpdateHomeView) { newValue, oldValue in
+                if newValue {
+                    viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
+                    viewModel.fetchFirstWorkoutDate(userId: 1)
+                }
             }
         }
     }
