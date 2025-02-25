@@ -60,17 +60,14 @@ public enum APIEndpoint {
     
     public var method: HTTPMethod {
         switch self {
-        case .getWeeklyWorkout, .getWorkoutCount, .getWorkoutIntensity,
-                .getWorkoutDetail, .getExercises, .getMyPage, .getMyPageProfileImage :
         case .getFirstWorkoutDate, .getWeeklyWorkout, .getWorkoutCount, .getWorkoutIntensity,
-             .getWorkoutDetail, .getExercises, .getMyPage:
+             .getWorkoutDetail, .getExercises, .getMyPage, .getMyPageProfileImage:
             return .get
         case .updateWorkout, .updateMyPage, .updateHeartRate:
             return .put
         case .deleteWorkout, .removeFavorite:
             return .delete
-        case .createWorkout, .createMyPageProfileImage:
-        case .createWorkout, .addFavorite:
+        case .createWorkout, .createMyPageProfileImage, .addFavorite:
             return .post
         }
     }
