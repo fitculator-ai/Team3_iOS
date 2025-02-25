@@ -34,24 +34,23 @@ class ProfileViewModel: ObservableObject {
     }
     
     @Published var profileImageString: String? = nil
-        
     
-    @Published var userGender: Gender = .male {
-        didSet {
-            MyPageRecord?.userGender = userGender.description
+    @Published var userGender: Gender = .man
+    
+    static func fromString(_ value: String) -> Gender? {
+        switch value.uppercased() {
+        case "MAN": return .man
+        case "WOMAN": return .woman
+        default: return nil
         }
-    }
-    
-    func updateGender(from string: String) {
-        self.userGender = Gender.fromString(string)
     }
 
     public lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
+        formatter.dateFormat = "yyyy-MM-dd" 
         return formatter
     }()
+
     
     
     @Published var isHeartRateValid: Bool = true
