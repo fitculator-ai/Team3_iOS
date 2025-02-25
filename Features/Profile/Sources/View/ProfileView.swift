@@ -166,7 +166,7 @@ public struct ProfileView: View {
                 viewModel.fetchProfileImage(userId: 1)
             }
             .environmentObject(viewModel)
-        }
+        }.scrollIndicators(.never)
     }
 }
 struct WeeklyActivityChart: View {

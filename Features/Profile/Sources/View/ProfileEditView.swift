@@ -336,7 +336,6 @@ public struct ProfileEditView: View {
             }
             .frame(width: UIScreen.main.bounds.width * 0.88)
         }
-        .scrollIndicators(.never)
     }
 }
 
