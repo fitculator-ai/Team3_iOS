@@ -19,7 +19,7 @@ public struct WorkoutData: Codable {
     public let weekIntensity: String
 }
 
-public struct WorkoutRecord: Codable, Identifiable {
+public struct WorkoutRecord: Codable, Identifiable, Hashable {
     public var id: Int { recordId }
     
     public let recordId: Int
@@ -28,6 +28,8 @@ public struct WorkoutRecord: Codable, Identifiable {
     public let exerciseImg: String
     public let exerciseColor: String
     public let avgHeartRate: Int
+    public let recordStart: String
+    public let recordEnd: String
     public let duration: Int
     public let intensity: String
     public let recordPoint: Int

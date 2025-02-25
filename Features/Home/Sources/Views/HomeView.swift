@@ -31,7 +31,6 @@ public struct HomeView: View {
                         HStack(spacing: 20) {
                             Spacer()
                             
-                            // TODO: 조건에 따라 버튼 disabled 처리
                             Button(action: {
                                 if let previousWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: viewModel.selectedDate) {
                                     viewModel.selectedDate = previousWeekDate
@@ -40,11 +39,15 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.left")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(viewModel.checkIsFirstWeek() ? Color(.darkGray) : Color(.white))
                             }
+                            .disabled(viewModel.checkIsFirstWeek())
                             
                             Text(viewModel.getSelectedWeekString())
                                 .font(.subheadline)
+                                .fontWeight(
+                                    ["이번주 운동량", "지난주 운동량"].contains(viewModel.getSelectedWeekString()) ? .semibold : .regular
+                                )
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
                                 .frame(width: 228)
@@ -54,7 +57,6 @@ public struct HomeView: View {
                                     showDatePicker.toggle()
                                 }
                             
-                            // TODO: 조건에 따라 버튼 disabled 처리
                             Button(action: {
                                 if let nextWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: +1, to: viewModel.selectedDate) {
                                     viewModel.selectedDate = nextWeekDate
@@ -63,26 +65,28 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.right")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(viewModel.checkIsCurrentWeek() ? Color(.darkGray) : Color(.white))
                             }
+                            .disabled(viewModel.checkIsCurrentWeek())
                             
                             Spacer()
                         }
                         ZStack(alignment: .top) {
                             VStack {
-                                ExercisePieChartView(data: viewModel.weeklyExercisePoints)
+                                ExercisePieChartView(data: viewModel.workoutRecordPointSums)
                                     .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.7)
                                 
                                 HStack {
-                                    Image(systemName: "arrowshape.down.circle")
-                                    Text("지난 주 대비 19%")
+                                    Image(systemName: viewModel.pointPercentageDifference >= 0 ? "arrowshape.up.circle" : "arrowshape.down.circle")
+                                    Text("지난 주 대비 \(abs(viewModel.pointPercentageDifference))%")
                                 }
                                 .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(viewModel.pointPercentageDifference >= 0 ? Color(.systemBlue) : Color(.systemRed))
                                 
                                 Spacer()
                                     .frame(height: 20)
                                 
-                                //TODO: 색상 변경
                                 HStack(spacing: 16) {
                                     // 근력
                                     VStack {
@@ -98,17 +102,19 @@ public struct HomeView: View {
                                         }
                                         Spacer()
                                         HStack(spacing: 4) {
+                                            // progressbar 색상과 동일하게
                                             RoundedRectangle(cornerRadius: 8)
+                                                .foregroundStyle(viewModel.getStrenthCount() > 0 ?  Color(.blue) : Color(hex: "#494a59"))
                                             RoundedRectangle(cornerRadius: 8)
+                                                .foregroundStyle(viewModel.getStrenthCount() > 1 ?  Color(.blue) : Color(hex: "#494a59"))
                                         }
-                                        .foregroundStyle(.blue)
                                         .frame(height: 12)
                                         
                                         Spacer()
                                         
                                         HStack {
                                             Spacer()
-                                            Text(viewModel.getStrenthPoint()).font(AppFont.subTitle) + Text("/2").font(.subheadline)
+                                            Text("\(viewModel.getStrenthCount())").font(AppFont.subTitle) + Text("/2").font(.subheadline)
                                         }
                                     }
                                     .padding(12)
@@ -127,7 +133,7 @@ public struct HomeView: View {
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
-                                        ProgressView(value: viewModel.getWorkoutLoad())
+                                        ProgressView(value: viewModel.getWeekIntensityPoint())
                                             .progressViewStyle(.linear)
                                             .scaleEffect(y: 2.5)
                                             .frame(height: 20)
@@ -144,7 +150,7 @@ public struct HomeView: View {
                                         Spacer()
                                             .frame(height: 8)
                                         
-                                        Text("적당한 운동중")
+                                        Text(viewModel.getWeekIntensityString())
                                             .font(.subheadline)
                                     }
                                     .padding(12)
@@ -168,11 +174,16 @@ public struct HomeView: View {
                 .scrollIndicators(.never)
             }
             .onAppear {
-                viewModel.selectedDate = Date()
-                viewModel.updateStartAndEndOfWeek()
+                viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
             .onChange(of: viewModel.selectedDate) {
-                viewModel.updateStartAndEndOfWeek()
+                // 날짜 변경 시 주가 바뀌었을 때만 fetch
+                guard let newWeek = viewModel.getStartAndEndOfWeek(from: $0), let oldWeek = viewModel.getStartAndEndOfWeek(from: $1), newWeek == oldWeek else {
+                    viewModel.updateStartAndEndOfWeek()
+                    showDatePicker = false
+                    viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
+                    return
+                }
                 showDatePicker = false
             }
         }
