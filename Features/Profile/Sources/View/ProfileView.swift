@@ -52,8 +52,8 @@ struct ExerciseData {
 public struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     
-    var followingCount: Int = 123
-    var followerCount: Int = 155
+    var followingCount: Int = 0
+    var followerCount: Int = 0
     
     public init() {}
     
@@ -108,7 +108,7 @@ public struct ProfileView: View {
                                     .frame(height: 20)
                                     .background(Color.white)
                                 
-                                Text("팔로윙 \(followingCount)")
+                                Text("팔로잉 \(followingCount)")
                                     .font(AppFont.profileContentTextFont)
                                     .foregroundColor(.white)
                             }
