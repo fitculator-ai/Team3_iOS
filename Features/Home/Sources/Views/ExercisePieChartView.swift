@@ -34,9 +34,8 @@ struct ExercisePieChartView: View {
         data.reduce(0) { $0 + $1.recordPointSum }
     }
     var adjustedData: [WorkoutRecordPointSum] {
-        //TODO: maximum point 변경
-        if total < 250 {
-            let remaining = 250 - total
+        if total < 100 {
+            let remaining = 100 - total
             return data + [WorkoutRecordPointSum(exerciseKorName: "empty", exerciseImg: nil, recordPointSum: remaining, exerciseColor: Color.cellColor)]
         }
         return data
@@ -55,8 +54,7 @@ struct ExercisePieChartView: View {
     var body: some View {
         Chart(Array(zip(adjustedData, cumulativeSums)), id: \.0.exerciseKorName) { element, cumulativeSum in
             let elementPoint = Double(element.recordPointSum)
-            //TODO: maximum point 변경
-            let adjustedTotal = max(total, 250)
+            let adjustedTotal = max(total, 100)
             let centerAngle =
             // 현재 조각의 끝 지점
                 .pi * 2 * (cumulativeSum / adjustedTotal)
@@ -96,7 +94,7 @@ struct ExercisePieChartView: View {
                     VStack {
                         Text("유산소")
                             .font(.subheadline)
-                        Text("\(Int(total/250 * 100))").font(.largeTitle) + Text(" %").font(.subheadline)
+                        Text("\(Int(total))").font(.largeTitle) + Text(" %").font(.subheadline)
                         if !hasSeenInfoButton {
                             Spacer().frame(height: 4)
                             Button(action: {

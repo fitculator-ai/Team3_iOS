@@ -56,8 +56,7 @@ public class HomeViewModel: ObservableObject {
                 },
                 receiveValue: { [weak self] (currentWorkout, previousWorkoutPoint) in
                     self?.workoutData = currentWorkout.workoutData
-                    //TODO: MaxPoint 변경
-                    self?.pointPercentageDifference = (currentWorkout.weeklyWorkoutPoint - previousWorkoutPoint) * 100 / 250
+                    self?.pointPercentageDifference = currentWorkout.weeklyWorkoutPoint - previousWorkoutPoint
                     self?.updateWorkoutRecordSum(weeklyWorkoutDataRecords: currentWorkout.workoutData.records)
                 }
             )
