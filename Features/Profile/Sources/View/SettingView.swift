@@ -118,6 +118,8 @@ struct RestingHeartRateView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var profileViewModel: ProfileViewModel
     
+    @State private var heartRateText: String = ""
+    
     var body: some View {
         VStack(spacing: 20) {
             ZStack {
@@ -135,12 +137,19 @@ struct RestingHeartRateView: View {
             HStack {
                 TextField(" ", text: Binding(
                     get: {
-                        return "\(profileViewModel.MyPageRecord?.userHeartRate ?? 0)"
+                        if let heartRate = profileViewModel.MyPageRecord?.userHeartRate {
+                            return "\(heartRate)" // Int 값을 String으로 변환해서 반환
+                        } else {
+                            return "" // nil일 경우 빈 문자열 반환
+                        }
                     },
                     set: { newValue in
-                        // 입력 값이 유효하면 업데이트
+                        heartRateText = newValue
+                        // 실시간 유효성 검사 (숫자인지 + 범위 체크)
                         if let newHeartRate = Int(newValue) {
-                            profileViewModel.MyPageRecord?.userHeartRate = newHeartRate
+                            profileViewModel.isHeartRateValid = (40...120).contains(newHeartRate)
+                        } else {
+                            profileViewModel.isHeartRateValid = false
                         }
                     }
                 ))
@@ -175,11 +184,10 @@ struct RestingHeartRateView: View {
             Spacer()
             
             Button(action: {
-                if let record = profileViewModel.MyPageRecord {
-                    let request = HeartRateRequest(userId: record.userId, userHeartRate: record.userHeartRate)
-                    print("저장된 심박수: \(request.userHeartRate), userId: \(request.userId)")
-                    
-                    profileViewModel.updateHeartRate()
+                if let newHeartRate = Int(heartRateText), profileViewModel.isHeartRateValid {
+                    profileViewModel.MyPageRecord?.userHeartRate = newHeartRate
+                    profileViewModel.updateHeartRate(HeartRate: profileViewModel.MyPageRecord!.userHeartRate)
+//                    print("저장된 심박수: \(profileViewModel.MyPageRecord?.userHeartRate )")
                 }
             }) {
                 Text("저장")
@@ -190,20 +198,17 @@ struct RestingHeartRateView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
-            .disabled(!profileViewModel.isHeartRateValid)  // 유효성에 맞지 않으면 버튼 비활성화
+            .disabled(!profileViewModel.isHeartRateValid) // 유효하지 않으면 버튼 비활성화
             .padding(.horizontal)
         }
         .padding()
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
-            // 최초 로드시, 심박수 데이터를 가져온 후 API 호출을 최소화
-            if profileViewModel.MyPageRecord == nil {
-                profileViewModel.updateHeartRate() // 데이터를 불러오는 메서드 호출
-            }
+            // 화면이 나타날 때 저장된 심박수를 불러와서 초기화
+            profileViewModel.fetchMyPage(userId: 1)
         }
     }
 }
-
 struct MembershipBenefitsView: View {
     var body: some View {
         Text("멤버십 제휴 혜택 화면")

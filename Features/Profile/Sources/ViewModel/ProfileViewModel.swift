@@ -181,34 +181,51 @@ class ProfileViewModel: ObservableObject {
     }
     
     //MARK: 안정시 심박수 put
-    func updateHeartRate() {
-        // HeartRate 값 가져오기
-        guard let heartRate = MyPageRecord?.userHeartRate else {
-            print("Error: Heart rate is nil")
+    func updateHeartRate(HeartRate: Int) {
+        //let request = HeartRateRequest(userId: 1, userHeartRate: HeartRate)
+        
+        guard let userName = MyPageRecord?.userName,
+              let userGender = MyPageRecord?.userGender,
+              let userWeight = MyPageRecord?.userWeight,
+              let userHeight = MyPageRecord?.userHeight,
+              let userBirth = MyPageRecord?.userBirth,
+              let userHeartRate = MyPageRecord?.userHeartRate else {
+            print("Error: MyPageRecord is nil or incomplete data")
             return
         }
         
-        // HeartRateRequest 객체 생성
-        let request = HeartRateRequest(userId: 1, userHeartRate: heartRate)
+        // Create the request for the API
+        let request = MyPageRequest(userId: 1,
+                                    userName: userName,
+                                    userGender: userGender,
+                                    userWeight: userWeight,
+                                    userHeight: userHeight,
+                                    userBirth: userBirth,
+                                    socialProvider: "exampleProvider", // 임시 값 추가
+                                    userHeartRate: userHeartRate) // HeartRate 그대로 사용
         
-        // API Endpoint 설정
-        let endpoint = APIEndpoint.updateHeartRate(request: request)
+        // Define the endpoint for the API call
+        let endpoint = APIEndpoint.updateMyPage(request: request)
         
-        // 네트워크 요청
+        // Use networkService to make the API request
         networkService.request(endpoint)
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.main) // Ensure updates happen on the main thread
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    // 오류 처리
                     print("Error: \(error.localizedDescription)")
                 case .finished:
                     break
                 }
             }, receiveValue: { (response: HeartRateResponse) in
-                // 서버 응답 처리
                 if response.success {
                     print("Success: \(response.message), Data: \(response.data)")
+                    
+                    // Update the ViewModel value upon success
+                    DispatchQueue.main.async {
+                        self.MyPageRecord?.userHeartRate = HeartRate
+                        print("ViewModel 업데이트 완료: \(self.MyPageRecord?.userHeartRate ?? -1)")
+                    }
                 } else {
                     print("Failed: \(response.message)")
                 }
@@ -216,7 +233,6 @@ class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    
     //MARK: 프로필 사진 get
     func fetchProfileImage(userId: Int) {
         let networkImageService = NetworkImageService()
