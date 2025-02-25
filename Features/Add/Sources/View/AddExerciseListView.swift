@@ -37,6 +37,7 @@ public struct AddExerciseListView: View {
                     .pickerStyle(.segmented)
                     .frame(width: UIScreen.main.bounds.width * 0.88)
                     .padding(.vertical, 5)
+                    .padding(.top, 10)
                     
                     if selectedPicker == .aerobic {
                         ExerciseTypeListView(viewModel: viewModel, exerciseValues: "CARDIO", exerciseList: viewModel.exerciseCardioList)
@@ -89,8 +90,7 @@ struct ExerciseTypeListView: View {
                         } else {
                             viewModel.fetchRemoveFavoriteExercise(userId: 1, exerciseId: item.exerciseId)
                         }
-                        viewModel.fetchAddExerciseList(exerciseType: "CARDIO", userId: "1")
-                        viewModel.fetchAddExerciseList(exerciseType: "STRENGTH", userId: "1")
+                        viewModel.fetchAddExerciseList(exerciseType: item.exerciseType, userId: "1")
                     } label: {
                         Image(systemName: item.favoriteYn == "N" ? "bookmark" : "bookmark.fill")
                     }

@@ -53,11 +53,7 @@ class AddExerciseListViewModel: ObservableObject {
                     break
                 }
             }, receiveValue: { (responseData: FavoriteResponse) in
-                if responseData.success {
-                    print("✅ 즐겨찾기 추가 성공")
-                } else {
-                    debugPrint("📢 Raw Response:", responseData)
-                }
+                print(responseData.message)
             })
             .store(in: &cancellables)
     }
@@ -75,11 +71,7 @@ class AddExerciseListViewModel: ObservableObject {
                     break
                 }
             }, receiveValue: { (responseData: FavoriteResponse) in
-                if responseData.success {
-                    print("✅ 즐겨찾기 삭제 성공")
-                } else {
-                    debugPrint("📢 Raw Response:", responseData)
-                }
+                print(responseData.message)
             })
             .store(in: &cancellables)
     }

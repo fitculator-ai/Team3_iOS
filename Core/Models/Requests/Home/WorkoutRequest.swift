@@ -19,16 +19,7 @@ public struct WorkoutRequest: Codable {
     let highHeartRate: Int
     let memo: String
 
-    public init(userId: Int,
-                exerciseType: String,
-                exerciseKorName: String,
-                exerciseEngName: String,
-                recordDate: String,
-                recordStart: String,
-                duration: Int,
-                avgHeartRate: Int,
-                highHeartRate: Int,
-                memo: String) {
+    public init(userId: Int, exerciseType: String, exerciseKorName: String, exerciseEngName: String, recordDate: String, recordStart: String, duration: Int, avgHeartRate: Int, highHeartRate: Int, memo: String) {
         self.userId = userId
         self.exerciseType = exerciseType
         self.exerciseKorName = exerciseKorName
