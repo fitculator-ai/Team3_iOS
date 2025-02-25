@@ -186,8 +186,10 @@ struct RestingHeartRateView: View {
             Button(action: {
                 if let newHeartRate = Int(heartRateText), profileViewModel.isHeartRateValid {
                     profileViewModel.MyPageRecord?.userHeartRate = newHeartRate
-                    profileViewModel.updateHeartRate(HeartRate: profileViewModel.MyPageRecord!.userHeartRate)
-//                    print("저장된 심박수: \(profileViewModel.MyPageRecord?.userHeartRate )")
+                    
+                    let heartRateRequest = HeartRateRequest(userId: 1, userHeartRate: profileViewModel.MyPageRecord?.userHeartRate ?? 0)
+                    
+                    profileViewModel.updateHeartRate(request: heartRateRequest)
                 }
             }) {
                 Text("저장")

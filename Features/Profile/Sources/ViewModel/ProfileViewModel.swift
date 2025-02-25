@@ -181,58 +181,45 @@ class ProfileViewModel: ObservableObject {
     }
     
     //MARK: 안정시 심박수 put
-    func updateHeartRate(HeartRate: Int) {
-        //let request = HeartRateRequest(userId: 1, userHeartRate: HeartRate)
+    func updateHeartRate(request: HeartRateRequest) {
+        let endpoint = APIEndpoint.updateHeartRate(request: request)
         
-        guard let userName = MyPageRecord?.userName,
-              let userGender = MyPageRecord?.userGender,
-              let userWeight = MyPageRecord?.userWeight,
-              let userHeight = MyPageRecord?.userHeight,
-              let userBirth = MyPageRecord?.userBirth,
-              let userHeartRate = MyPageRecord?.userHeartRate else {
-            print("Error: MyPageRecord is nil or incomplete data")
-            return
-        }
-        
-        // Create the request for the API
-        let request = MyPageRequest(userId: 1,
-                                    userName: userName,
-                                    userGender: userGender,
-                                    userWeight: userWeight,
-                                    userHeight: userHeight,
-                                    userBirth: userBirth,
-                                    socialProvider: "exampleProvider", // 임시 값 추가
-                                    userHeartRate: userHeartRate) // HeartRate 그대로 사용
-        
-        // Define the endpoint for the API call
-        let endpoint = APIEndpoint.updateMyPage(request: request)
-        
-        // Use networkService to make the API request
         networkService.request(endpoint)
-            .receive(on: DispatchQueue.main) // Ensure updates happen on the main thread
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    // 오류 처리 (디코딩 오류 처리)
+                    if let decodingError = error as? DecodingError {
+                        switch decodingError {
+                        case .dataCorrupted(let context):
+                            print("Data corrupted: \(context.debugDescription)")
+                        case .keyNotFound(let key, let context):
+                            print("Key '\(key)' not found: \(context.debugDescription)")
+                        case .valueNotFound(let value, let context):
+                            print("Value '\(value)' not found: \(context.debugDescription)")
+                        case .typeMismatch(let type, let context):
+                            print("Type mismatch for type \(type): \(context.debugDescription)")
+                        @unknown default:
+                            print("Unknown decoding error: \(decodingError)")
+                        }
+                    } else {
+                        // 네트워크 오류 처리
+                        print("Network error: \(error.localizedDescription)")
+                    }
+
                 case .finished:
                     break
                 }
             }, receiveValue: { (response: HeartRateResponse) in
-                if response.success {
-                    print("Success: \(response.message), Data: \(response.data)")
-                    
-                    // Update the ViewModel value upon success
-                    DispatchQueue.main.async {
-                        self.MyPageRecord?.userHeartRate = HeartRate
-                        print("ViewModel 업데이트 완료: \(self.MyPageRecord?.userHeartRate ?? -1)")
-                    }
-                } else {
-                    print("Failed: \(response.message)")
-                }
+                // 성공적인 응답 처리
+                print("Heart rate updated successfully. Success: \(response.success), Message: \(response.message)")
             })
             .store(in: &cancellables)
     }
 
+
+    
     //MARK: 프로필 사진 get
     func fetchProfileImage(userId: Int) {
         let networkImageService = NetworkImageService()
