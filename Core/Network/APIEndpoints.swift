@@ -32,7 +32,7 @@ public enum APIEndpoint {
     public var path: String {
         switch self {
         case .getFirstWorkoutDate:
-            return "workout/firstWorkout"
+            return "/workout/firstWorkout"
         case .getWeeklyWorkout:
             return "/workout/week"
         case .getWorkoutCount:
@@ -83,7 +83,7 @@ public enum APIEndpoint {
         case .updateWorkout(let request):
             return request.toDictionary()
         case .deleteWorkout(let userId, let recordId):
-            return ["userId": userId, "workoutId": recordId]
+            return ["userId": userId, "recordId": recordId]
         case .createWorkout(let request):
             return request.toDictionary()
         case .getExercises(let exerciseType, let userId):

@@ -12,6 +12,7 @@ import Core
 
 public struct HomeView: View {
     public init() {}
+    @EnvironmentObject var addModalManager: AddModalManager
     @StateObject private var viewModel = HomeViewModel()
     
     @State private var showDatePicker = false
@@ -133,7 +134,7 @@ public struct HomeView: View {
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
-                                        ProgressView(value: viewModel.getWeekIntensityPoint())
+                                        ProgressView(value: viewModel.getWeekIntensityPercentage(viewModel.workoutData?.weekIntensity ?? ""))
                                             .progressViewStyle(.linear)
                                             .scaleEffect(y: 2.5)
                                             .frame(height: 20)
@@ -150,8 +151,9 @@ public struct HomeView: View {
                                         Spacer()
                                             .frame(height: 8)
                                         
-                                        Text(viewModel.getWeekIntensityString())
+                                        Text(viewModel.getIntensityText(viewModel.workoutData?.weekIntensity ?? ""))
                                             .font(.subheadline)
+                                            .foregroundStyle(viewModel.getIntensityColor(viewModel.workoutData?.weekIntensity ?? ""))
                                     }
                                     .padding(12)
                                     .background(Color.cellColor)
@@ -159,7 +161,7 @@ public struct HomeView: View {
                                 }
                             }
                             if showDatePicker {
-                                CustomCalendarView(selectedDate: $viewModel.selectedDate)
+                                CustomCalendarView(selectedDate: $viewModel.selectedDate, firstWorkoutDate: viewModel.firstWorkoutDate)
                                     .frame(height: 300)
                                     .background(.black)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -175,6 +177,7 @@ public struct HomeView: View {
             }
             .onAppear {
                 viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
+                viewModel.fetchFirstWorkoutDate(userId: 1)
             }
             .onChange(of: viewModel.selectedDate) {
                 // 날짜 변경 시 주가 바뀌었을 때만 fetch
@@ -185,6 +188,13 @@ public struct HomeView: View {
                     return
                 }
                 showDatePicker = false
+            }
+            // 운동 추가 시 HomeView 업데이트 되도록
+            .onChange(of: addModalManager.shouldUpdateHomeView) { newValue, oldValue in
+                if newValue {
+                    viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
+                    viewModel.fetchFirstWorkoutDate(userId: 1)
+                }
             }
         }
     }

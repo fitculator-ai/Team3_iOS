@@ -9,6 +9,7 @@ struct ContentView: View {
         ZStack {
             TabView {
                 HomeView()
+                    .environmentObject(addModalManager)
                     .tabItem {
                         Image(systemName: "house")
                         Text("홈")
@@ -54,7 +55,11 @@ struct ContentView: View {
                     .shadow(radius: 4)
                     .padding(30)
             }
-            .sheet(isPresented: $addModalManager.isModalPresented) {
+            .sheet(isPresented: $addModalManager.isModalPresented, onDismiss: {
+                if addModalManager.shouldUpdateHomeView {
+                    addModalManager.shouldUpdateHomeView = false
+                }
+            }) {
                 AddExerciseListView()
                     .environmentObject(addModalManager)
             }
