@@ -10,7 +10,7 @@ import Core
 import Shared
 
 struct SettingView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ProfileViewModel
     
     var body: some View {
@@ -119,10 +119,23 @@ struct SettingView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.background)
             }
-            .navigationTitle("설정")
-            .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationTitle("설정")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.white)
+                }
+            }
         }
         .scrollIndicators(.never)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

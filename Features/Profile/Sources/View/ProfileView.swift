@@ -116,14 +116,17 @@ public struct ProfileView: View {
                 }
                 .navigationTitle("MY")
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing: NavigationLink(destination: SettingView().environmentObject(ProfileViewModel())) {
-                    Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 5)
-                })
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SettingView().environmentObject(profileviewModel)) {
+                            Image(systemName: "gearshape.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .padding(.trailing, 5)
+                        }
+                    }
+                }
             }
             .onAppear{
                 profileviewModel.fetchMyPage(userId: 1)
