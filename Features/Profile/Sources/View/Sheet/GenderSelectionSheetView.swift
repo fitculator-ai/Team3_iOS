@@ -31,10 +31,8 @@ enum Gender: Int, CaseIterable, Identifiable {
 
 //MARK: 프로필 선택 시트 뷰(성별)
 struct GenderSettingSheetView: View {
-    
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedGender: Gender
-    
     var body: some View {
         VStack {
             Text("성별을 선택하세요")

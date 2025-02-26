@@ -22,8 +22,6 @@ public struct ProfileEditView: View {
     @State private var showImagePicker = false
     @State private var showActionSheet = false
     
-    @State private var userGender: Gender = .man
-    
     @State private var userBirth: Date = Date()
     
     @State private var imageSourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -139,17 +137,6 @@ public struct ProfileEditView: View {
                             Text(viewModel.userGender.description)
                         }
                     }
-                    
-//                    Button(action: {
-//                        showGenderSheet = true
-//                    }) {
-//                        Text(viewModel.MyPageRecord?.userGender)
-//                        print("viewModel.MyPageRecord?.userGender")
-//                            .padding()
-//                            .foregroundColor(.white)
-//                            .cornerRadius(8)
-//                            .multilineTextAlignment(.trailing)
-//                    }
                     .padding(.trailing, -10)
                 }
                 .padding(.horizontal)
@@ -293,49 +280,22 @@ public struct ProfileEditView: View {
                         .foregroundColor(viewModel.isFormValid ? Color.blue : Color.gray)
                         .disabled(!viewModel.isFormValid)
                 }
-            )
-//            .sheet(isPresented: $showGenderSheet) {
-//                GenderSettingSheetView(selectedGender: $viewModel.MyPageRecord?.userGender)
-//                       .presentationDetents([.fraction(0.35)])
-////                GenderSettingSheetView(selectedGender: Binding(
-////                    get: { viewModel.userGender},
-////                    set: { newGender in
-////                        $viewModel.userGender = newGender
-////                    }
-////                ))
-//                //.presentationDetents([.fraction(0.35)])
-//            }
-//            .sheet(isPresented: $showGenderSheet) {
-//                GenderSettingSheetView(selectedGender: Binding(
-//                    get: { viewModel.userGender },  // 뷰 모델의 userGender 값을 가져옴
-//                    set: { newGender in
-//                        viewModel.userGender = newGender  // 새로 선택된 gender로 업데이트
-//                    }
-//                ))
-//                .presentationDetents([.fraction(0.35)])
-//            }
             .sheet(isPresented: $showGenderSheet) {
-                if let genderString = viewModel.MyPageRecord?.userGender,
-                   let gender = Gender.fromString(genderString) {
-                    GenderSettingSheetView(selectedGender: Binding(
-                        get: { gender },
-                        set: { newGender in
-                            // 성별이 선택되면 viewModel에 반영
-                            viewModel.MyPageRecord?.userGender = newGender.description
-                        }
-                    ))
+                let bindingGender = Binding(
+                    get: {
+                        let genderString = viewModel.MyPageRecord?.userGender ?? "nil"
+                        let gender = Gender.fromString(genderString) ?? .man
+                        return gender
+                    },
+                    set: { newGender in
+                        viewModel.MyPageRecord?.userGender = newGender.description
+                    }
+                )
+
+                GenderSettingSheetView(selectedGender: bindingGender)
                     .presentationDetents([.fraction(0.35)])
-                } else {
-                    // 기본 성별을 지정
-                    GenderSettingSheetView(selectedGender: Binding(
-                        get: { Gender.man }, // 기본 성별: 남성
-                        set: { newGender in
-                            viewModel.MyPageRecord?.userGender = newGender.description
-                        }
-                    ))
-                    .presentationDetents([.fraction(0.35)])
-                }
             }
+
             .sheet(isPresented: $showWeightSheet) {
                 WeightSettingSheetView(Weight: Binding(
                     get: {
