@@ -48,7 +48,7 @@ public struct ProfileEditView: View {
                                 .clipShape(Circle())
                                 .overlay(
                                     Circle()
-                                        .stroke(Color.white, lineWidth: 4)
+                                        .stroke(Color.basicColor, lineWidth: 4)
                                 )
                                 .shadow(radius: 5)
                                 .padding(.leading, 5)
@@ -60,7 +60,7 @@ public struct ProfileEditView: View {
                                 .clipShape(Circle())
                                 .overlay(
                                     Circle()
-                                        .stroke(Color.white, lineWidth: 4)
+                                        .stroke(Color.basicColor, lineWidth: 4)
                                 )
                                 .shadow(radius: 5)
                                 .padding(.leading, 5)
@@ -72,7 +72,7 @@ public struct ProfileEditView: View {
                                 .clipShape(Circle())
                                 .overlay(
                                     Circle()
-                                        .stroke(Color.white, lineWidth: 4)
+                                        .stroke(Color.basicColor, lineWidth: 4)
                                 )
                                 .shadow(radius: 5)
                                 .padding(.leading, 5)
@@ -89,7 +89,7 @@ public struct ProfileEditView: View {
                 //닉네임
                 HStack {
                     Text("닉네임")
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                         .frame(width: 100, alignment: .leading)
                     TextField("공백 없이 최대 15자까지 입력 가능", text: Binding(
                         get: { viewModel.MyPageRecord?.userName ?? "" },
@@ -106,7 +106,7 @@ public struct ProfileEditView: View {
                 .padding(.horizontal)
                 
                 Divider()
-                    .background(Color.white)
+                    .background(Color.basicColor)
                     .frame(height: 2)
                     .padding(.top, -20)
                     .padding(.horizontal, 20)
@@ -123,7 +123,7 @@ public struct ProfileEditView: View {
                 // 성별
                 HStack {
                     Text("성별")
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                         .frame(width: 100, alignment: .leading)
                     Spacer()
                     
@@ -133,10 +133,10 @@ public struct ProfileEditView: View {
                         if let genderString = viewModel.MyPageRecord?.userGender,
                            let gender = Gender.fromString(genderString) {
                             Text(gender.description)
-                                .foregroundColor(.white)
+                                .foregroundColor(.basicColor)
                         } else {
                             Text(viewModel.userGender.description)
-                                .foregroundColor(.white)
+                                .foregroundColor(.basicColor)
                         }
                     }
                     .padding(.trailing, -5)
@@ -145,14 +145,14 @@ public struct ProfileEditView: View {
                 .padding(.top, 30)
                 
                 Divider()
-                    .background(Color.white)
+                    .background(Color.basicColor)
                     .frame(height: 2)
                     .padding(.top, -20)
                     .padding(.horizontal, 20)
                 
                 HStack {
                     Text("몸무게 (kg)")
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                         .frame(width: 100)
                         .padding(.leading, 5)
                     Spacer()
@@ -161,7 +161,7 @@ public struct ProfileEditView: View {
                     }) {
                         Text(String(format: "%.1f", viewModel.MyPageRecord?.userWeight ?? 0.0))
                             .padding()
-                            .foregroundColor(.white)
+                            .foregroundColor(.basicColor)
                             .cornerRadius(8)
                             .multilineTextAlignment(.trailing)
                     }
@@ -169,7 +169,7 @@ public struct ProfileEditView: View {
                 }
                 
                 Divider()
-                    .background(Color.white)
+                    .background(Color.basicColor)
                     .frame(height: 2)
                     .padding(.top, -20)
                     .padding(.horizontal, 20)
@@ -186,7 +186,7 @@ public struct ProfileEditView: View {
                 //신장
                 HStack {
                     Text("신장 (cm)")
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                         .frame(width: 100, alignment: .leading)
                     
                     TextField(" ", text: Binding(
@@ -214,7 +214,7 @@ public struct ProfileEditView: View {
                 .padding(.top, -20)
                 
                 Divider()
-                    .background(Color.white)
+                    .background(Color.basicColor)
                     .frame(height: 2)
                     .padding(.top, -20)
                     .padding(.horizontal, 20)
@@ -231,7 +231,7 @@ public struct ProfileEditView: View {
                 // 생년월일
                 HStack {
                     Text("생년월일")
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                         .frame(width: 100, alignment: .leading)
                     Spacer()
                     
@@ -241,7 +241,7 @@ public struct ProfileEditView: View {
                         let birthString = viewModel.MyPageRecord?.userBirth ?? viewModel.dateFormatter.string(from: Date())
                         Text(birthString)
                             .padding()
-                            .foregroundColor(.white)
+                            .foregroundColor(.basicColor)
                             .cornerRadius(8)
                             .multilineTextAlignment(.trailing)
                             .padding(.trailing, -10)
@@ -251,7 +251,7 @@ public struct ProfileEditView: View {
                 .padding(.horizontal)
                 
                 Divider()
-                    .background(Color.white)
+                    .background(Color.basicColor)
                     .frame(height: 2)
                     .padding(.top, -20)
                     .padding(.horizontal, 20)
@@ -264,7 +264,7 @@ public struct ProfileEditView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                 },
                 trailing: Button(action: {
                     if let userId = viewModel.MyPageRecord?.userId,

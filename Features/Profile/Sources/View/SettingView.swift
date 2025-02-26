@@ -77,7 +77,7 @@ struct SettingView: View {
                         Text("버전 정보")
                         Spacer()
                         Text("1.0.0")
-                            .foregroundColor(.white)
+                            .foregroundColor(.basicColor)
                     }
                 }
                 
@@ -129,7 +129,7 @@ struct RestingHeartRateView: View {
                 Image(systemName: "heart.fill")
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(.white)
+                    .foregroundColor(.basicColor)
                     .frame(width: 60, height: 60)
             }
             .padding(.top, 20)
@@ -169,7 +169,7 @@ struct RestingHeartRateView: View {
                 
                 Text("bpm")
                     .font(.title)
-                    .foregroundColor(.white)
+                    .foregroundColor(.basicColor)
                     .bold()
             }
             
@@ -197,7 +197,7 @@ struct RestingHeartRateView: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(profileViewModel.isHeartRateValid ? Color.blue : Color.gray)
-                    .foregroundColor(.white)
+                    .foregroundColor(.basicColor)
                     .cornerRadius(10)
             }
             .disabled(!profileViewModel.isHeartRateValid) // 유효하지 않으면 버튼 비활성화

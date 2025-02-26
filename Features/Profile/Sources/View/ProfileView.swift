@@ -85,7 +85,7 @@ public struct ProfileView: View {
                                 Text(profileviewModel.MyPageRecord?.userName ?? "테스트")
                                     .font(AppFont.profileItemFont)
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.basicColor)
                                 
                                 Capsule(style: .continuous)
                                     .fill(.blue)
@@ -123,7 +123,7 @@ public struct ProfileView: View {
                                     .frame(width: 100, height: 40)
                                     .overlay(
                                         Text("프로필 편집")
-                                            .foregroundColor(.white)
+                                            .foregroundColor(.basicColor)
                                             .font(AppFont.profileContentTextFont)
                                     )
                             }
@@ -131,7 +131,7 @@ public struct ProfileView: View {
                         .padding([.leading, .trailing], 30)
                         
                         Divider()
-                            .background(Color.white)
+                            .background(Color.basicColor)
                             .frame(height: 30)
                             .padding(.horizontal, 0)
                         
@@ -161,7 +161,7 @@ public struct ProfileView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
+                        .foregroundColor(.basicColor)
                         .padding(.trailing, 5)
                 })
             }
@@ -229,13 +229,13 @@ public struct WeeklyActivityChart: View {
                             ZStack{
                                 if viewModel.isLoading {
                                     ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .basicColor))
                                         .scaleEffect(1.5)
                                         .padding()
                                 } else if (viewModel.workoutData?.records ?? []).isEmpty && viewModel.weeklyWorkoutData.isEmpty {
                                     Text("운동을 추가해 그래프를 분석해보세요!")
                                         .font(.headline)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.basicColor)
                                         .multilineTextAlignment(.center)
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.5)))
@@ -338,13 +338,13 @@ public struct FatigueChart: View {
                         VStack {
                             if viewModel.isLoading {
                                 ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .basicColor))
                                     .scaleEffect(1.5)
                                     .padding()
                             } else if (viewModel.workoutData?.records ?? []).isEmpty && viewModel.weeklyWorkoutData.isEmpty {
                                 Text("운동을 추가해 그래프를 분석해보세요!")
                                     .font(.headline)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.basicColor)
                                     .multilineTextAlignment(.center)
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.5)))
