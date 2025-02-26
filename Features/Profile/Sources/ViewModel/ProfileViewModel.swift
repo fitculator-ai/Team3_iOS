@@ -94,7 +94,6 @@ class ProfileViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] response in
-                    print("Decoded Response: \(response)")
                     self?.MyPageRecord = response.data
                     
                     if let heartRate = self?.MyPageRecord?.userHeartRate {
