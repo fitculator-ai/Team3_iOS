@@ -5,3 +5,13 @@
   Created by Song Kim on 2/26/25.
   
 */
+
+"stre" = "근력";
+
+// 운동 추가
+"averageHeartRate" = "평균 심박수";
+"maxHeartRate" = "최대 심박수";
+"startDate" = "시작 날짜";
+"startTime" = "시작 시간";
+"exerciseDurationInMinutes" = "운동시간(분)";
+"memo" = "메모";
