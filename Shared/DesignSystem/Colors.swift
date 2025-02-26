@@ -20,7 +20,7 @@ public extension Color {
     static let disabledColor = Color("DisabledColor", bundle: Bundle(for: BundleFinder.self))
     static let emptyColor = Color("EmptyColor", bundle: Bundle(for: BundleFinder.self))
     
-    static let calendarBackground = Color("CalendarBackground", bundle: Bundle(for: BundleFinder.self))
+    static let secondBackground = Color("SecondBackground", bundle: Bundle(for: BundleFinder.self))
     
     static let textRed = Color("TextRed", bundle: Bundle(for: BundleFinder.self))
     static let textPurple = Color("TextPurple", bundle: Bundle(for: BundleFinder.self))

@@ -163,7 +163,7 @@ public struct HomeView: View {
                             if showDatePicker {
                                 CustomCalendarView(selectedDate: $viewModel.selectedDate, firstWorkoutDate: viewModel.firstWorkoutDate)
                                     .frame(height: 300)
-                                    .background(Color.calendarBackground)
+                                    .background(Color.secondBackground)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .shadow(radius: 5)
                             }
