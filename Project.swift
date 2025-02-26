@@ -24,7 +24,6 @@ let project = Project(
                         "UIColorName": "",
                         "UIImageName": "",
                     ],
-                    "UIUserInterfaceStyle": "Dark",
                     "NSCameraUsageDescription": "사진을 찍기 위해 카메라에 접근해야 합니다.",
                     "NSPhotoLibraryUsageDescription": "사진 라이브러리에 접근해야 합니다."
                 ]

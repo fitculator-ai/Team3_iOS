@@ -49,7 +49,6 @@ struct HomeNavigationBar: View {
             
             Image(systemName: rightIcon)
                 .font(AppFont.subTitle)
-                .foregroundStyle(.white)
         }
         .frame(height: navBarHeight) // 동적으로 가져온 높이 적용
         
