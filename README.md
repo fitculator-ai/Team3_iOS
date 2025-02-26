@@ -20,7 +20,7 @@ tuist install
 ```
 tuist generate
 ```
-정상적으로 완료됐다면 생성된 Fitculator.xcworkspace 실행 후 개발
+정상적으로 완료됐다면 생성된 **Fitculator.xcworkspace** 실행 후 개발
 <br><br>
 
 
