@@ -216,12 +216,14 @@ public class HomeViewModel: ObservableObject {
             let exerciseImg = records.first?.exerciseImg ?? ""
             let exerciseColor = Color(hex: records.first?.exerciseColor ?? "#000000")
             
-            result.append(WorkoutRecordPointSum(
-                exerciseKorName: exerciseKorName,
-                exerciseImg: exerciseImg,
-                recordPointSum: totalPoints,
-                exerciseColor: exerciseColor
-            ))
+            if totalPoints > 0 {
+                result.append(WorkoutRecordPointSum(
+                    exerciseKorName: exerciseKorName,
+                    exerciseImg: exerciseImg,
+                    recordPointSum: totalPoints,
+                    exerciseColor: exerciseColor
+                ))
+            }
         }
         
         workoutRecordPointSums = result
