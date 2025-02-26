@@ -83,9 +83,11 @@ struct WorkoutRecordRow: View {
                             .opacity(0.8)
                     }
                     Spacer()
-                    Text("\(workout.recordPoint)pt")
-                        .font(.system(size: 26))
-                        .fontWeight(.bold)
+                    if workout.recordPoint > 0 {
+                        Text("\(workout.recordPoint)pt")
+                            .font(.system(size: 26))
+                            .fontWeight(.bold)
+                    }
                 }
                 .padding(.horizontal, 25)
                 .padding(.bottom, 20)

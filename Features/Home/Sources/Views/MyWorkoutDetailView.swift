@@ -50,8 +50,10 @@ struct MyWorkoutDetailView: View {
                             .font(.system(size: 16))
                     }
                     Spacer()
-                    Text("\(workout.recordPoint)pt")
-                        .font(AppFont.mainTitle)
+                    if workout.recordPoint > 0 {
+                        Text("\(workout.recordPoint)pt")
+                            .font(AppFont.mainTitle)
+                    }
                 }
                 .padding(.vertical)
                 
