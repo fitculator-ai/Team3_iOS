@@ -22,8 +22,8 @@ enum Gender: Int, CaseIterable, Identifiable {
     
     static func fromString(_ value: String) -> Gender? {
         switch value.uppercased() {
-        case "MAN": return .man
-        case "WOMAN": return .woman
+        case "MAN", "남성": return .man
+        case "WOMAN", "여성": return .woman
         default: return nil
         }
     }
@@ -38,19 +38,19 @@ struct GenderSettingSheetView: View {
             Text("성별을 선택하세요")
                 .font(.headline)
                 .padding()
-            
+
             Picker("성별 선택", selection: $selectedGender) {
                 ForEach(Gender.allCases, id: \.self) { gender in
-                    Text(gender.description).tag(gender)  
+                    Text(gender.description).tag(gender)
                 }
             }
             .pickerStyle(WheelPickerStyle())
             .onChange(of: selectedGender) { newValue in
-                            // 성별이 바뀔 때마다 출력
-                            print("선택된 성별: \(newValue.description)")
-                        }
-            Spacer()
-         }
+                print("선택된 성별: \(newValue.description)")
+            }
+
+            Spacer() 
+        }
         .padding()
     }
 }
