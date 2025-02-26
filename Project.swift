@@ -30,7 +30,9 @@ let project = Project(
                 ]
             ),
             sources: ["Fitculator/Sources/**"],
-            resources: ["Fitculator/Resources/**"],
+            resources: ["Fitculator/Resources/**",
+                        "Shared/Localization/en.lproj/Localizable.strings",
+                        "Shared/Localization/ko.lproj/Localizable.strings"],
             dependencies: [
                 .target(name: "Features"),
                 .target(name: "Core"),
