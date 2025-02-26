@@ -6,6 +6,13 @@
   
 */
 
+"save" = "저장";
+"cancel" = "취소";
+"edit" = "수정";
+"delete" = "삭제";
+"month" = "월";
+"day" = "일";
+
 // 운동 추가
 "averageHeartRate" = "평균 심박수";
 "maxHeartRate" = "최대 심박수";
@@ -30,6 +37,7 @@
 "startYourWorkout" = "운동을 시작해보세요!🏋️‍♀️";
 "time" = "시간";
 "average" = "평균";
+"exerciseDetails" = "운동 세부사항";
 "exerciseIntensity" = "운동 강도";
 "veryLow" = "매우낮음";
 "low" = "낮음";

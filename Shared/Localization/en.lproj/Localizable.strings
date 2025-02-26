@@ -6,6 +6,13 @@
   
 */
 
+"save" = "Save";
+"cancel" = "Cancel";
+"edit" = "Edit";
+"delete" = "Delete";
+"month" = "Month";
+"day" = "Day";
+
 // 운동 추가
 "averageHeartRate" = "Average Heart Rate";
 "maxHeartRate" = "Max Heart Rate";
@@ -30,6 +37,7 @@
 "startYourWorkout" = "Start your workout!🏋️‍♀️";
 "time" = "Time";
 "average" = "average";
+"exerciseDetails" = "Exercise Details";
 "exerciseIntensity" = "intensity";
 "veryLow" = "Very Low";
 "low" = "Low";
@@ -42,7 +50,6 @@
 "follower" = "Follower";
 "following" = "Following";
 "editProfile" = "Edit Profile";
-"thisWeeksExerciseAmount" = "Weekly Exercise Amount";
 "fatigueGraph" = "Fatigue Graph";
 "nickname" = "Nickname";
 "gender" = "Gender";

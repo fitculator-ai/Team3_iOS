@@ -76,7 +76,7 @@ struct WorkoutRecordRow: View {
                             .frame(width: 20, height: 20)
                     }
                     VStack(alignment: .leading) {
-                        Text(workout.exerciseKorName)
+                        Text(currentLanguage() == "kr" ? workout.exerciseKorName : workout.exerciseEngName)
                             .font(AppFont.subTitle)
                         Text(viewModel.getDateToDateTime(dateString: workout.recordStart))
                             .font(.system(size: 13))
@@ -96,7 +96,7 @@ struct WorkoutRecordRow: View {
                     workoutInfo(title: "average", value: "\(workout.avgHeartRate)bpm")
                     Spacer()
                     workoutInfo(
-                        title: "exerciseIntensity",
+                        title: NSLocalizedString("exerciseIntensity", comment: ""),
                         value: viewModel.getIntensityText(workout.intensity),
                         color: viewModel.getIntensityColor(workout.intensity)
                     )
