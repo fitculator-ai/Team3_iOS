@@ -176,22 +176,22 @@ struct MyWorkoutDetailView: View {
                     isEditing = true
                     isFocused = true
                 }
-                Button("삭제", role: .destructive) {
+                Button("delete", role: .destructive) {
                     showDeleteAlert = true
                 }
-                Button("취소", role: .cancel) {}
+                Button("cancel", role: .cancel) {}
             }
-            .alert("운동 기록 삭제", isPresented: $showDeleteAlert) {
-                Button("취소", role: .cancel) {
+            .alert(NSLocalizedString("deleteExerciseRecord", comment: ""), isPresented: $showDeleteAlert) {
+                Button("cancel", role: .cancel) {
                     showDeleteAlert = false
                 }
-                Button("삭제", role: .destructive) {
+                Button("delete", role: .destructive) {
                     viewModel.deleteWorkout(userId: 1, recordId: workout.recordId)
                     viewModel.fetchFirstWorkoutDate(userId: 1)
                     presentationMode.wrappedValue.dismiss()
                 }
             } message: {
-                Text("이 운동 기록을 삭제하시겠습니까?")
+                Text("deleteExerciseRecordConfirmation")
             }
         }
     }

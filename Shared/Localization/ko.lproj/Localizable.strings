@@ -44,6 +44,8 @@
 "medium" = "보통";
 "high" = "높음";
 "veryHigh" = "매우높음";
+"deleteExerciseRecordConfirmation" = "이 운동 기록을 삭제하시겠습니까?";
+"deleteExerciseRecord" = "운동 기록 삭제";
 
 // 마이페이지
 "my" = "마이";
