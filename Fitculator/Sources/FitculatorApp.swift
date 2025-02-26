@@ -7,7 +7,7 @@ struct FitculatorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme(isDarkMode ? .dark : .light)
+//                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }

@@ -30,8 +30,6 @@ struct NavigationBarHeightReader: UIViewControllerRepresentable {
 
 struct HomeNavigationBar: View {
     final class BundleFinder {}
-    var title: String = "Fitculator"
-    var leftIcon: String = "globe"
     var rightIcon: String = "bell"
 
     @State private var navBarHeight: CGFloat = 44 // 기본값 설정
