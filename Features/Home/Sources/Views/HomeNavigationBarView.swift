@@ -29,6 +29,7 @@ struct NavigationBarHeightReader: UIViewControllerRepresentable {
 
 
 struct HomeNavigationBar: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = true
     final class BundleFinder {}
     var rightIcon: String = "bell"
 
@@ -45,8 +46,16 @@ struct HomeNavigationBar: View {
                 .clipped()
             Spacer()
             
-            Image(systemName: rightIcon)
-                .font(AppFont.subTitle)
+            //TODO: 설정으로 옮기기
+            // 다크/라이트 모드 전환
+            Button(action: {
+                isDarkMode.toggle()
+            }) {
+                Image(systemName: rightIcon)
+                    .font(AppFont.subTitle)
+                    .foregroundStyle(Color.basicColor)
+            }
+            
         }
         .frame(height: navBarHeight) // 동적으로 가져온 높이 적용
         
