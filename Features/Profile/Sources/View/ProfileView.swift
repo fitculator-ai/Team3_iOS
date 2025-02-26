@@ -154,7 +154,7 @@ public struct ProfileView: View {
                     .frame(width: UIScreen.main.bounds.width * 0.88)
                     .frame(maxHeight: .infinity)
                 }
-                .navigationTitle("마이")
+                .navigationTitle("MY")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: NavigationLink(destination: SettingView().environmentObject(ProfileViewModel())) {
                     Image(systemName: "gearshape.fill")
