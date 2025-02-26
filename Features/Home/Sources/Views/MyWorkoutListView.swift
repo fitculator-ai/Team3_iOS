@@ -76,7 +76,7 @@ struct WorkoutRecordRow: View {
                             .frame(width: 20, height: 20)
                     }
                     VStack(alignment: .leading) {
-                        Text(currentLanguage() == "kr" ? workout.exerciseKorName : workout.exerciseEngName)
+                        Text(currentLanguage() == "ko" ? workout.exerciseKorName : workout.exerciseEngName)
                             .font(AppFont.subTitle)
                         Text(viewModel.getDateToDateTime(dateString: workout.recordStart))
                             .font(.system(size: 13))

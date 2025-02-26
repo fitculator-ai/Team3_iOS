@@ -45,7 +45,7 @@ struct MyWorkoutDetailView: View {
                             .frame(width: 40, height: 40)
                     }
                     VStack(alignment: .leading) {
-                        Text(currentLanguage() == "kr" ? workout.exerciseKorName : workout.exerciseEngName)
+                        Text(currentLanguage() == "ko" ? workout.exerciseKorName : workout.exerciseEngName)
                             .font(AppFont.subTitle)
                         Text("\(viewModel.getDateToTime(dateString: workout.recordStart)) - \(viewModel.getDateToTime(dateString: workout.recordEnd))")
                             .font(.system(size: 16))
