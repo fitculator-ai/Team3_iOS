@@ -108,7 +108,7 @@ struct AddExerciseDetailView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("저장") {
+                Button("save") {
                     modalManager.shouldUpdateHomeView = true
                     modalManager.isModalPresented = false
                     
