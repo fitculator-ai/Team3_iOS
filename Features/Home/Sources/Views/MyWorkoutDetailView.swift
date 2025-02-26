@@ -15,6 +15,7 @@ struct MyWorkoutDetailView: View {
     @State private var isEditing: Bool = false
     @State private var textEditor: String = ""
     @State private var originalText: String = ""
+    @State private var showDeleteAlert = false
     
     @FocusState private var isFocused: Bool
     
@@ -175,12 +176,22 @@ struct MyWorkoutDetailView: View {
                     isEditing = true
                     isFocused = true
                 }
-                Button("delete", role: .destructive) {
+                Button("삭제", role: .destructive) {
+                    showDeleteAlert = true
+                }
+                Button("취소", role: .cancel) {}
+            }
+            .alert("운동 기록 삭제", isPresented: $showDeleteAlert) {
+                Button("취소", role: .cancel) {
+                    showDeleteAlert = false
+                }
+                Button("삭제", role: .destructive) {
                     viewModel.deleteWorkout(userId: 1, recordId: workout.recordId)
                     viewModel.fetchFirstWorkoutDate(userId: 1)
                     presentationMode.wrappedValue.dismiss()
                 }
-                Button("cancel", role: .cancel) {}
+            } message: {
+                Text("이 운동 기록을 삭제하시겠습니까?")
             }
         }
     }
