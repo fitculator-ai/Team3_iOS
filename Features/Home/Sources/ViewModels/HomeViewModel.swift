@@ -265,11 +265,11 @@ public class HomeViewModel: ObservableObject {
         
         var color: Color {
             switch self {
-            case .veryHigh: return .red
-            case .high: return .purple
+            case .veryHigh: return Color.textRed
+            case .high: return Color.textPurple
             case .medium: return Color.fitculatorLogo
-            case .low: return .yellow
-            case .veryLow: return .green
+            case .low: return Color.textYellow
+            case .veryLow: return Color.textGreen
             }
         }
         
