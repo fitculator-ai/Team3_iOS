@@ -25,7 +25,7 @@ public struct ProfileEditView: View {
     @State private var userBirth: Date = Date()
     
     @State private var imageSourceType: UIImagePickerController.SourceType = .photoLibrary
-
+    
     @State private var showImageCropper = false
     
     public var body: some View {
@@ -41,42 +41,42 @@ public struct ProfileEditView: View {
                         
                     }) {
                         if let image = viewModel.profileImage {
-                                 Image(uiImage: image)
-                                     .resizable()
-                                     .scaledToFit()
-                                     .frame(width: 140, height: 140)
-                                     .clipShape(Circle())
-                                     .overlay(
-                                         Circle()
-                                             .stroke(Color.white, lineWidth: 4)
-                                     )
-                                     .shadow(radius: 5)
-                                     .padding(.leading, 5)
-                             } else if let selectedImage = viewModel.profileImage {
-                                 Image(uiImage: selectedImage)
-                                     .resizable()
-                                     .scaledToFit()
-                                     .frame(width: 140, height: 140)
-                                     .clipShape(Circle())
-                                     .overlay(
-                                         Circle()
-                                             .stroke(Color.white, lineWidth: 4)
-                                     )
-                                     .shadow(radius: 5)
-                                     .padding(.leading, 5)
-                             } else {
-                                 Image(systemName: "person.circle.fill")
-                                     .resizable()
-                                     .scaledToFit()
-                                     .frame(width: 140, height: 140)
-                                     .clipShape(Circle())
-                                     .overlay(
-                                         Circle()
-                                             .stroke(Color.white, lineWidth: 4)
-                                     )
-                                     .shadow(radius: 5)
-                                     .padding(.leading, 5)
-                             }
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 140, height: 140)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 4)
+                                )
+                                .shadow(radius: 5)
+                                .padding(.leading, 5)
+                        } else if let selectedImage = viewModel.profileImage {
+                            Image(uiImage: selectedImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 140, height: 140)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 4)
+                                )
+                                .shadow(radius: 5)
+                                .padding(.leading, 5)
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 140, height: 140)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 4)
+                                )
+                                .shadow(radius: 5)
+                                .padding(.leading, 5)
+                        }
                     }
                     Spacer()
                 }
@@ -132,15 +132,17 @@ public struct ProfileEditView: View {
                     }) {
                         if let genderString = viewModel.MyPageRecord?.userGender,
                            let gender = Gender.fromString(genderString) {
-                            Text(gender.description)  // Gender Enum의 description을 사용하여 한글로 출력
+                            Text(gender.description)
+                                .foregroundColor(.white)
                         } else {
                             Text(viewModel.userGender.description)
+                                .foregroundColor(.white)
                         }
                     }
-                    .padding(.trailing, -10)
+                    .padding(.trailing, -5)
                 }
                 .padding(.horizontal)
-                .padding(.top, -10)
+                .padding(.top, 30)
                 
                 Divider()
                     .background(Color.white)
@@ -236,7 +238,7 @@ public struct ProfileEditView: View {
                     Button(action: {
                         showDatePickerSheet = true
                     }) {
-                        let birthString = viewModel.MyPageRecord?.userBirth ?? viewModel.dateFormatter.string(from: Date()) 
+                        let birthString = viewModel.MyPageRecord?.userBirth ?? viewModel.dateFormatter.string(from: Date())
                         Text(birthString)
                             .padding()
                             .foregroundColor(.white)
@@ -280,22 +282,23 @@ public struct ProfileEditView: View {
                         .foregroundColor(viewModel.isFormValid ? Color.blue : Color.gray)
                         .disabled(!viewModel.isFormValid)
                 }
-            .sheet(isPresented: $showGenderSheet) {
-                let bindingGender = Binding(
-                    get: {
-                        let genderString = viewModel.MyPageRecord?.userGender ?? "nil"
-                        let gender = Gender.fromString(genderString) ?? .man
-                        return gender
-                    },
-                    set: { newGender in
-                        viewModel.MyPageRecord?.userGender = newGender.description
+                    .sheet(isPresented: $showGenderSheet) {
+                        let bindingGender = Binding(
+                            get: {
+                                let genderString = viewModel.MyPageRecord?.userGender ?? "nil"
+                                let gender = Gender.fromString(genderString) ?? .man
+                                return gender
+                            },
+                            set: { newGender in
+                                viewModel.MyPageRecord?.userGender = newGender.description
+                            }
+                        )
+                        
+                        GenderSettingSheetView(selectedGender: bindingGender)
+                            .presentationDetents([.fraction(0.35)])
                     }
-                )
-
-                GenderSettingSheetView(selectedGender: bindingGender)
-                    .presentationDetents([.fraction(0.35)])
-            }
-
+            )
+            
             .sheet(isPresented: $showWeightSheet) {
                 WeightSettingSheetView(Weight: Binding(
                     get: {
@@ -347,6 +350,7 @@ public struct ProfileEditView: View {
         }
     }
 }
+
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
