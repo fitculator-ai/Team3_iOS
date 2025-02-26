@@ -38,7 +38,7 @@ public struct AddExerciseListView: View {
                 Color.background.ignoresSafeArea()
                 
                 ScrollView {
-                    Picker("운동 종류", selection: $selectedPicker) {
+                    Picker("", selection: $selectedPicker) {
                         ForEach(TapInfo.allCases, id: \.self) { option in
                             Text(option.localizedString)
                         }

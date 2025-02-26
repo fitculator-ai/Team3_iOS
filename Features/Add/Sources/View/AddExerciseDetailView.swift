@@ -27,7 +27,7 @@ struct AddExerciseDetailView: View {
                     
                     VStack {
                         HStack {
-                            Text(NSLocalizedString("averageHeartRate", comment: ""))
+                            Text("averageHeartRate")
                                 .opacity(0.7)
                             NumberTextField(text: $viewModel.avgHeartRate)
                         }
@@ -36,7 +36,7 @@ struct AddExerciseDetailView: View {
                             .padding(.bottom, 5)
                         
                         HStack {
-                            Text(NSLocalizedString("maxHeartRate", comment: ""))
+                            Text("maxHeartRate")
                                 .opacity(0.7)
                             NumberTextField(text: $viewModel.maxHeartRate)
                         }
@@ -65,7 +65,7 @@ struct AddExerciseDetailView: View {
                             .padding(.bottom, 7)
                         
                         HStack {
-                            Text(NSLocalizedString("exerciseDurationInMinutes", comment: ""))
+                            Text("exerciseDurationInMinutes")
                                 .opacity(0.7)
                             NumberTextField(text: $viewModel.duration)
                         }
