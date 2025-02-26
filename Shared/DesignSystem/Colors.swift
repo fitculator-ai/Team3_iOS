@@ -15,4 +15,7 @@ public extension Color {
     
     static let subscriptionTagColor = Color("SubscriptionTagColor", bundle: Bundle(for: BundleFinder.self))
     static let editButtonColor = Color("EditButtonColor", bundle: Bundle(for: BundleFinder.self))
+    
+    static let basicColor = Color("BasicColor", bundle: Bundle(for: BundleFinder.self))
+    static let disabledColor = Color("DisabledColor", bundle: Bundle(for: BundleFinder.self))
 }

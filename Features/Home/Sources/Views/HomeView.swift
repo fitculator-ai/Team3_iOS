@@ -40,7 +40,7 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.left")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(viewModel.checkIsFirstWeek() ? Color(.darkGray) : Color(.white))
+                                    .foregroundStyle(viewModel.checkIsFirstWeek() ? Color.disabledColor : Color.basicColor)
                             }
                             .disabled(viewModel.checkIsFirstWeek())
                             
@@ -66,7 +66,7 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.right")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(viewModel.checkIsCurrentWeek() ? Color(.darkGray) : Color(.white))
+                                    .foregroundStyle(viewModel.checkIsCurrentWeek() ? Color.disabledColor : Color.basicColor)
                             }
                             .disabled(viewModel.checkIsCurrentWeek())
                             
