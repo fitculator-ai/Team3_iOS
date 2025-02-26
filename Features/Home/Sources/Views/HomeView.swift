@@ -97,7 +97,7 @@ public struct HomeView: View {
                                                 .padding(12)
                                                 .background(.blue)
                                                 .clipShape(Circle())
-                                            Text(NSLocalizedString("stre", comment: ""))
+                                            Text("근 력")
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }

@@ -6,8 +6,6 @@
   
 */
 
-"stre" = "근력";
-
 // 운동 추가
 "averageHeartRate" = "평균 심박수";
 "maxHeartRate" = "최대 심박수";
