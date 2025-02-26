@@ -80,7 +80,7 @@ struct ExercisePieChartView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
-                                .foregroundColor(.white)
+                                .foregroundColor(.basicColor)
                                 .position(x: frame.midX - offsetX, y: frame.midY - offsetY)
                         }
                     }
@@ -102,7 +102,7 @@ struct ExercisePieChartView: View {
                                 updateHasSeenInfoButton = true
                             }) {
                                 Image(systemName: "info.circle")
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(Color.basicColor)
                                     .font(.caption)
                             }
                             .popover(isPresented: $showPopover, arrowEdge: .top) {

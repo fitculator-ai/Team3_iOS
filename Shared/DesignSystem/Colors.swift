@@ -18,4 +18,6 @@ public extension Color {
     
     static let basicColor = Color("BasicColor", bundle: Bundle(for: BundleFinder.self))
     static let disabledColor = Color("DisabledColor", bundle: Bundle(for: BundleFinder.self))
+    static let emptyColor = Color("EmptyColor", bundle: Bundle(for: BundleFinder.self))
+    
 }

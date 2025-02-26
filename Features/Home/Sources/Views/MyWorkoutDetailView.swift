@@ -132,7 +132,7 @@ struct MyWorkoutDetailView: View {
                             presentationMode.wrappedValue.dismiss()
                         }) {
                             Image(systemName: "chevron.left")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.basicColor)
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -140,7 +140,7 @@ struct MyWorkoutDetailView: View {
                             showDialog = true
                         }) {
                             Image(systemName: "ellipsis")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.basicColor)
                         }
                     }
                 } else {
@@ -151,7 +151,7 @@ struct MyWorkoutDetailView: View {
                             isFocused = false
                         } label: {
                             Text("취소")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.basicColor)
                         }
                     }
                     

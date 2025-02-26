@@ -105,9 +105,9 @@ public struct HomeView: View {
                                         HStack(spacing: 4) {
                                             // progressbar 색상과 동일하게
                                             RoundedRectangle(cornerRadius: 8)
-                                                .foregroundStyle(viewModel.getStrenthCount() > 0 ?  Color(.blue) : Color(hex: "#494a59"))
+                                                .foregroundStyle(viewModel.getStrenthCount() > 0 ?  Color(.blue) : Color.emptyColor)
                                             RoundedRectangle(cornerRadius: 8)
-                                                .foregroundStyle(viewModel.getStrenthCount() > 1 ?  Color(.blue) : Color(hex: "#494a59"))
+                                                .foregroundStyle(viewModel.getStrenthCount() > 1 ?  Color(.blue) : Color.emptyColor)
                                         }
                                         .frame(height: 12)
                                         
