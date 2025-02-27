@@ -14,7 +14,7 @@ struct SettingView: View {
     @EnvironmentObject var viewModel: ProfileViewModel
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 List {
                     Section(header: Text("계정관리")) {
