@@ -1,0 +1,80 @@
+/* 
+  Localizable.strings
+  Fitculator
+
+  Created by Song Kim on 2/26/25.
+  
+*/
+
+"save" = "저장";
+"cancel" = "취소";
+"edit" = "수정";
+"delete" = "삭제";
+"month" = "월";
+"day" = "일";
+
+// 운동 추가
+"averageHeartRate" = "평균 심박수";
+"maxHeartRate" = "최대 심박수";
+"startDate" = "시작 날짜";
+"startTime" = "시작 시간";
+"exerciseDurationInMinutes" = "운동시간(분)";
+"memo" = "메모";
+
+// 홈
+"thisWeeksExerciseAmount" = "이번주 운동량";
+"lastWeeksExerciseAmount" = "지난주 운동량";
+"cardio" = "유산소";
+"notice" = "세계보건기구 신체활동 가이드라인 기준 나의 주간 운동량입니다";
+"comparedToLastWeek" = "지난 주 대비";
+"strength" = "근력";
+"exerciseLoad" = "운동부하";
+"insufficient" = "부족";
+"excessive" = "과다";
+
+// 홈 리스트
+"myWorkoutRecord" = "나의 운동기록";
+"startYourWorkout" = "운동을 시작해보세요!🏋️‍♀️";
+"time" = "시간";
+"average" = "평균";
+"exerciseDetails" = "운동 세부사항";
+"exerciseIntensity" = "운동 강도";
+"veryLow" = "매우낮음";
+"low" = "낮음";
+"medium" = "보통";
+"high" = "높음";
+"veryHigh" = "매우높음";
+"deleteExerciseRecordConfirmation" = "이 운동 기록을 삭제하시겠습니까?";
+"deleteExerciseRecord" = "운동 기록 삭제";
+
+// 마이페이지
+"my" = "마이";
+"follower" = "팔로워";
+"following" = "팔로잉";
+"editProfile" = "프로필 편집";
+"fatigueGraph" = "피로도 그래프";
+"nickname" = "닉네임";
+"gender" = "성별";
+"weightKg" = "몸무게(kg)";
+"heightCm" = "신장(cm)";
+"birthDate" = "생년월일";
+"settings" = "설정";
+"accountManagement" = "계정 관리";
+"email" = "이메일";
+"blockedUsersManagement" = "차단한 사용자관리";
+"blockedUsers" = "차단한 사용자";
+"healthInfo" = "건강정보";
+"restingHeartRate" = "안정시 심박수";
+"membershipManagement" = "멤버십 관리";
+"membershipBenefits" = "멤버십 제휴 혜택";
+"paymentMethod" = "결제수단";
+"device" = "디바이스";
+"currentLinkedDevice" = "현재 연동 중인 디바이스";
+"registeredDevicesManagement" = "등록된 디바이스 관리";
+"service" = "서비스";
+"customerSupport" = "고객센터";
+"sendFeedback" = "피드백 보내기";
+"termsAndPolicies" = "약관 및 정책";
+"appInfo" = "앱 정보";
+"versionInfo" = "버전 정보";
+"deleteAccount" = "회원탈퇴";

@@ -45,7 +45,7 @@ struct MyWorkoutDetailView: View {
                             .frame(width: 40, height: 40)
                     }
                     VStack(alignment: .leading) {
-                        Text(workout.exerciseKorName)
+                        Text(currentLanguage() == "ko" ? workout.exerciseKorName : workout.exerciseEngName)
                             .font(AppFont.subTitle)
                         Text("\(viewModel.getDateToTime(dateString: workout.recordStart)) - \(viewModel.getDateToTime(dateString: workout.recordEnd))")
                             .font(.system(size: 16))
@@ -58,7 +58,7 @@ struct MyWorkoutDetailView: View {
                 }
                 .padding(.vertical)
                 
-                Text("운동 세부사항")
+                Text("exerciseDetails")
                     .font(AppFont.subTitle)
                 
                 ZStack {
@@ -68,7 +68,7 @@ struct MyWorkoutDetailView: View {
                     
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading) {
-                            Text("평균 심박수")
+                            Text("averageHeartRate")
                                 .font(AppFont.cellTitle)
                             HStack {
                                 Text("\(workout.avgHeartRate)")
@@ -83,7 +83,7 @@ struct MyWorkoutDetailView: View {
                             .padding(.bottom, 3)
                         
                         VStack(alignment: .leading) {
-                            Text("운동 시간")
+                            Text("exerciseDurationInMinutes")
                                 .font(AppFont.cellTitle)
                             HStack {
                                 Text("\(workout.duration)")
@@ -98,7 +98,7 @@ struct MyWorkoutDetailView: View {
                             .padding(.bottom, 3)
                         
                         VStack(alignment: .leading) {
-                            Text("운동 강도")
+                            Text("exerciseIntensity")
                                 .font(AppFont.cellTitle)
                             Text(viewModel.getIntensityText(workout.intensity))
                                 .font(AppFont.subTitle)
@@ -109,7 +109,7 @@ struct MyWorkoutDetailView: View {
                 }
                 .padding(.bottom)
                 
-                Text("메모")
+                Text("memo")
                     .font(AppFont.subTitle)
                 
                 ScrollableTextEditor(
@@ -151,13 +151,13 @@ struct MyWorkoutDetailView: View {
                             isEditing = false
                             isFocused = false
                         } label: {
-                            Text("취소")
+                            Text("cancel")
                                 .foregroundStyle(.white)
                         }
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("저장") {
+                        Button("save") {
                             originalText = textEditor
                             viewModel.updateWorkoutMemo(
                                 request: WorkoutUpdateRequest(
@@ -172,26 +172,26 @@ struct MyWorkoutDetailView: View {
                 }
             }
             .confirmationDialog("MyWorkoutEdit", isPresented: $showDialog) {
-                Button("수정") {
+                Button("edit") {
                     isEditing = true
                     isFocused = true
                 }
-                Button("삭제", role: .destructive) {
+                Button("delete", role: .destructive) {
                     showDeleteAlert = true
                 }
-                Button("취소", role: .cancel) {}
+                Button("cancel", role: .cancel) {}
             }
-            .alert("운동 기록 삭제", isPresented: $showDeleteAlert) {
-                Button("취소", role: .cancel) {
+            .alert(NSLocalizedString("deleteExerciseRecord", comment: ""), isPresented: $showDeleteAlert) {
+                Button("cancel", role: .cancel) {
                     showDeleteAlert = false
                 }
-                Button("삭제", role: .destructive) {
+                Button("delete", role: .destructive) {
                     viewModel.deleteWorkout(userId: 1, recordId: workout.recordId)
                     viewModel.fetchFirstWorkoutDate(userId: 1)
                     presentationMode.wrappedValue.dismiss()
                 }
             } message: {
-                Text("이 운동 기록을 삭제하시겠습니까?")
+                Text("deleteExerciseRecordConfirmation")
             }
         }
     }

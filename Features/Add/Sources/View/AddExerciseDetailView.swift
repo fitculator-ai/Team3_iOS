@@ -27,7 +27,7 @@ struct AddExerciseDetailView: View {
                     
                     VStack {
                         HStack {
-                            Text("평균 심박수")
+                            Text("averageHeartRate")
                                 .opacity(0.7)
                             NumberTextField(text: $viewModel.avgHeartRate)
                         }
@@ -36,7 +36,7 @@ struct AddExerciseDetailView: View {
                             .padding(.bottom, 5)
                         
                         HStack {
-                            Text("최대 심박수")
+                            Text("maxHeartRate")
                                 .opacity(0.7)
                             NumberTextField(text: $viewModel.maxHeartRate)
                         }
@@ -52,20 +52,20 @@ struct AddExerciseDetailView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     
                     VStack(alignment: .leading) {
-                        DatePicker("시작 날짜", selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
+                        DatePicker(NSLocalizedString("startDate", comment: ""), selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date)
                             .opacity(0.7)
                             .padding(.top, -8)
                         
                         Divider()
                         
-                        DatePicker("시작 시간", selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
+                        DatePicker(NSLocalizedString("startTime", comment: ""), selection: $viewModel.selectedDate, displayedComponents: .hourAndMinute)
                             .opacity(0.7)
                         
                         Divider()
                             .padding(.bottom, 7)
                         
                         HStack {
-                            Text("운동 시간(분)")
+                            Text("exerciseDurationInMinutes")
                                 .opacity(0.7)
                             NumberTextField(text: $viewModel.duration)
                         }
@@ -80,7 +80,7 @@ struct AddExerciseDetailView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     
                     VStack(alignment:.leading) {
-                        Text("메모")
+                        Text(NSLocalizedString("memo", comment: ""))
                             .opacity(0.7)
                         
                         Divider()
@@ -96,7 +96,7 @@ struct AddExerciseDetailView: View {
                 Spacer()
             }
         }
-        .navigationTitle(exerciseKRName)
+        .navigationTitle(currentLanguage() == "ko" ? exerciseKRName : exerciseENName)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .toolbar {
@@ -108,7 +108,7 @@ struct AddExerciseDetailView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("저장") {
+                Button("save") {
                     modalManager.shouldUpdateHomeView = true
                     modalManager.isModalPresented = false
                     
