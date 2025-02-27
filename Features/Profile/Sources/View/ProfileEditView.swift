@@ -101,15 +101,18 @@ public struct ProfileEditView: View {
                     .background(Color.background)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .padding(.trailing, -20)
+                    .padding(.trailing, -25)
                 }
                 .padding(.horizontal)
-                
-                Divider()
-                    .background(Color.white)
-                    .frame(height: 2)
-                    .padding(.top, -20)
-                    .padding(.horizontal, 20)
+                .padding(.top, 30)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.white)
+                        .opacity(0.5)
+                        .offset(y: 10)
+                    , alignment: .bottom
+                )
                 
                 if !viewModel.isUserNameValid {
                     Text("닉네임을 입력해주세요.")
@@ -125,6 +128,7 @@ public struct ProfileEditView: View {
                     Text("성별")
                         .foregroundColor(.white)
                         .frame(width: 100, alignment: .leading)
+                    
                     Spacer()
                     
                     Button(action: {
@@ -143,19 +147,23 @@ public struct ProfileEditView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 30)
-                
-                Divider()
-                    .background(Color.white)
-                    .frame(height: 2)
-                    .padding(.top, -20)
-                    .padding(.horizontal, 20)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.white)
+                        .opacity(0.5)
+                        .offset(y: 10)
+                    , alignment: .bottom
+                )
                 
                 HStack {
                     Text("몸무게 (kg)")
                         .foregroundColor(.white)
                         .frame(width: 100)
-                        .padding(.leading, 5)
-                    Spacer()
+                        .padding(.leading, -15)
+
+                    Spacer() // 간격을 추가
+
                     Button(action: {
                         showWeightSheet = true
                     }) {
@@ -167,12 +175,16 @@ public struct ProfileEditView: View {
                     }
                     .padding(.trailing, 5)
                 }
-                
-                Divider()
-                    .background(Color.white)
-                    .frame(height: 2)
-                    .padding(.top, -20)
-                    .padding(.horizontal, 20)
+                .padding(.horizontal)
+                .padding(.top, 30)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.white)
+                        .opacity(0.5)
+                        .offset(y: 10),
+                    alignment: .bottom
+                )
                 
                 if !viewModel.isUserWeightValid {
                     Text("올바른 몸무게를 입력해주세요.")
@@ -211,13 +223,15 @@ public struct ProfileEditView: View {
                     .padding(.trailing, -15)
                 }
                 .padding(.horizontal)
-                .padding(.top, -20)
-                
-                Divider()
-                    .background(Color.white)
-                    .frame(height: 2)
-                    .padding(.top, -20)
-                    .padding(.horizontal, 20)
+                .padding(.top, 30)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.white)
+                        .opacity(0.5)
+                        .offset(y: 10)
+                    , alignment: .bottom
+                )
                 
                 if !viewModel.isUserHeightValid {
                     Text("올바른 신장을 입력해주세요.")
@@ -249,12 +263,14 @@ public struct ProfileEditView: View {
                 }
                 .padding(.top, -10)
                 .padding(.horizontal)
-                
-                Divider()
-                    .background(Color.white)
-                    .frame(height: 2)
-                    .padding(.top, -20)
-                    .padding(.horizontal, 20)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.white)
+                        .opacity(0.5)
+                        .offset(y: 10)
+                    , alignment: .bottom
+                )
             }
             .navigationTitle("프로필 설정")
             .navigationBarTitleDisplayMode(.inline)
