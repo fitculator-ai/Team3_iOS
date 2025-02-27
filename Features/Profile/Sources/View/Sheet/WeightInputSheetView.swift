@@ -33,7 +33,7 @@ struct WeightSettingSheetView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .frame(width: 100)
-                .onChange(of: frontValue) { _ in updateWeight() }
+                .onChange(of: frontValue) {  updateWeight() }
                 
                 Text(".")
                     .font(.headline)
@@ -45,7 +45,7 @@ struct WeightSettingSheetView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .frame(width: 100)
-                .onChange(of: backValue) { _ in updateWeight() }
+                .onChange(of: backValue) {  updateWeight() }
                 
                 Text("kg")
                     .font(.headline)
@@ -57,11 +57,11 @@ struct WeightSettingSheetView: View {
         .padding()
         .onAppear {
             frontValue = floor(Weight)
-            backValue = (Weight - floor(Weight)) * 10
+            backValue = round((Weight - floor(Weight)) * 10)
         }
     }
     
     private func updateWeight() {
-        Weight = frontValue + (backValue * 0.1)
+        Weight = frontValue + (backValue / 10)
     }
 }
