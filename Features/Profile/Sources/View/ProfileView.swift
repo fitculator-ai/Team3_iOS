@@ -240,7 +240,7 @@ public struct WeeklyActivityChart: View {
             .onAppear {
                 viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
-            .onChange(of: viewModel.selectedDate) { newDate in
+            .onChange(of: viewModel.selectedDate) {
                 viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
         }
@@ -312,7 +312,7 @@ public struct FatigueChart: View {
             .onAppear {
                 viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
-            .onChange(of: viewModel.selectedDate) { newDate in
+            .onChange(of: viewModel.selectedDate) {
                 viewModel.fetchWeeklyWorkout(userId: 1, targetDate: viewModel.getSelectedDateString())
             }
         }
