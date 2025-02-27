@@ -31,15 +31,12 @@ struct ContentView: View {
                         Image(systemName: "person.2")
                         Text("커뮤니티")
                     }
-                NavigationStack {
-                    //NavigationLink(destination: ProfileView()) {
-                    ProfileView()
-                    // }
-                }
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("MY")
-                }
+                
+                ProfileView()
+                    .tabItem {
+                        Image(systemName: "person.crop.circle")
+                        Text("MY")
+                    }
             }
             .tint(Color.fitculatorLogo)
             
