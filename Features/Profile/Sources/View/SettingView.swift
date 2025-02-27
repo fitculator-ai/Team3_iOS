@@ -141,9 +141,25 @@ struct SettingView: View {
 // MARK: - 더미 뷰들
 
 struct BlockedUsersView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         Text("차단한 사용자관리 화면")
             .navigationTitle("차단한 사용자")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
@@ -237,73 +253,213 @@ struct RestingHeartRateView: View {
             .padding(.horizontal)
         }
         .padding()
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .background(Color.black.edgesIgnoringSafeArea(.all))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.white)
+                }
+            }
+        }
         .onAppear {
             // 화면이 나타날 때 저장된 심박수를 불러와서 초기화
             profileViewModel.fetchMyPage(userId: 1)
         }
+        
     }
 }
 struct MembershipBenefitsView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("멤버십 제휴 혜택 화면")
+        
             .navigationTitle("멤버십 혜택")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct PaymentMethodsView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("결제수단 화면")
             .navigationTitle("결제수단")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct LinkedDevicesView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("현재 연동 중인 디바이스 화면")
             .navigationTitle("연동 중인 디바이스")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct ManageDevicesView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("등록된 디바이스 관리 화면")
             .navigationTitle("디바이스 관리")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct NotificationSettingsView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("알림설정 화면")
             .navigationTitle("알림설정")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct CustomerServiceView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("고객센터 화면")
             .navigationTitle("고객센터")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct FeedbackView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("피드백 보내기 화면")
             .navigationTitle("피드백")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct TermsView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("약관 및 정책 화면")
             .navigationTitle("약관 및 정책")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 
 struct AppVersionView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         Text("버전 정보 화면")
             .navigationTitle("버전 정보")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
     }
 }
 

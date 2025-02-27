@@ -172,7 +172,7 @@ public struct ProfileEditView: View {
                             .cornerRadius(8)
                             .multilineTextAlignment(.trailing)
                     }
-                    .padding(.trailing, 5)
+                    .padding(.trailing, -25)
                 }
                 .padding(.horizontal)
                 .padding(.top, 30)
