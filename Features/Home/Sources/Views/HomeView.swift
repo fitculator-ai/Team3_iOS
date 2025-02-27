@@ -40,7 +40,7 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.left")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(viewModel.checkIsFirstWeek() ? Color(.darkGray) : Color(.white))
+                                    .foregroundStyle(viewModel.checkIsFirstWeek() ? Color.disabledColor : Color.basicColor)
                             }
                             .disabled(viewModel.checkIsFirstWeek())
                             
@@ -66,7 +66,7 @@ public struct HomeView: View {
                                 Image(systemName: "chevron.right")
                                     .resizable()
                                     .frame(width: 8, height: 18)
-                                    .foregroundStyle(viewModel.checkIsCurrentWeek() ? Color(.darkGray) : Color(.white))
+                                    .foregroundStyle(viewModel.checkIsCurrentWeek() ? Color.disabledColor : Color.basicColor)
                             }
                             .disabled(viewModel.checkIsCurrentWeek())
                             
@@ -105,9 +105,9 @@ public struct HomeView: View {
                                         HStack(spacing: 4) {
                                             // progressbar 색상과 동일하게
                                             RoundedRectangle(cornerRadius: 8)
-                                                .foregroundStyle(viewModel.getStrenthCount() > 0 ?  Color(.blue) : Color(hex: "#494a59"))
+                                                .foregroundStyle(viewModel.getStrenthCount() > 0 ?  Color(.blue) : Color.emptyColor)
                                             RoundedRectangle(cornerRadius: 8)
-                                                .foregroundStyle(viewModel.getStrenthCount() > 1 ?  Color(.blue) : Color(hex: "#494a59"))
+                                                .foregroundStyle(viewModel.getStrenthCount() > 1 ?  Color(.blue) : Color.emptyColor)
                                         }
                                         .frame(height: 12)
                                         
@@ -163,7 +163,7 @@ public struct HomeView: View {
                             if showDatePicker {
                                 CustomCalendarView(selectedDate: $viewModel.selectedDate, firstWorkoutDate: viewModel.firstWorkoutDate)
                                     .frame(height: 300)
-                                    .background(.black)
+                                    .background(Color.secondBackground)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .shadow(radius: 5)
                             }

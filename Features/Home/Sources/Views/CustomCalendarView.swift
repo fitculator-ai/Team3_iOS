@@ -17,10 +17,11 @@ struct CustomCalendarView: UIViewRepresentable {
         // Coordinator에서 calendar에 접근할 수 있도록 참조 저장
         context.coordinator.calendarView = calendar
         
-        calendar.appearance.titleDefaultColor = .white
+        calendar.appearance.titleDefaultColor = UIColor(.basicColor)
         calendar.appearance.weekdayTextColor = .gray
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.todayColor = UIColor.purple.withAlphaComponent(0.5)
+        calendar.appearance.titleTodayColor = UIColor(.basicColor)
         calendar.appearance.selectionColor = UIColor(Color.fitculatorLogo)
         calendar.placeholderType = .none
         calendar.headerHeight = 0
@@ -128,14 +129,14 @@ struct CustomCalendarView: UIViewRepresentable {
             else { return nil }
             
             if date > endOfThisWeek {
-                return UIColor(Color(.darkGray))
+                return UIColor(Color.disabledColor)
             }
             
             // 최초 운동 기록 이전 날짜
             guard let startOfFirstDataWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: parent.firstWorkoutDate)) else { return nil }
             
             if date < startOfFirstDataWeek {
-                return UIColor(Color(.darkGray))
+                return UIColor(Color.disabledColor)
             }
             
             return nil
