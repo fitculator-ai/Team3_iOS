@@ -10,11 +10,6 @@ import UIKit
 import Core
 import Shared
 
-import SwiftUI
-import UIKit
-import Core
-import Shared
-
 public struct ProfileEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
