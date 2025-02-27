@@ -81,7 +81,7 @@ public struct ProfileView: View {
                                     .fill(Color.editButtonColor)
                                     .frame(width: 100, height: 40)
                                     .overlay(
-                                        Text("프로필 설정")
+                                        Text("프로필 편집")
                                             .foregroundColor(.basicColor)
                                             .font(AppFont.profileContentTextFont)
                                     )

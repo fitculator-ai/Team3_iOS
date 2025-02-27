@@ -271,7 +271,7 @@ public struct ProfileEditView: View {
                     , alignment: .bottom
                 )
             }
-            .navigationTitle("프로필 설정")
+            .navigationTitle("프로필 편집")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(
