@@ -5,6 +5,7 @@
 //  Created by Heeji Jung on 2/20/25.
 //
 
+
 import SwiftUI
 
 struct WeightSettingSheetView: View {
@@ -15,20 +16,8 @@ struct WeightSettingSheetView: View {
     private let maxFrontValue: Double = 200
     private let maxBackValue: Double = 9
     
-    @State private var frontValue: Double = 70
+    @State private var frontValue: Double = 0
     @State private var backValue: Double = 0
-    
-    init(Weight: Binding<Double>) {
-          if Weight.wrappedValue.isNaN {
-              _Weight = Weight
-              _frontValue = State(initialValue: 0)
-              _backValue = State(initialValue: 0)
-          } else {
-              _Weight = Weight
-              _frontValue = State(initialValue: Weight.wrappedValue)
-              _backValue = State(initialValue: 0)
-          }
-      }
     
     var body: some View {
         VStack {
@@ -44,9 +33,7 @@ struct WeightSettingSheetView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .frame(width: 100)
-                .onChange(of: frontValue) { _, newValue in
-                    updateWeight()
-                }
+                .onChange(of: frontValue) { _ in updateWeight() }
                 
                 Text(".")
                     .font(.headline)
@@ -58,10 +45,7 @@ struct WeightSettingSheetView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .frame(width: 100)
-                .onChange(of: backValue) { _, newValue in
-                    updateWeight()
-                }
-
+                .onChange(of: backValue) { _ in updateWeight() }
                 
                 Text("kg")
                     .font(.headline)
@@ -71,6 +55,10 @@ struct WeightSettingSheetView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            frontValue = floor(Weight)
+            backValue = (Weight - floor(Weight)) * 10
+        }
     }
     
     private func updateWeight() {
