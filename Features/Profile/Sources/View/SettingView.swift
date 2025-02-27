@@ -10,100 +10,135 @@ import Core
 import Shared
 
 struct SettingView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ProfileViewModel
-    //@StateObject private var viewModel = SettingViewModel()
     
     var body: some View {
         NavigationView {
-            List {
-                Section(header: Text("계정관리")) {
-                    HStack {
-                        Text("이메일")
-                        Spacer()
-                        Text("user@example.com")
-                            .foregroundColor(.gray)
+            VStack {
+                List {
+                    Section(header: Text("계정관리")) {
+                        HStack {
+                            Text("이메일")
+                            Spacer()
+                            Text("1")
+                                .foregroundColor(.gray)
+                        }
+                        .listRowBackground(Color.cellColor)
+                        
+                        NavigationLink(destination: BlockedUsersView()) {
+                            Text("차단한 사용자관리")
+                        }
+                        .listRowBackground(Color.cellColor)
                     }
                     
-                    NavigationLink(destination: BlockedUsersView()) {
-                        Text("차단한 사용자관리")
+                    Section(header: Text("건강 정보")) {
+                        NavigationLink(destination: RestingHeartRateView().environmentObject(viewModel)){
+                            Text("안정시 심박수 설정")
+                        }
+                        .listRowBackground(Color.cellColor)
                     }
-                }
-                
-                Section(header: Text("건강 정보")) {
-                    NavigationLink(destination: RestingHeartRateView().environmentObject(viewModel)){
-                        Text("안정시 심박수 설정")
-                    }
-                }
-                
-                Section(header: Text("멤버십 관리")) {
-                    NavigationLink(destination: MembershipBenefitsView()) {
-                        Text("멤버십 제휴 혜택")
-                    }
-                    NavigationLink(destination: PaymentMethodsView()) {
-                        Text("결제수단")
-                    }
-                }
-                
-                Section(header: Text("디바이스")) {
-                    NavigationLink(destination: LinkedDevicesView()) {
-                        Text("현재 연동 중인 디바이스")
-                    }
-                    NavigationLink(destination: ManageDevicesView()) {
-                        Text("등록된 디바이스 관리")
-                    }
-                }
-                
-                Section(header: Text("알림")) {
-                    NavigationLink(destination: NotificationSettingsView()) {
-                        Text("알림설정")
-                    }
-                }
-                
-                Section(header: Text("서비스")) {
-                    NavigationLink(destination: CustomerServiceView()) {
-                        Text("고객센터")
-                    }
-                    NavigationLink(destination: FeedbackView()) {
-                        Text("피드백 보내기")
-                    }
-                    NavigationLink(destination: TermsView()) {
-                        Text("약관 및 정책")
-                    }
-                }
-                
-                Section(header: Text("앱 정보")) {
-                    HStack {
-                        Text("버전 정보")
-                        Spacer()
-                        Text("1.0.0")
-                            .foregroundColor(.basicColor)
-                    }
-                }
-                
-                HStack {
-                    Spacer()
-                    Button(action: {
+                    
+                    Section(header: Text("멤버십 관리")) {
+                        NavigationLink(destination: MembershipBenefitsView()) {
+                            Text("멤버십 제휴 혜택")
+                        }
+                        .listRowBackground(Color.cellColor)
                         
-                    }) {
-                        Text("회원탈퇴")
-                            .font(.system(size: 12))
-                            .fontWeight(.regular)
-                            .foregroundColor(.gray)
+                        NavigationLink(destination: PaymentMethodsView()) {
+                            Text("결제수단")
+                        }
+                        .listRowBackground(Color.cellColor)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .multilineTextAlignment(.trailing)
+                    
+                    Section(header: Text("디바이스")) {
+                        NavigationLink(destination: LinkedDevicesView()) {
+                            Text("현재 연동 중인 디바이스")
+                        }
+                        .listRowBackground(Color.cellColor)
+                        
+                        NavigationLink(destination: ManageDevicesView()) {
+                            Text("등록된 디바이스 관리")
+                        }
+                        .listRowBackground(Color.cellColor)
+                    }
+                    
+                    Section(header: Text("알림")) {
+                        NavigationLink(destination: NotificationSettingsView()) {
+                            Text("알림설정")
+                        }
+                        .listRowBackground(Color.cellColor)
+                    }
+                    
+                    Section(header: Text("서비스")) {
+                        NavigationLink(destination: CustomerServiceView()) {
+                            Text("고객센터")
+                        }
+                        .listRowBackground(Color.cellColor)
+                        
+                        NavigationLink(destination: FeedbackView()) {
+                            Text("피드백 보내기")
+                        }
+                        .listRowBackground(Color.cellColor)
+                        
+                        NavigationLink(destination: TermsView()) {
+                            Text("약관 및 정책")
+                        }
+                        .listRowBackground(Color.cellColor)
+                    }
+                    
+                    Section(header: Text("앱 정보")) {
+                        HStack {
+                            Text("버전 정보")
+                            Spacer()
+                            Text("1.0.0")
+                                .foregroundColor(.basicColor)
+                        }
+                        .listRowBackground(Color.cellColor)
+                    }
+                    
+                    Section(header: Text(" ")) {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                
+                            }) {
+                                Text("회원탈퇴")
+                                    .font(.system(size: 12))
+                                    .fontWeight(.regular)
+                                    .foregroundColor(.gray)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .multilineTextAlignment(.trailing)
+                        }
+                        .listRowBackground(Color.clear)
+                    }
+                    .padding(.top, -20)
+                    
                 }
+                .scrollContentBackground(.hidden)
                 .background(Color.background)
-                .listRowBackground(Color.clear)
-                
             }
-            .navigationTitle("설정")
-            .navigationBarTitleDisplayMode(.inline)
-            
         }
+        .navigationTitle("설정")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.white)
+                }
+            }
+        }
+        .scrollIndicators(.never)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
+
 
 // MARK: - 더미 뷰들
 
@@ -138,9 +173,9 @@ struct RestingHeartRateView: View {
                 TextField(" ", text: Binding(
                     get: {
                         if let heartRate = profileViewModel.MyPageRecord?.userHeartRate {
-                            return "\(heartRate)" // Int 값을 String으로 변환해서 반환
+                            return "\(heartRate)"
                         } else {
-                            return "" // nil일 경우 빈 문자열 반환
+                            return ""
                         }
                     },
                     set: { newValue in

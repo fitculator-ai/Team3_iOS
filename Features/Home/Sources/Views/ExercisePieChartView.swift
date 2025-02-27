@@ -92,7 +92,7 @@ struct ExercisePieChartView: View {
                 if let plotFrame = chartProxy.plotFrame {
                     let frame = geometry[plotFrame]
                     VStack {
-                        Text("유산소")
+                        Text("cardio")
                             .font(.subheadline)
                         Text("\(Int(total))").font(.largeTitle) + Text(" %").font(.subheadline)
                         if !hasSeenInfoButton {
@@ -106,7 +106,7 @@ struct ExercisePieChartView: View {
                                     .font(.caption)
                             }
                             .popover(isPresented: $showPopover, arrowEdge: .top) {
-                                Text("세계보건기구 신체활동 가이드라인 기준\n나의 주간 운동량입니다.")
+                                Text("notice")
                                     .font(.caption)
                                     .padding([.leading, .trailing], 10)
                                     .presentationBackground(.gray.opacity(0.3))

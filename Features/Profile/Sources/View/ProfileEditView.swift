@@ -277,9 +277,10 @@ public struct ProfileEditView: View {
                         }
                     }
                     viewModel.updateMyPage()
+                    
                 }) {
-                    Text("Save")
-                        .foregroundColor(viewModel.isFormValid ? Color.blue : Color.gray)
+                    Text("저장")
+                        .foregroundColor(viewModel.isFormValid ? Color.white : Color.gray)
                         .disabled(!viewModel.isFormValid)
                 }
                     .sheet(isPresented: $showGenderSheet) {

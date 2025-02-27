@@ -21,14 +21,14 @@ struct MyWorkoutListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("나의 운동 기록")
+            Text("myWorkoutRecord")
                 .font(AppFont.subTitle)
             
             if viewModel.isLoading {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else if viewModel.workoutData?.records.isEmpty ?? true {
-                Text("운동을 시작해보세요!🏋️‍♀️")
+                Text("startYourWorkout")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
                 NavigationStack {
@@ -76,7 +76,7 @@ struct WorkoutRecordRow: View {
                             .frame(width: 20, height: 20)
                     }
                     VStack(alignment: .leading) {
-                        Text(workout.exerciseKorName)
+                        Text(currentLanguage() == "ko" ? workout.exerciseKorName : workout.exerciseEngName)
                             .font(AppFont.subTitle)
                         Text(viewModel.getDateToDateTime(dateString: workout.recordStart))
                             .font(.system(size: 13))
@@ -93,12 +93,12 @@ struct WorkoutRecordRow: View {
                 .padding(.bottom, 20)
                 
                 HStack {
-                    workoutInfo(title: "시간", value: "\(workout.duration)min")
+                    workoutInfo(title: NSLocalizedString("time", comment: ""), value: "\(workout.duration)min")
                     Spacer()
-                    workoutInfo(title: "평균 심박수", value: "\(workout.avgHeartRate)bpm")
+                    workoutInfo(title: NSLocalizedString("average", comment: ""), value: "\(workout.avgHeartRate)bpm")
                     Spacer()
                     workoutInfo(
-                        title: "운동 강도",
+                        title: NSLocalizedString("exerciseIntensity", comment: ""),
                         value: viewModel.getIntensityText(workout.intensity),
                         color: viewModel.getIntensityColor(workout.intensity)
                     )

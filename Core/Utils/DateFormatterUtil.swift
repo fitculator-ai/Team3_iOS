@@ -32,10 +32,10 @@ public class DateFormatterUtil {
     // M월d일 (요일)
     public static let dateToDay: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M월d일 (E)"
+        formatter.dateFormat = "M/d (E)"
         return formatter
     }()
-    
+
     // 오후 HH:mm
     public static let dateToTime: DateFormatter = {
         let formatter = DateFormatter()

@@ -28,11 +28,11 @@ public enum ExerciseIntensityColor: String {
     // 한국어 텍스트 반환
     public var koreanText: String {
         switch self {
-        case .veryHigh: return "매우 높음"
-        case .high: return "높음"
-        case .medium: return "보통"
-        case .low: return "낮음"
-        case .veryLow: return "매우 낮음"
+        case .veryHigh: return NSLocalizedString("veryHigh", comment: "")
+        case .high: return NSLocalizedString("high", comment: "")
+        case .medium: return NSLocalizedString("medium", comment: "")
+        case .low: return NSLocalizedString("low", comment: "")
+        case .veryLow: return NSLocalizedString("veryLow", comment: "")
         }
     }
     

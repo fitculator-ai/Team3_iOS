@@ -47,7 +47,7 @@ public struct HomeView: View {
                             Text(viewModel.getSelectedWeekString())
                                 .font(.subheadline)
                                 .fontWeight(
-                                    ["이번주 운동량", "지난주 운동량"].contains(viewModel.getSelectedWeekString()) ? .semibold : .regular
+                                    [NSLocalizedString("thisWeeksExerciseAmount", comment: ""), NSLocalizedString("lastWeeksExerciseAmount", comment: "")].contains(viewModel.getSelectedWeekString()) ? .semibold : .regular
                                 )
                                 .padding([.leading, .trailing], 24)
                                 .padding([.top, .bottom], 8)
@@ -79,7 +79,7 @@ public struct HomeView: View {
                                 
                                 HStack {
                                     Image(systemName: viewModel.pointPercentageDifference >= 0 ? "arrowshape.up.circle" : "arrowshape.down.circle")
-                                    Text("지난 주 대비 \(abs(viewModel.pointPercentageDifference))%")
+                                    Text("\(NSLocalizedString("comparedToLastWeek", comment: "")) \(abs(viewModel.pointPercentageDifference))%")
                                 }
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
@@ -97,7 +97,7 @@ public struct HomeView: View {
                                                 .padding(12)
                                                 .background(.blue)
                                                 .clipShape(Circle())
-                                            Text("근력")
+                                            Text("strength")
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
@@ -130,7 +130,7 @@ public struct HomeView: View {
                                                 .padding(12)
                                                 .background(.purple)
                                                 .clipShape(Circle())
-                                            Text("운동 부하")
+                                            Text("exerciseLoad")
                                                 .font(AppFont.subTitle)
                                             Spacer()
                                         }
@@ -141,9 +141,9 @@ public struct HomeView: View {
                                             .foregroundStyle(.blue)
                                         
                                         HStack {
-                                            Text("부족")
+                                            Text("insufficient")
                                             Spacer()
-                                            Text("과다")
+                                            Text("excessive")
                                         }
                                         .font(.caption)
                                         .foregroundColor(.gray)

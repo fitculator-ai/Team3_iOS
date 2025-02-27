@@ -44,7 +44,7 @@ struct WeightSettingSheetView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .frame(width: 100)
-                .onChange(of: frontValue) { newValue in
+                .onChange(of: frontValue) { _, newValue in
                     updateWeight()
                 }
                 
@@ -58,9 +58,10 @@ struct WeightSettingSheetView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .frame(width: 100)
-                .onChange(of: backValue) { newValue in
+                .onChange(of: frontValue) { _, newValue in
                     updateWeight()
                 }
+
                 
                 Text("kg")
                     .font(.headline)
