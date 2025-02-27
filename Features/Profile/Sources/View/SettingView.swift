@@ -134,8 +134,6 @@ struct SettingView: View {
             }
         }
         .scrollIndicators(.never)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
     }
 }
 
