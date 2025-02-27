@@ -13,13 +13,23 @@ enum Gender: Int, CaseIterable, Identifiable {
 
     var id: Int { rawValue }
 
+    /// UI에 표시할 값 (한글)
     var description: String {
         switch self {
         case .man: return "남성"
         case .woman: return "여성"
         }
     }
-    
+
+    /// 저장할 값 (영어)
+    var GendersaveValue: String {
+        switch self {
+        case .man: return "MAN"
+        case .woman: return "WOMAN"
+        }
+    }
+
+    /// 문자열을 Gender 타입으로 변환
     static func fromString(_ value: String) -> Gender? {
         switch value.uppercased() {
         case "MAN", "남성": return .man
@@ -33,6 +43,7 @@ enum Gender: Int, CaseIterable, Identifiable {
 struct GenderSettingSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedGender: Gender
+
     var body: some View {
         VStack {
             Text("성별을 선택하세요")
@@ -45,13 +56,18 @@ struct GenderSettingSheetView: View {
                 }
             }
             .pickerStyle(WheelPickerStyle())
-            .onChange(of: selectedGender) { newValue in
-                print("선택된 성별: \(newValue.description)")
+            .onChange(of: selectedGender) { _, newValue in
+                saveGenderToStorage(newValue) // 선택 시 저장
             }
 
-            Spacer() 
         }
         .padding()
     }
-}
 
+    /// 성별을 저장 (UserDefaults 예시)
+    private func saveGenderToStorage(_ gender: Gender) {
+        let GendersaveValue = gender.GendersaveValue
+        UserDefaults.standard.set(GendersaveValue, forKey: "selectedGender")
+        print("저장된 성별: \(GendersaveValue)") // "MAN" or "WOMAN"
+    }
+}

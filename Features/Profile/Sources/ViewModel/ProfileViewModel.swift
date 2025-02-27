@@ -74,8 +74,7 @@ class ProfileViewModel: ObservableObject {
         let endpoint = APIEndpoint.getMyPage(userId: userId)
 
         let urlString = "\(NetworkConstants.baseURL)\(endpoint.path)?userId=\(userId)"
-        // URL 생성
-        //var urlString = NetworkConstants.baseURL + APIEndpoint.updateMyPage\(userId)"
+        
         guard let url = URL(string: urlString) else {
             print("Invalid URL string: \(urlString)")
             return
@@ -141,13 +140,16 @@ class ProfileViewModel: ObservableObject {
             return
         }
         
+        let genderEnum = Gender.fromString(userGender) ?? .man
+        let genderToSave = genderEnum.GendersaveValue
+
         let request = MyPageRequest(userId: 1,
                                     userName: userName,
-                                    userGender: userGender,
+                                    userGender: genderToSave,
                                     userWeight: userWeight,
                                     userHeight: userHeight,
                                     userBirth: userBirth,
-                                    socialProvider: "exampleProvider", // 임시 값 추가
+                                    socialProvider: "exampleProvider",
                                     userHeartRate: userHeartRate)
         
         let endpoint = APIEndpoint.updateMyPage(request: request)
@@ -157,7 +159,6 @@ class ProfileViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    // DecodingError가 있는 경우
                     if let decodingError = error as? DecodingError {
                         switch decodingError {
                         case .dataCorrupted(let context):
