@@ -19,7 +19,7 @@ public struct ProfileView: View {
     var followerCount: Int = 0
     
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.background
                     .ignoresSafeArea()
@@ -38,7 +38,6 @@ public struct ProfileView: View {
                                 .padding(.leading, 5)
                             Spacer()
                         }
-                        .padding(.top, -50)
                         
                         VStack(alignment: .center) {
                             HStack {
