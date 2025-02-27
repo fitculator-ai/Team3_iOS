@@ -70,8 +70,12 @@ class ProfileViewModel: ObservableObject {
     public func fetchMyPage(userId: Int) {
         isLoading = true
         
+        let userId = 1  // 예제 사용자 ID
+        let endpoint = APIEndpoint.getMyPage(userId: userId)
+
+        let urlString = "\(NetworkConstants.baseURL)\(endpoint.path)?userId=\(userId)"
         // URL 생성
-        var urlString = NetworkConstants.baseURL + "/mypage?userId=\(userId)"
+        //var urlString = NetworkConstants.baseURL + APIEndpoint.updateMyPage\(userId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL string: \(urlString)")
             return
@@ -221,7 +225,6 @@ class ProfileViewModel: ObservableObject {
     //MARK: 프로필 사진 get
     func fetchProfileImage(userId: Int) {
         let networkImageService = NetworkImageService()
-        
         let endpoint = APIEndpoint.getMyPageProfileImage(userId: userId)
         
         networkImageService.fetchProfileImage(userId: userId, to: endpoint)
@@ -233,8 +236,10 @@ class ProfileViewModel: ObservableObject {
                     break
                 }
             }, receiveValue: { profileImageResponse in
-                print("가져온 프로필 이미지 URL: \(profileImageResponse)")
+                print("가져온 프로필 이미지 응답: \(profileImageResponse)")
+                print("data의 타입: \(type(of: profileImageResponse.data))") // 타입 확인
                 
+                // data가 Optional<String> (String?) 인 경우
                 if let imageFileName = profileImageResponse.data as? String {
                     print("파일명: \(imageFileName)")
                     
@@ -254,10 +259,13 @@ class ProfileViewModel: ObservableObject {
                     } else {
                         print("유효하지 않은 URL: \(imageFileName)")
                     }
+                } else {
+                    print("data가 문자열이 아님: \(profileImageResponse.data)")
                 }
             })
             .store(in: &cancellables)
     }
+
 
     
     //MARK: 프로필 사진 post
