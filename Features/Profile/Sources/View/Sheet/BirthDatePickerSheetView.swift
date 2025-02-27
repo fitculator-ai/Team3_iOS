@@ -22,7 +22,7 @@ struct BirthDatePickerSheetView: View {
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .font(.headline)
-                .onChange(of: selectedDate) { newDate in
+                .onChange(of: selectedDate) { _,newDate in
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
                     birthdate = formatter.string(from: newDate)
