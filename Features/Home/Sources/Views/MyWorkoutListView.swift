@@ -93,9 +93,9 @@ struct WorkoutRecordRow: View {
                 .padding(.bottom, 20)
                 
                 HStack {
-                    workoutInfo(title: "time", value: "\(workout.duration)min")
+                    workoutInfo(title: NSLocalizedString("time", comment: ""), value: "\(workout.duration)min")
                     Spacer()
-                    workoutInfo(title: "average", value: "\(workout.avgHeartRate)bpm")
+                    workoutInfo(title: NSLocalizedString("average", comment: ""), value: "\(workout.avgHeartRate)bpm")
                     Spacer()
                     workoutInfo(
                         title: NSLocalizedString("exerciseIntensity", comment: ""),
