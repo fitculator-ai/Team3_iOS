@@ -278,6 +278,8 @@ public struct ProfileEditView: View {
                     }
                     viewModel.updateMyPage()
                     
+                    self.presentationMode.wrappedValue.dismiss()
+                    
                 }) {
                     Text("저장")
                         .foregroundColor(viewModel.isFormValid ? Color.white : Color.gray)
