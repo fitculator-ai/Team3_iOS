@@ -29,7 +29,7 @@ public struct AddExerciseListView: View {
     public init() {
         let appearance = UISegmentedControl.appearance()
         appearance.selectedSegmentTintColor = UIColor(Color.cellColor)
-        appearance.backgroundColor = UIColor(Color.black)
+        appearance.backgroundColor = UIColor(Color.secondBackground)
     }
     
     public var body: some View {

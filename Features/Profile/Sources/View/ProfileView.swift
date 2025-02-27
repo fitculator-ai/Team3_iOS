@@ -19,7 +19,7 @@ public struct ProfileView: View {
     var followerCount: Int = 0
     
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.background
                     .ignoresSafeArea()
@@ -38,14 +38,13 @@ public struct ProfileView: View {
                                 .padding(.leading, 5)
                             Spacer()
                         }
-                        .padding(.top, -50)
                         
                         VStack(alignment: .center) {
                             HStack {
-                                Text(profileviewModel.MyPageRecord?.userName ?? "테스트")
+                                Text(profileviewModel.MyPageRecord?.userName ?? "user")
                                     .font(AppFont.profileItemFont)
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.basicColor)
                                 
                                 Capsule(style: .continuous)
                                     .fill(.blue)
@@ -83,7 +82,7 @@ public struct ProfileView: View {
                                     .frame(width: 100, height: 40)
                                     .overlay(
                                         Text("프로필 설정")
-                                            .foregroundColor(.white)
+                                            .foregroundColor(.basicColor)
                                             .font(AppFont.profileContentTextFont)
                                     )
                             }
@@ -91,7 +90,7 @@ public struct ProfileView: View {
                         .padding([.leading, .trailing], 30)
                         
                         Divider()
-                            .background(Color.white)
+                            .background(Color.basicColor)
                             .frame(height: 30)
                             .padding(.horizontal, 0)
                         
@@ -122,7 +121,7 @@ public struct ProfileView: View {
                             Image(systemName: "gearshape.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(.white)
+                                .foregroundColor(.basicColor)
                                 .padding(.trailing, 5)
                         }
                     }
@@ -192,13 +191,13 @@ public struct WeeklyActivityChart: View {
                             ZStack{
                                 if viewModel.isLoading {
                                     ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .basicColor))
                                         .scaleEffect(1.5)
                                         .padding()
                                 } else if (viewModel.workoutData?.records ?? []).isEmpty && viewModel.weeklyWorkoutData.isEmpty {
                                     Text("운동을 추가해 그래프를 분석해보세요!")
                                         .font(.headline)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.basicColor)
                                         .multilineTextAlignment(.center)
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.5)))
@@ -266,13 +265,13 @@ public struct FatigueChart: View {
                         VStack {
                             if viewModel.isLoading {
                                 ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .basicColor))
                                     .scaleEffect(1.5)
                                     .padding()
                             } else if (viewModel.workoutData?.records ?? []).isEmpty && viewModel.weeklyWorkoutData.isEmpty {
                                 Text("운동을 추가해 그래프를 분석해보세요!")
                                     .font(.headline)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.basicColor)
                                     .multilineTextAlignment(.center)
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.5)))
