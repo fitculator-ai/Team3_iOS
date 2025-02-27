@@ -48,6 +48,6 @@ tuist generate
     <td>• 운동추가 View <br> • Localization</td>
     <td>• Tuist 세팅 <br> • 홈 View <br> • 다크모드/라이트모드</td>
     <td>• 나의 운동 리스트, 디테일 View <br> • Alamofire API 연동</td>
-    <td>• 마이페이지 <br> • 설정 View</td>
+    <td>• 마이페이지, 설정 View</td>
   </tr>
 </table>
