@@ -162,13 +162,13 @@ public class HomeViewModel: ObservableObject {
     func getSelectedWeekString() -> String {
         if let todayWeek = getStartAndEndOfWeek(from: Date()),
            let selectedDateWeek = getStartAndEndOfWeek(from: selectedDate), todayWeek == selectedDateWeek {
-            return "이번주 운동량"
+            return NSLocalizedString("thisWeeksExerciseAmount", comment: "")
         }
         if let todayWeek = getStartAndEndOfWeek(from: Date()),
            let nextWeekFromSelectedDate = Calendar.current.date(byAdding: .day, value: 7, to: selectedDate),
            let nextWeekFromSelectedWeek = getStartAndEndOfWeek(from: nextWeekFromSelectedDate),
            todayWeek == nextWeekFromSelectedWeek {
-            return "지난주 운동량"
+            return NSLocalizedString("lastWeeksExerciseAmount", comment: "")
         }
         
         let formatter = DateFormatter()
@@ -216,12 +216,14 @@ public class HomeViewModel: ObservableObject {
             let exerciseImg = records.first?.exerciseImg ?? ""
             let exerciseColor = Color(hex: records.first?.exerciseColor ?? "#000000")
             
-            result.append(WorkoutRecordPointSum(
-                exerciseKorName: exerciseKorName,
-                exerciseImg: exerciseImg,
-                recordPointSum: totalPoints,
-                exerciseColor: exerciseColor
-            ))
+            if totalPoints > 0 {
+                result.append(WorkoutRecordPointSum(
+                    exerciseKorName: exerciseKorName,
+                    exerciseImg: exerciseImg,
+                    recordPointSum: totalPoints,
+                    exerciseColor: exerciseColor
+                ))
+            }
         }
         
         workoutRecordPointSums = result
@@ -253,11 +255,11 @@ public class HomeViewModel: ObservableObject {
         
         var koreanText: String {
             switch self {
-            case .veryHigh: return "매우 높음"
-            case .high: return "높음"
-            case .medium: return "보통"
-            case .low: return "낮음"
-            case .veryLow: return "매우 낮음"
+            case .veryHigh: return NSLocalizedString("veryHigh", comment: "")
+            case .high: return NSLocalizedString("high", comment: "")
+            case .medium: return NSLocalizedString("medium", comment: "")
+            case .low: return NSLocalizedString("low", comment: "")
+            case .veryLow: return NSLocalizedString("veryLow", comment: "")
             }
         }
         

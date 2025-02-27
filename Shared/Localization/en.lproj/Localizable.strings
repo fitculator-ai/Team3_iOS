@@ -1,0 +1,81 @@
+/* 
+  Localizable.strings
+  Fitculator
+
+  Created by Song Kim on 2/26/25.
+  
+*/
+
+"save" = "Save";
+"cancel" = "Cancel";
+"edit" = "Edit";
+"delete" = "Delete";
+"month" = "Month";
+"day" = "Day";
+
+// 운동 추가
+"averageHeartRate" = "Average Heart Rate";
+"maxHeartRate" = "Max Heart Rate";
+"startDate" = "Start Date";
+"startTime" = "Start Time";
+"exerciseDurationInMinutes" = "Duration (minutes)";
+"memo" = "memo";
+
+// 홈
+"thisWeeksExerciseAmount" = "This Week's";
+"lastWeeksExerciseAmount" = "Last Week's";
+"cardio" = "Cardio";
+"notice" = "This is my weekly exercise amount based on WHO physical activity guidelines.";
+"comparedToLastWeek" = "Compared to Last Week";
+"strength" = "Power";
+"exerciseLoad" = "Exercise Load";
+"insufficient" = "Insufficient";
+"excessive" = "Excessive";
+
+// 홈 리스트
+"myWorkoutRecord" = "My Workout Record";
+"startYourWorkout" = "Start your workout!🏋️‍♀️";
+"time" = "Time";
+"average" = "average";
+"exerciseDetails" = "Exercise Details";
+"exerciseIntensity" = "intensity";
+"veryLow" = "Very Low";
+"low" = "Low";
+"medium" = "Medium";
+"high" = "High";
+"veryHigh" = "Very High";
+"deleteExerciseRecordConfirmation" = "Do you want to delete this exercise record?";
+"deleteExerciseRecord" = "Delete Exercise Record";
+
+// 마이 페이지
+"my" = "My";
+"follower" = "Follower";
+"following" = "Following";
+"editProfile" = "Edit Profile";
+"fatigueGraph" = "Fatigue Graph";
+"nickname" = "Nickname";
+"gender" = "Gender";
+"weightKg" = "Weight (kg)";
+"heightCm" = "Height (cm)";
+"birthDate" = "Birth Date";
+"settings" = "Settings";
+"accountManagement" = "Account Management";
+"email" = "Email";
+"blockedUsersManagement" = "Blocked Users Management";
+"blockedUsers" = "Blocked Users";
+"healthInfo" = "Health Information";
+"restingHeartRate" = "Resting Heart Rate";
+"membershipManagement" = "Membership Management";
+"membershipBenefits" = "Membership Benefits";
+"paymentMethod" = "Payment Method";
+"device" = "Device";
+"currentLinkedDevice" = "Current Linked Device";
+"registeredDevicesManagement" = "Registered Devices Management";
+"service" = "Service";
+"customerSupport" = "Customer Support";
+"sendFeedback" = "Send Feedback";
+"termsAndPolicies" = "Terms and Policies";
+"appInfo" = "App Information";
+"versionInfo" = "Version Information";
+"deleteAccount" = "Delete Account";
+

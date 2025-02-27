@@ -8,14 +8,23 @@
 import SwiftUI
 import Core
 
-enum tapInfo : String, CaseIterable {
-    case aerobic = "유산소"
-    case anaerobic = "근력"
+enum TapInfo: CaseIterable {
+    case aerobic
+    case anaerobic
+
+    var localizedString: String {
+        switch self {
+        case .aerobic:
+            return NSLocalizedString("cardio", comment: "")
+        case .anaerobic:
+            return NSLocalizedString("strength", comment: "")
+        }
+    }
 }
 
 public struct AddExerciseListView: View {
     @StateObject private var viewModel = AddExerciseListViewModel()
-    @State private var selectedPicker: tapInfo = .aerobic
+    @State private var selectedPicker: TapInfo = .aerobic
     
     public init() {
         let appearance = UISegmentedControl.appearance()
@@ -29,9 +38,9 @@ public struct AddExerciseListView: View {
                 Color.background.ignoresSafeArea()
                 
                 ScrollView {
-                    Picker("운동 종류", selection: $selectedPicker) {
-                        ForEach(tapInfo.allCases, id: \.self) { option in
-                            Text(option.rawValue)
+                    Picker("", selection: $selectedPicker) {
+                        ForEach(TapInfo.allCases, id: \.self) { option in
+                            Text(option.localizedString)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -78,7 +87,7 @@ struct ExerciseTypeListView: View {
                         .clipShape(Circle())
                         .padding(.leading, 20)
                     
-                    Text(item.exerciseKorName)
+                    Text(currentLanguage() == "ko" ? item.exerciseKorName : item.exerciseEngName)
                         .bold()
                         .padding(.leading, 10)
                     
