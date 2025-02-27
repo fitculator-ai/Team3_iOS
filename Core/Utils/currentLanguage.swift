@@ -9,5 +9,5 @@ import Foundation
 
 public func currentLanguage() -> String {
     let preferredLanguage = Locale.preferredLanguages.first ?? "Unknown"
-    return preferredLanguage
+    return String(preferredLanguage.prefix(2))
 }
